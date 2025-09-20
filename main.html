@@ -429,6 +429,399 @@
             text-decoration: underline;
         }
         
+        .resources-section {
+            background: white;
+            padding: 6rem 2rem;
+        }
+        
+        .resource-tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .resource-tab {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-tab.active {
+            color: #001F3F;
+            border-bottom-color: #001F3F;
+        }
+        
+        .resource-category-content {
+            display: none;
+        }
+        
+        .resource-category-content.active {
+            display: block;
+        }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .resource-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            border-color: #001F3F;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 31, 63, 0.15);
+        }
+        
+        .resource-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .resource-card h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .resource-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .download-btn {
+            background: linear-gradient(45deg, #001F3F, #1a3a5c);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 31, 63, 0.3);
+        }
+        
+        .learning-path-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #001F3F, #1a3a5c);
+            color: white;
+            border-radius: 20px;
+        }
+        
+        .learning-path-header h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .learning-path-header p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .view-timeline-btn, .see-all-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .view-timeline-btn:hover, .see-all-btn:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.5);
+        }
+        
+        .book-recommendations {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .book-card {
+            display: flex;
+            gap: 2rem;
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            align-items: center;
+        }
+        
+        .book-card.featured {
+            border: 3px solid #001F3F;
+            background: linear-gradient(135deg, #f8fafc 0%, #e6f3ff 100%);
+        }
+        
+        .book-cover {
+            font-size: 4rem;
+            flex-shrink: 0;
+        }
+        
+        .book-info h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .month-badge {
+            background: linear-gradient(45deg, #001F3F, #1a3a5c);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .book-rating {
+            margin: 1rem 0;
+            color: #f59e0b;
+        }
+        
+        .book-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: #001F3F;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        
+        .quick-preview {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            border-left: 5px solid #001F3F;
+            margin-top: 2rem;
+        }
+        
+        .quick-preview h4 {
+            color: #001F3F;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .quick-preview ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+        
+        .quick-preview li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            color: #666;
+        }
+        
+        .quick-preview li:last-child {
+            border-bottom: none;
+            font-style: italic;
+            color: #001F3F;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .tool-recommendation {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+        }
+        
+        .tool-logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tool-pricing {
+            color: #10b981;
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+        
+        .communities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .community-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+        }
+        
+        .community-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .community-stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .join-btn {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .learning-timeline-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .timeline-content {
+            background: white;
+            border-radius: 25px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .timeline-header {
+            background: linear-gradient(135deg, #001F3F, #1a3a5c);
+            color: white;
+            padding: 2rem;
+            border-radius: 25px 25px 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        
+        .close-timeline {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-timeline:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .timeline-books {
+            padding: 2rem;
+        }
+        
+        .timeline-month {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .timeline-month:last-child {
+            border-bottom: none;
+        }
+        
+        .month-number {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #001F3F, #1a3a5c);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .month-details {
+            flex: 1;
+        }
+        
+        .month-details h4 {
+            color: #001F3F;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .month-details .author {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .month-details .reasoning {
+            color: #333;
+            line-height: 1.6;
+        }
+        
         .ai-assistant-section {
             background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
             padding: 6rem 2rem;
@@ -1103,6 +1496,178 @@
         </div>
     </section>
 
+    <section class="resources-section">
+        <div class="container">
+            <h2 class="section-title">PM Resource Library</h2>
+            <p class="section-subtitle">Curated resources, templates, and inspiration from the best in product management</p>
+            
+            <div class="resource-categories">
+                <div class="resource-tab-nav">
+                    <button class="resource-tab active" data-category="templates">📋 Templates</button>
+                    <button class="resource-tab" data-category="books">📚 Essential Reading</button>
+                    <button class="resource-tab" data-category="tools">🛠️ Tools & Software</button>
+                    <button class="resource-tab" data-category="communities">👥 Communities</button>
+                </div>
+                
+                <div class="resource-content">
+                    <div class="resource-category-content active" data-category="templates">
+                        <div class="resource-grid">
+                            <div class="resource-card downloadable">
+                                <div class="resource-icon">📊</div>
+                                <h4>Product Requirements Document (PRD)</h4>
+                                <p>Comprehensive template for documenting product specifications and requirements</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Google Docs</span>
+                                    <span class="resource-downloads">2.3k downloads</span>
+                                </div>
+                                <button class="download-btn">Download Template</button>
+                            </div>
+                            
+                            <div class="resource-card downloadable">
+                                <div class="resource-icon">🎯</div>
+                                <h4>User Story Mapping Canvas</h4>
+                                <p>Visual template for mapping user journeys and identifying key features</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Miro Board</span>
+                                    <span class="resource-downloads">1.8k downloads</span>
+                                </div>
+                                <button class="download-btn">Download Template</button>
+                            </div>
+                            
+                            <div class="resource-card downloadable">
+                                <div class="resource-icon">📈</div>
+                                <h4>Product Metrics Dashboard</h4>
+                                <p>Ready-to-use analytics dashboard template with key product KPIs</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Google Sheets</span>
+                                    <span class="resource-downloads">3.1k downloads</span>
+                                </div>
+                                <button class="download-btn">Download Template</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-category-content" data-category="books">
+                        <div class="learning-path-header">
+                            <h3>12-Month PM Learning Journey</h3>
+                            <p>A progressive reading path designed to build your product management skills systematically</p>
+                            <button class="view-timeline-btn" onclick="showLearningTimeline()">View Full Timeline</button>
+                        </div>
+                        
+                        <div class="book-recommendations">
+                            <div class="book-card featured">
+                                <div class="book-cover">📘</div>
+                                <div class="book-info">
+                                    <div class="month-badge">Month 1</div>
+                                    <h4>Think Again by Adam Grant</h4>
+                                    <p class="book-description">Builds habit of questioning assumptions. Easier read to kick-off.</p>
+                                    <div class="book-rating">★★★★★ Essential Start</div>
+                                    <div class="book-tags">
+                                        <span class="tag">Mindset</span>
+                                        <span class="tag">Critical Thinking</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="book-card">
+                                <div class="book-cover">📗</div>
+                                <div class="book-info">
+                                    <div class="month-badge">Month 2</div>
+                                    <h4>Escaping the Build Trap by Melissa Perri</h4>
+                                    <p class="book-description">After mindset, need to shift from output to outcome.</p>
+                                    <div class="book-rating">★★★★★ Foundation</div>
+                                    <div class="book-tags">
+                                        <span class="tag">Outcomes</span>
+                                        <span class="tag">Product Culture</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="book-card">
+                                <div class="book-cover">📙</div>
+                                <div class="book-info">
+                                    <div class="month-badge">Month 3</div>
+                                    <h4>Inspired by Marty Cagan</h4>
+                                    <p class="book-description">Adds framework for what good product practice looks like.</p>
+                                    <div class="book-rating">★★★★★ Framework</div>
+                                    <div class="book-tags">
+                                        <span class="tag">Best Practices</span>
+                                        <span class="tag">Team Management</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="quick-preview">
+                                <h4>Coming Next: Months 4-12</h4>
+                                <ul>
+                                    <li><strong>Month 4:</strong> The Lean Product Playbook - Product-market fit process</li>
+                                    <li><strong>Month 5:</strong> Thinking in Systems - Strategic leverage</li>
+                                    <li><strong>Month 6:</strong> The Product Book - Broad survey integration</li>
+                                    <li>...and 6 more carefully sequenced books</li>
+                                </ul>
+                                <button class="see-all-btn" onclick="showLearningTimeline()">See Complete 12-Month Plan</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-category-content" data-category="tools">
+                        <div class="tools-grid">
+                            <div class="tool-recommendation">
+                                <div class="tool-logo">🎨</div>
+                                <h4>Figma</h4>
+                                <p>Collaborative design and prototyping</p>
+                                <div class="tool-pricing">Free - $45/month</div>
+                                <div class="tool-rating">★★★★★</div>
+                            </div>
+                            
+                            <div class="tool-recommendation">
+                                <div class="tool-logo">📊</div>
+                                <h4>Amplitude</h4>
+                                <p>Product analytics and user behavior tracking</p>
+                                <div class="tool-pricing">Free - $995/month</div>
+                                <div class="tool-rating">★★★★☆</div>
+                            </div>
+                            
+                            <div class="tool-recommendation">
+                                <div class="tool-logo">🗂️</div>
+                                <h4>Linear</h4>
+                                <p>Issue tracking and project management</p>
+                                <div class="tool-pricing">$8 - $16/month</div>
+                                <div class="tool-rating">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-category-content" data-category="communities">
+                        <div class="communities-grid">
+                            <div class="community-card">
+                                <div class="community-icon">💬</div>
+                                <h4>Product Manager HQ</h4>
+                                <p>45k+ product managers sharing insights and best practices</p>
+                                <div class="community-stats">
+                                    <span>45,892 members</span>
+                                    <span>Very Active</span>
+                                </div>
+                                <button class="join-btn">Join Community</button>
+                            </div>
+                            
+                            <div class="community-card">
+                                <div class="community-icon">🎯</div>
+                                <h4>Mind the Product</h4>
+                                <p>Global community with events, content, and career resources</p>
+                                <div class="community-stats">
+                                    <span>200k+ members</span>
+                                    <span>Events & Content</span>
+                                </div>
+                                <button class="join-btn">Join Community</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="ai-assistant-section">
         <div class="container">
             <div class="ai-assistant-card">
@@ -1470,18 +2035,16 @@
             // Handle joke requests
             if (userMessage.toLowerCase().includes('joke') || userMessage.toLowerCase().includes('funny')) {
                 const jokes = [
-                    // Add your 10-15 PM/SDLC jokes here!
-                    "Why do product managers love user stories? Because they're the only stories where the ending actually matters to the business!",
-                    "How many product managers does it take to change a lightbulb? None - they just pivot to candles and call it 'market validation.'",
-                    "A PM walks into a bar and asks for a drink. The bartender says 'What kind?' The PM replies: 'Let me run some A/B tests first.'",
-                    // Placeholder for your jokes - replace these with your actual jokes
-                    "PM Joke #4 - [Add your joke here]",
-                    "PM Joke #5 - [Add your joke here]",
-                    "PM Joke #6 - [Add your joke here]",
-                    "PM Joke #7 - [Add your joke here]",
-                    "PM Joke #8 - [Add your joke here]",
-                    "PM Joke #9 - [Add your joke here]",
-                    "PM Joke #10 - [Add your joke here]"
+                    "Why did the product manager cross the road? → To create a Jira ticket for engineering to figure out *why* the chicken crossed it.",
+                    "A developer, a tester, and a PM walk into a bar. Developer says: 'It works.' Tester says: 'It doesn't.' PM says: 'Is this bar even on the roadmap?'",
+                    "How many product managers does it take to change a lightbulb? → None. They just write a user story: *'As a user, I want light.'*",
+                    "What's the difference between a product manager and a project manager? → About three letters and 200 Jira tickets.",
+                    "Why do PMs love Gantt charts? → Because nothing says 'control' like a pretty picture of something that will never happen.",
+                    "'Done' means: Developer → 'It compiles.' QA → 'All tests pass.' PM → 'We shipped it last quarter in the deck.'",
+                    "Why don't PMs ever play hide and seek? → Because good luck hiding when you've already put your location in the roadmap.",
+                    "A stakeholder says: 'Can we just add this small feature?' PM translation: 'Welcome to scope creep, please fasten your seatbelts.'",
+                    "What's a PM's favorite bedtime story? → *The Neverending Backlog.*",
+                    "Why did the sprint fail? → Because the user stories ran a marathon."
                 ];
                 
                 const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
@@ -1510,6 +2073,50 @@
             messagesContainer.appendChild(aiMessage);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
+        
+        // Resource tabs functionality
+        document.querySelectorAll('.resource-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs and content
+                document.querySelectorAll('.resource-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.resource-category-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Show corresponding content
+                const category = this.dataset.category;
+                document.querySelector(`[data-category="${category}"].resource-category-content`).classList.add('active');
+            });
+        });
+        
+        // Download functionality simulation
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const resourceName = this.parentNode.querySelector('h4').textContent;
+                
+                // Simulate download
+                this.textContent = 'Downloading...';
+                this.style.background = '#10b981';
+                
+                setTimeout(() => {
+                    this.textContent = '✓ Downloaded';
+                    setTimeout(() => {
+                        this.textContent = 'Download Template';
+                        this.style.background = 'linear-gradient(45deg, #001F3F, #1a3a5c)';
+                    }, 2000);
+                }, 1500);
+            });
+        });
+        
+        // Community join functionality
+        document.querySelectorAll('.join-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.textContent = 'Joined! ✓';
+                this.style.background = '#10b981';
+                this.disabled = true;
+            });
+        });
         
         // Learning timeline overlay functions
         function showLearningTimeline() {
