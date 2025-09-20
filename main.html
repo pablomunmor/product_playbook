@@ -4,620 +4,1457 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Manager's Playbook</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoVBL5gI9kLmbG0C+wFfsFPbAx0eCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
-        :root {
-            --marine-blue: #001F3F;
-            --white: #FFFFFF;
-            --light-gray: #f0f2f5;
-            --text-color: #333;
-            --border-color: #e0e0e0;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            background-color: var(--light-gray);
-            color: var(--text-color);
-            line-height: 1.6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
         }
 
-        .container {
+        .hero {
+            min-height: 100vh;
             display: flex;
-        }
-
-        .sidebar {
-            width: 250px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            background-color: var(--white);
-            padding: 2rem 1rem;
-            border-right: 1px solid var(--border-color);
-            overflow-y: auto;
-        }
-
-        .sidebar h2 {
-            color: var(--marine-blue);
-            font-weight: 700;
-            margin-top: 0;
-        }
-
-        .sidebar nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .sidebar nav li a {
-            display: block;
-            color: var(--marine-blue);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .sidebar nav li a:hover,
-        .sidebar nav li a.active {
-            background-color: var(--light-gray);
-        }
-
-        .content {
-            margin-left: 250px;
-            padding: 2rem;
-            width: calc(100% - 250px);
-        }
-
-        .card {
-            background-color: var(--white);
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-        }
-
-        .card-header {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .card-header h3 {
-            margin: 0;
-            color: var(--marine-blue);
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            color: var(--marine-blue);
-            font-weight: 600;
-        }
-
-        button {
-            background-color: var(--marine-blue);
-            color: var(--white);
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            opacity: 0.9;
-        }
-
-        textarea, input, select {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .editable {
-            background-color: #f8f9fa;
-            padding: 1rem;
-            border-radius: 5px;
-            border: 1px dashed var(--border-color);
-        }
-
-        #lifecycle-diagram {
-            display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 2rem 0;
+            text-align: center;
+            padding: 2rem;
             position: relative;
         }
 
-        #lifecycle-diagram::before {
+        .hero::before {
             content: '';
             position: absolute;
-            top: 50%;
+            top: 0;
             left: 0;
             right: 0;
-            height: 2px;
-            background-color: var(--border-color);
-            transform: translateY(-50%);
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
         }
 
-        .lifecycle-phase {
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        }
+
+        .risks-section {
+            background: white;
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .risks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .risk-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .risk-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+        }
+
+        .risk-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+        }
+
+        .risk-card.value { --gradient: linear-gradient(45deg, #ff6b6b, #ff8e53); }
+        .risk-card.usability { --gradient: linear-gradient(45deg, #4ecdc4, #44a08d); }
+        .risk-card.feasibility { --gradient: linear-gradient(45deg, #667eea, #764ba2); }
+        .risk-card.viability { --gradient: linear-gradient(45deg, #f093fb, #f5576c); }
+
+        .risk-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            background: var(--gradient);
+        }
+
+        .risk-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .risk-description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .phases-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 6rem 2rem;
+        }
+
+        .phases-timeline {
             display: flex;
             flex-direction: column;
+            gap: 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .phase-item {
+            display: flex;
             align-items: center;
-            cursor: pointer;
-            z-index: 1;
+            gap: 3rem;
+            opacity: 0;
+            animation: slideInLeft 0.8s ease-out forwards;
         }
 
-        .lifecycle-dot {
-            width: 20px;
-            height: 20px;
-            background-color: var(--white);
-            border: 2px solid var(--marine-blue);
+        .phase-item:nth-child(even) {
+            flex-direction: row-reverse;
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        .phase-number {
+            flex-shrink: 0;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            margin-bottom: 0.5rem;
-            transition: background-color 0.3s;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
         }
 
-        .lifecycle-phase:hover .lifecycle-dot {
-            background-color: var(--marine-blue);
+        .phase-content {
+            flex: 1;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
         }
 
-        #prioritization-framework form {
-            display: grid;
-            grid-template-columns: 1fr;
+        .phase-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .phase-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .phase-tools {
+            display: flex;
+            flex-wrap: wrap;
             gap: 1rem;
         }
 
-        #prioritization-framework label {
+        .tool-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
             font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .canvas-grid {
+        .tool-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .framework-section {
+            background: white;
+            padding: 6rem 2rem;
+        }
+
+        .framework-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .framework-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 25px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 25px 70px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .framework-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 35px 90px rgba(102, 126, 234, 0.4);
+        }
+
+        .framework-header {
+            padding: 2rem;
+            color: white;
+        }
+
+        .framework-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .framework-subtitle {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .framework-body {
+            background: white;
+            padding: 2.5rem;
+            min-height: 300px;
+        }
+
+        .framework-body h4 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .framework-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .framework-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .framework-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .toolkit-section {
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6741 100%);
+            padding: 6rem 2rem;
+            color: white;
+        }
+
+        .toolkit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .tool-category {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
             gap: 1rem;
-            padding: 1rem;
-            border-radius: 5px;
-            background-color: #f8f9fa;
+            margin-bottom: 2rem;
         }
 
-        .canvas-cell {
-            background-color: var(--white);
-            padding: 1rem;
-            border-radius: 5px;
-            border: 1px solid var(--border-color);
+        .category-icon {
+            font-size: 2.5rem;
         }
 
-        .canvas-cell label {
+        .category-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .tool-item {
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .tool-item strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-item p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-button {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tool-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .interactive-workshop {
+            background: #f8fafc;
+            padding: 6rem 2rem;
+        }
+
+        .workshop-scenario {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .scenario-card {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .scenario-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .scenario-header h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .workshop-tabs {
+            display: flex;
+            background: #e2e8f0;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1.5rem;
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background: white;
+            color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 3rem;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .exercise-card {
+            background: #f8fafc;
+            padding: 2.5rem;
+            border-radius: 20px;
+            border-left: 5px solid #667eea;
+        }
+
+        .exercise-card h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .interactive-form {
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
             font-weight: 600;
             margin-bottom: 0.5rem;
-            display: block;
-            color: var(--marine-blue);
+            color: #333;
         }
 
-        .canvas-cell textarea {
-            height: 120px;
+        .smart-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .smart-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .hint {
             font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .progress-indicator {
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            margin-top: 2rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .assumption-template {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            line-height: 2;
+        }
+
+        .inline-input {
+            border: none;
+            border-bottom: 2px solid #667eea;
+            background: transparent;
+            padding: 0.25rem;
+            margin: 0 0.5rem;
+            min-width: 100px;
+            font-weight: 600;
+        }
+
+        .risk-assessment {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+        }
+
+        .risk-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .risk-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid;
+            border-radius: 20px;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .risk-btn.low { border-color: #10b981; color: #10b981; }
+        .risk-btn.medium { border-color: #f59e0b; color: #f59e0b; }
+        .risk-btn.high { border-color: #ef4444; color: #ef4444; }
+
+        .risk-btn:hover {
+            background: currentColor;
+            color: white;
+        }
+
+        .feature-prioritizer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .feature-list {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .feature-item {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            cursor: move;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-name {
+            font-weight: 600;
+        }
+
+        .feature-score {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .mvp-bucket {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px dashed #e2e8f0;
+            text-align: center;
+            min-height: 200px;
+        }
+
+        .metrics-dashboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .metric-card h5 {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .metric-trend {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .metric-trend.up { color: #10b981; }
+        .metric-trend.down { color: #ef4444; }
+
+        .insight-prompt {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .floating-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #667eea;
+            transform: scale(1.5);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero .subtitle { font-size: 1.2rem; }
+            .section-title { font-size: 2rem; }
+            .phase-item { flex-direction: column !important; }
+            .framework-grid { grid-template-columns: 1fr; }
+            .floating-nav { display: none; }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .risk-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .metric-item {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <aside class="sidebar">
-            <h2>PM's Playbook</h2>
-            <nav>
-                <ul>
-                    <li><a href="#intro" class="active">Intro</a></li>
-                    <li><a href="#phase1">Phase 1: Definition</a></li>
-                    <li><a href="#phase2">Phase 2: Discovery</a></li>
-                    <li><a href="#phase3">Phase 3: Delivery</a></li>
-                    <li><a href="#phase4">Phase 4: Learning</a></li>
-                </ul>
-            </nav>
-        </aside>
-        <main class="content">
-            <section id="intro">
-                <h1>Product Manager's Playbook</h1>
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Welcome to the PM's Playbook!</h3>
-                    </div>
-                    <p>This is an interactive, self-contained tool for Product Managers of all levels. It's designed to be both a learning resource and a practical, day-to-day workbench. The frameworks within are inspired by the teachings of industry leaders like Marty Cagan (SVPG), Melissa Perri, and Jeff Gothelf.</p>
-                </div>
-                <div class="card" id="four-risks">
-                    <div class="card-header">
-                        <h3>The Four Big Risks</h3>
-                    </div>
-                    <p>Coined by Marty Cagan of the Silicon Valley Product Group (SVPG), these are the four fundamental questions every product team must address to be successful. You'll see these concepts woven throughout the templates in this playbook.</p>
-                    <ul>
-                        <li><strong>Value Risk:</strong> Will customers buy it or users choose to use it?</li>
-                        <li><strong>Usability Risk:</strong> Can users figure out how to use it?</li>
-                        <li><strong>Feasibility Risk:</strong> Can our engineers build what we need with the time, skills, and technology we have?</li>
-                        <li><strong>Viability Risk:</strong> Will this solution work for our business? (e.g., financially, legally, etc.)</li>
-                    </ul>
-                </div>
-                 <div class="card" id="lifecycle-diagram-card">
-                    <div class="card-header">
-                        <h3>The Product Lifecycle</h3>
-                    </div>
-                    <p>This diagram represents the iterative journey of product management, from defining a new idea to delivering it and learning from its impact. Click on a phase to jump to the relevant templates.</p>
-                    <div id="lifecycle-diagram">
-                        <!-- Diagram will be generated by JS -->
-                    </div>
-                </div>
-            </section>
-
-            <section id="phase1">
-                <h2>Phase 1: Product Definition</h2>
-                <div class="card" id="vision-strategy">
-                    <div class="card-header"><h3>Vision & Strategy One-Pager</h3></div>
-                    <h4>What this is</h4>
-                    <p>A concise document that aligns the company on a product's direction. It's a foundational artifact that cascades from the company's mission down to specific objectives. This structure is inspired by the hierarchy described by product leaders and ensures every initiative has a clear purpose.</p>
-                    <h4>Why it's helpful</h4>
-                    <p>It forces clarity of thought and ensures that every feature we build is valuable (solves a customer need), viable (works for the business), usable (easy for users), and feasible (we can build it). It's the North Star for the product team.</p>
-                    <h4>Editable Example: "Recipe Finder" App</h4>
-                    <div class="editable">
-                        <label><strong>Mission (The "Why"):</strong></label>
-                        <textarea data-key="phase1.vision.mission" placeholder="e.g., To make home cooking accessible and enjoyable for everyone.">To make home cooking accessible and enjoyable for everyone.</textarea>
-
-                        <label><strong>Vision (The "What"):</strong></label>
-                        <textarea data-key="phase1.vision.vision" placeholder="e.g., To be the go-to app for finding and cooking recipes, personalized to your tastes and dietary needs.">To be the go-to app for finding and cooking recipes, personalized to your tastes and dietary needs.</textarea>
-
-                        <label><strong>Strategy (The "How"):</strong></label>
-                        <textarea data-key="phase1.vision.strategy" placeholder="e.g., 1. Build the largest, most accurate recipe database. 2. Create a seamless, personalized user experience. 3. Foster a community of home cooks.">1. Build the largest, most accurate recipe database.\n2. Create a seamless, personalized user experience.\n3. Foster a community of home cooks.</textarea>
-
-                        <label><strong>Objectives (The measurable goals):</strong></label>
-                        <textarea data-key="phase1.vision.objectives" placeholder="e.g., 1. Increase user engagement by 25% in 6 months. 2. Grow recipe database by 50% in 1 year. 3. Achieve a 4.5-star rating.">1. Increase user engagement (measured by weekly active users) by 25% in the next 6 months.\n2. Grow the recipe database by 50% in the next year through partnerships and user submissions.\n3. Achieve a 4.5-star rating in the app stores by improving performance and adding key features.</textarea>
-                    </div>
-                    <button class="export-btn">Export as PNG</button> <button class="reset-btn">Reset</button>
-                </div>
-                <div class="card" id="pr-faq">
-                    <div class="card-header"><h3>PR/FAQ</h3></div>
-                    <h4>What this is</h4>
-                    <p>A PR/FAQ is a powerful tool used to "work backwards" from the customer, a practice famously evangelized by Amazon. You write a press release for a future product launch and a list of frequently asked questions from both customers and internal stakeholders. It's a fantastic way to pressure-test an idea before writing a single line of code.</p>
-                    <h4>Why it's helpful</h4>
-                    <p>It helps you think through the customer benefit, anticipate hard questions, and align the team on the "what" and "why." A great PR/FAQ ensures your product will be valuable and usable from the customer's perspective.</p>
-                    <h4>Editable Example: "Recipe Finder" App</h4>
-                    <div class="editable">
-                        <label><strong>Press Release Headline:</strong></label>
-                        <textarea data-key="phase1.prfaq.headline">Recipe-Finder App Launches 'Meal-Kit-Mode' to Turn Any Recipe into a Smart Shopping List</textarea>
-
-                        <label><strong>Summary:</strong></label>
-                        <textarea data-key="phase1.prfaq.summary">A new feature that helps users instantly create a shopping list from any recipe in the app, and even check for items they may already have at home.</textarea>
-
-                        <label><strong>Customer FAQ 1: How does it work?</strong></label>
-                        <textarea data-key="phase1.prfaq.faq1">It uses natural language processing to parse the ingredient list and automatically adds the items to a checklist. You can then customize the list before you shop.</textarea>
-
-                        <label><strong>Internal FAQ 1: How does this support our objectives?</strong></label>
-                        <textarea data-key="phase1.prfaq.faq2">This directly supports our objective to "Increase user engagement by 25%." By solving a major pain point in the cooking journey (shopping), we expect users to engage with our app more frequently.</textarea>
-                    </div>
-                    <button class="export-btn">Export as PNG</button> <button class="reset-btn">Reset</button>
-                </div>
-                <div class="card" id="roadmaps">
-                    <div class="card-header"><h3>Roadmaps</h3></div>
-                    <h4>What this is</h4>
-                    <p>A product roadmap is a strategic document that communicates the high-level product strategy and how it will be achieved over time. As Melissa Perri teaches, a good roadmap should be focused on outcomes, not outputs. It should connect the work of the team to the objectives of the business.</p>
-                    <h4>Editable Example</h4>
-                    <div class="editable"><textarea data-key="phase1.roadmaps.content" placeholder="e.g., Now: Launch Meal-Kit-Mode (Objective: Increase Engagement). Next: Community Features (Objective: Foster Community). Later: International Expansion (Objective: Grow User Base)."></textarea></div>
-                    <button class="export-btn">Export as PNG</button> <button class="reset-btn">Reset</button>
-                </div>
-            </section>
-
-            <section id="phase2">
-                <h2>Phase 2: Product Discovery</h2>
-                <div class="card" id="lean-canvas">
-                    <div class="card-header"><h3>Lean Product Canvas</h3></div>
-                    <h4>What this is</h4>
-                    <p>The Lean Product Canvas is a powerful tool for product discovery, adapted from the popular Business Model Canvas. It helps you break down a big idea into its core assumptions. This version is inspired by several modern canvases and focuses on the questions you need to answer to validate your idea.</p>
-                    <h4>Why it's helpful</h4>
-                    <p>It's a collaborative tool that helps teams align on the problem, solution, and key risks. As Jeff Gothelf, author of "Lean UX," advocates, it's about fostering a shared understanding. The goal is to identify your riskiest assumptions and turn them into testable hypotheses before you build anything. This is key to ensuring your product is valuable, usable, and feasible.</p>
-                    <h4>Editable Example: "Recipe Finder" App</h4>
-                    <div class="canvas-grid">
-                        <div class="canvas-cell">
-                            <label>1. Problem</label>
-                            <textarea data-key="phase2.canvas.problem" placeholder="What problem are you solving? Who has it?">Home cooks struggle to decide what to cook daily and find shopping for ingredients tedious and time-consuming.</textarea>
-                        </div>
-                        <div class="canvas-cell">
-                            <label>2. Actors / Customers</label>
-                            <textarea data-key="phase2.canvas.actors" placeholder="Who are your target customers and users?">Busy professionals and parents who cook at home 3-5 times a week. They are tech-savvy but not expert chefs.</textarea>
-                        </div>
-                        <div class="canvas-cell">
-                            <label>3. Solution</label>
-                            <textarea data-key="phase2.canvas.solution" placeholder="What is your proposed solution?">A mobile app that provides personalized recipe suggestions and a one-click 'add to shopping list' feature.</textarea>
-                        </div>
-                        <div class="canvas-cell">
-                            <label>4. Values / USP</label>
-                            <textarea data-key="phase2.canvas.values" placeholder="What is the unique value proposition?">"Your personal meal planner and shopping assistant." We save you time and reduce food waste by simplifying the entire cooking process.</textarea>
-                        </div>
-                        <div class="canvas-cell">
-                            <label>5. Hypothesis</label>
-                            <textarea data-key="phase2.canvas.hypothesis" placeholder="What is the most critical hypothesis to test?">We believe that by providing a 'smart shopping list' feature, users will engage with our app at least once a week, proving it's a valuable part of their routine.</textarea>
-                        </div>
-                        <div class="canvas-cell">
-                            <label>6. Risks</label>
-                            <textarea data-key="phase2.canvas.risks" placeholder="What are the biggest risks? (Usability, Feasibility, Viability)">- Usability: Is the shopping list feature easy to use in a real grocery store?\n- Feasibility: Can we accurately parse ingredients from any online recipe?\n- Viability: Will users be willing to pay for premium features in the future?</textarea>
-                        </div>
-                         <div class="canvas-cell">
-                            <label>7. KPIs / Key Metrics</label>
-                            <textarea data-key="phase2.canvas.kpis" placeholder="How will you measure success?">- Activation: % of users who create a shopping list in their first week.\n- Engagement: # of shopping lists created per user per month.\n- Retention: 4-week retention rate.</textarea>
-                        </div>
-                        <div class="canvas-cell">
-                            <label>8. Actions / Experiments</label>
-                            <textarea data-key="phase2.canvas.actions" placeholder="What's the next action to de-risk your idea?">Build a clickable prototype of the shopping list feature and test it with 10 target users in a simulated shopping experience.</textarea>
-                        </div>
-                    </div>
-                    <br>
-                    <button class="export-btn">Export as PNG</button> <button class="reset-btn">Reset</button>
-                </div>
-                <div class="card" id="hypotheses-builder">
-                    <div class="card-header"><h3>Hypotheses Builder</h3></div>
-                    <h4>What this is</h4>
-                    <p>A template to structure your assumptions into testable hypotheses. A common format is: "We believe that [building this feature] for [these people] will achieve [this outcome]. We will know this is true when we see [this metric change]."</p>
-                    <h4>Editable Example</h4>
-                    <div class="editable"><textarea data-key="phase2.hypotheses.content" placeholder="e.g., We believe that creating a smart shopping list for busy professionals will lead to higher weekly engagement. We'll know this is true when we see a 15% increase in weekly active users."></textarea></div>
-                    <button class="export-btn">Export as PNG</button> <button class="reset-btn">Reset</button>
-                </div>
-            </section>
-
-            <section id="phase3">
-                <h2>Phase 3: Product Delivery</h2>
-                <div class="card" id="okrs">
-                    <div class="card-header"><h3>OKRs (Objectives & Key Results)</h3></div>
-                    <h4>What this is</h4>
-                    <p>OKRs are a goal-setting framework for companies, teams, and individuals. They are about setting ambitious goals and tracking progress. The structure is simple:
-                        <ul>
-                            <li><strong>Objectives</strong> are what you want to achieve. They should be ambitious, qualitative, and inspirational.</li>
-                            <li><strong>Key Results</strong> are how you'll measure progress towards the Objective. They must be quantitative and measurable.</li>
-                            <li><strong>Initiatives</strong> are the projects and tasks you will do to influence the Key Results. (h/t Jeff Gothelf).</li>
-                        </ul>
-                    </p>
-                    <h4>Editable Example: "Recipe Finder" App</h4>
-                    <div class="editable">
-                        <label><strong>Objective:</strong></label>
-                        <textarea data-key="phase3.okrs.objective">Make our app an indispensable part of our users' weekly cooking routine.</textarea>
-
-                        <label><strong>Key Result 1:</strong></label>
-                        <textarea data-key="phase3.okrs.kr1">Increase the number of weekly active users who create a shopping list from 1,000 to 5,000.</textarea>
-
-                        <label><strong>Key Result 2:</strong></label>
-                        <textarea data-key="phase3.okrs.kr2">Increase 4-week user retention from 20% to 35%.</textarea>
-
-                        <label><strong>Initiatives:</strong></label>
-                        <textarea data-key="phase3.okrs.initiatives">- Launch v1 of the "Meal-Kit-Mode" smart shopping list.\n- Implement a personalized "What to cook this week" notification system.</textarea>
-                    </div>
-                    <button class="export-btn">Export as PNG</button> <button class="reset-btn">Reset</button>
-                </div>
-                <div class="card" id="prioritization">
-                    <div class="card-header"><h3>Prioritization Framework</h3></div>
-                    <h4>What this is</h4>
-                    <p>A system for scoring and ranking initiatives to ensure you're working on the most impactful things. This example uses a weighted scoring model, a common method for balancing different aspects of value and effort. The key is not to follow the score blindly, but to use it as a tool to facilitate a conversation about what's truly important.</p>
-                    <h4>Framework</h4>
-                    <div id="prioritization-framework">
-                        <form>
-                            <label>Opportunity Value (35%)</label>
-                            <select id="opp-value" data-weight="0.35">
-                                <option value="1">1 (&lt; $100K)</option>
-                                <option value="1.5">1.5 ($100K–$500K)</option>
-                                <option value="2">2 ($500K–$1M)</option>
-                                <option value="2.5">2.5 ($1M–$1.5M)</option>
-                                <option value="3">3 ($1.5M–$2.5M)</option>
-                                <option value="3.5">3.5 ($2.5M–$3.5M)</option>
-                                <option value="4">4 (&gt; $3.5M)</option>
-                            </select>
-                             <label>Customer Value (20%)</label>
-                            <select id="cust-value" data-weight="0.20">
-                                <option value="1">1 (Negligible)</option>
-                                <option value="2">2 (Moderate)</option>
-                                <option value="3">3 (Strong)</option>
-                                <option value="4">4 (Very High)</option>
-                            </select>
-                            <label>Feasibility Value (10%)</label>
-                            <select id="feas-value" data-weight="0.10">
-                                <option value="0">0 (None)</option>
-                                <option value="1">1 (Low)</option>
-                                <option value="2">2 (Low-Medium)</option>
-                                <option value="3">3 (Medium-High)</option>
-                                <option value="4">4 (High)</option>
-                            </select>
-                            <label>Strategic Value (35%)</label>
-                            <select id="strat-value" data-weight="0.35">
-                                <option value="1">1 (Negligible)</option>
-                                <option value="2">2 (Measurable)</option>
-                                <option value="3">3 (Significant)</option>
-                                <option value="4">4 (Critical)</option>
-                            </select>
-                        </form>
-                        <h4>Score: <span id="total-score">0.00</span></h4>
-                    </div>
-                    <h4>Editable Example</h4><div class="editable"><textarea data-key="phase3.prioritization.notes" placeholder="Notes on prioritization..."></textarea></div>
-                    <button class="export-btn">Export as PNG</button> <button class="reset-btn">Reset</button>
-                </div>
-                 <div class="card" id="raci-matrix">
-                    <div class="card-header"><h3>RACI Matrix</h3></div>
-                    <h4>What this is</h4>
-                    <p>A RACI matrix is a responsibility assignment chart that maps out every task, milestone or key decision involved in completing a project and assigns which roles are Responsible, Accountable, Consulted and Informed for each action item.</p>
-                    <h4>Editable Example</h4>
-                    <div class="editable"><textarea data-key="phase3.raci.content" placeholder="e.g., Feature Launch: PM (A), Eng (R), Design (C), Marketing (I)"></textarea></div>
-                    <button class="export-btn">Export as PNG</button> <button class="reset-btn">Reset</button>
-                </div>
-            </section>
-
-            <section id="phase4">
-                <h2>Phase 4: Post-Release & Continuous Learning</h2>
-                <div class="card" id="kpi-dashboard">
-                    <div class="card-header"><h3>KPI Dashboard Starter</h3></div>
-                    <h4>What this is</h4>
-                    <p>A dashboard to track your Key Performance Indicators (KPIs) after launch. This helps you understand if you're achieving your product outcomes. A common framework for product KPIs is AARRR (Acquisition, Activation, Retention, Referral, Revenue), also known as Pirate Metrics.</p>
-                    <h4>Editable Example: "Recipe Finder" App</h4>
-                    <div class="editable">
-                        <label><strong>Acquisition:</strong> Where are users coming from?</label>
-                        <textarea data-key="phase4.kpi.acquisition">- Downloads per week: 1,500\n- App Store conversion rate: 25%</textarea>
-
-                        <label><strong>Activation:</strong> Are users getting to the "aha!" moment?</label>
-                        <textarea data-key="phase4.kpi.activation">- % of users creating a shopping list in first week: 40%\n- Onboarding completion rate: 85%</textarea>
-
-                        <label><strong>Retention:</strong> Are users coming back?</label>
-                        <textarea data-key="phase4.kpi.retention">- 4-week retention: 35%\n- Daily Active Users (DAU): 8,000</textarea>
-
-                        <label><strong>Referral:</strong> Are users telling others?</label>
-                        <textarea data-key="phase4.kpi.referral">- # of invites sent per user: 0.2\n- Viral coefficient (k-factor): 0.1</textarea>
-
-                        <label><strong>Revenue:</strong> Are we making money?</label>
-                        <textarea data-key="phase4.kpi.revenue">- # of premium subscriptions: 500\n- Monthly Recurring Revenue (MRR): $2,500</textarea>
-                    </div>
-                    <button class="export-btn">Export as PNG</button> <button class="reset-btn">Reset</button>
-                </div>
-                <div class="card" id="ux-metrics">
-                    <div class="card-header"><h3>UX Metrics Checklist</h3></div>
-                    <h4>What this is</h4>
-                    <p>A checklist of common User Experience (UX) metrics to track. These help you understand the usability of your product and identify areas for improvement.</p>
-                    <h4>Editable Example</h4>
-                    <div class="editable">
-                        <textarea data-key="phase4.ux.checklist">- [x] Task Success Rate > 80% for 'Create Shopping List'\n- [ ] Time on Task < 60 seconds for 'Find a Recipe'\n- [ ] System Usability Scale (SUS) score > 75\n- [ ] User satisfaction (CSAT) score > 90% for new features</textarea>
-                    </div>
-                    <button class="export-btn">Export as PNG</button> <button class="reset-btn">Reset</button>
-                </div>
-                <div class="card" id="learning-log">
-                    <div class="card-header"><h3>Continuous Learning Log</h3></div>
-                    <h4>What this is</h4>
-                    <p>A simple log to capture what you're learning from your data and user feedback. This is the heart of continuous discovery and improvement. The goal is to turn insights into action.</p>
-                    <h4>Editable Example</h4>
-                    <div class="editable">
-                        <label><strong>Insight / What we learned:</strong></label>
-                        <textarea data-key="phase4.learning.insight">Users are successfully creating shopping lists, but many are not using them in-store (based on session data).</textarea>
-
-                        <label><strong>Next Action / What we'll do:</strong></label>
-                        <textarea data-key="phase4.learning.action">Conduct 5 user interviews with people who have created lists but not used them to understand why. Is it a usability issue? A context issue?</textarea>
-                    </div>
-                    <button class="export-btn">Export as PNG</button> <button class="reset-btn">Reset</button>
-                </div>
-            </section>
-        </main>
+    <div class="floating-nav">
+        <div class="nav-dot active" data-section="hero"></div>
+        <div class="nav-dot" data-section="risks"></div>
+        <div class="nav-dot" data-section="phases"></div>
+        <div class="nav-dot" data-section="frameworks"></div>
     </div>
+
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h1>Product Manager's Playbook</h1>
+            <p class="subtitle">Your intelligent companion for building products that customers love and businesses thrive on</p>
+            <a href="#risks" class="cta-button">Start Your Journey</a>
+        </div>
+    </section>
+
+    <section id="risks" class="risks-section">
+        <div class="container">
+            <h2 class="section-title">The Four Big Risks</h2>
+            <p class="section-subtitle">Every product faces these fundamental challenges. Master them, and you'll build products that win.</p>
+
+            <div class="risks-grid">
+                <div class="risk-card value">
+                    <div class="risk-icon">💎</div>
+                    <h3 class="risk-title">Value Risk</h3>
+                    <p class="risk-description">Will customers actually want this? The graveyard of products is full of "solutions" nobody asked for.</p>
+                    <div class="risk-metrics">
+                        <div class="metric-item">
+                            <div class="metric-label">Success Rate</div>
+                            <div class="metric-value">23%</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Common Cause</div>
+                            <div class="metric-value">Assumptions</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="risk-card usability">
+                    <div class="risk-icon">🎯</div>
+                    <h3 class="risk-title">Usability Risk</h3>
+                    <p class="risk-description">Can users actually figure out how to use it? Even the most valuable solution fails if it's confusing.</p>
+                    <div class="risk-metrics">
+                        <div class="metric-item">
+                            <div class="metric-label">User Drop-off</div>
+                            <div class="metric-value">70%</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">First Impression</div>
+                            <div class="metric-value">8 seconds</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="risk-card feasibility">
+                    <div class="risk-icon">⚡</div>
+                    <h3 class="risk-title">Feasibility Risk</h3>
+                    <p class="risk-description">Can we actually build this with our team, timeline, and tech stack? Dreams meet reality here.</p>
+                    <div class="risk-metrics">
+                        <div class="metric-item">
+                            <div class="metric-label">Over Budget</div>
+                            <div class="metric-value">68%</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Late Delivery</div>
+                            <div class="metric-value">89%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="risk-card viability">
+                    <div class="risk-icon">🚀</div>
+                    <h3 class="risk-title">Viability Risk</h3>
+                    <p class="risk-description">Will this work for our business? Legal, financial, operational - the business model has to add up.</p>
+                    <div class="risk-metrics">
+                        <div class="metric-item">
+                            <div class="metric-label">ROI Threshold</div>
+                            <div class="metric-value">15%</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Break-even</div>
+                            <div class="metric-value">18 months</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="phases" class="phases-section">
+        <div class="container">
+            <h2 class="section-title">The Product Journey</h2>
+            <p class="section-subtitle">Four phases that transform ideas into impact. Each phase has its purpose, tools, and mindset.</p>
+
+            <div class="phases-timeline">
+                <div class="phase-item" style="animation-delay: 0.2s;">
+                    <div class="phase-number">1</div>
+                    <div class="phase-content">
+                        <h3 class="phase-title">Define</h3>
+                        <p class="phase-description">Start with the end in mind. What's the vision? Who are we serving? What problem are we solving? This phase is about getting crystal clear on direction before you start building.</p>
+                        <div class="phase-tools">
+                            <span class="tool-tag">Vision Canvas</span>
+                            <span class="tool-tag">PR/FAQ</span>
+                            <span class="tool-tag">Strategy Map</span>
+                            <span class="tool-tag">User Personas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-item" style="animation-delay: 0.4s;">
+                    <div class="phase-number">2</div>
+                    <div class="phase-content">
+                        <h3 class="phase-title">Discover</h3>
+                        <p class="phase-description">Fall in love with the problem, not the solution. Validate assumptions, talk to users, run experiments. This is where hypotheses meet reality.</p>
+                        <div class="phase-tools">
+                            <span class="tool-tag">Lean Canvas</span>
+                            <span class="tool-tag">User Interviews</span>
+                            <span class="tool-tag">A/B Tests</span>
+                            <span class="tool-tag">Prototype</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-item" style="animation-delay: 0.6s;">
+                    <div class="phase-number">3</div>
+                    <div class="phase-content">
+                        <h3 class="phase-title">Deliver</h3>
+                        <p class="phase-description">Execute with precision. Prioritize ruthlessly, coordinate teams, and ship iteratively. This is where planning meets execution.</p>
+                        <div class="phase-tools">
+                            <span class="tool-tag">OKRs</span>
+                            <span class="tool-tag">Roadmap</span>
+                            <span class="tool-tag">RACI Matrix</span>
+                            <span class="tool-tag">Sprint Planning</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-item" style="animation-delay: 0.8s;">
+                    <div class="phase-number">4</div>
+                    <div class="phase-content">
+                        <h3 class="phase-title">Learn</h3>
+                        <p class="phase-description">Measure what matters. Analyze user behavior, gather feedback, iterate based on data. This is where products evolve from good to great.</p>
+                        <div class="phase-tools">
+                            <span class="tool-tag">Analytics Dashboard</span>
+                            <span class="tool-tag">User Feedback</span>
+                            <span class="tool-tag">Cohort Analysis</span>
+                            <span class="tool-tag">Retrospectives</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="frameworks" class="framework-section">
+        <div class="container">
+            <h2 class="section-title">Interactive Frameworks</h2>
+            <p class="section-subtitle">Ready-to-use tools that help you think through problems and communicate solutions. Click to start using.</p>
+
+            <div class="framework-grid">
+                <div class="framework-card" onclick="openFramework('vision')">
+                    <div class="framework-header">
+                        <h3 class="framework-title">Vision & Strategy Canvas</h3>
+                        <p class="framework-subtitle">Define your North Star and strategic direction</p>
+                    </div>
+                    <div class="framework-body">
+                        <h4>Mission Statement</h4>
+                        <input type="text" class="framework-input" placeholder="What's your product's core purpose?" />
+
+                        <h4>Target User</h4>
+                        <input type="text" class="framework-input" placeholder="Who are you building this for?" />
+
+                        <h4>Key Value Proposition</h4>
+                        <textarea class="framework-input framework-textarea" placeholder="What unique value do you deliver?"></textarea>
+                    </div>
+                </div>
+
+                <div class="framework-card" onclick="openFramework('prfaq')">
+                    <div class="framework-header">
+                        <h3 class="framework-title">PR/FAQ Builder</h3>
+                        <p class="framework-subtitle">Work backwards from the customer experience</p>
+                    </div>
+                    <div class="framework-body">
+                        <h4>Headline</h4>
+                        <input type="text" class="framework-input" placeholder="Write your product launch headline..." />
+
+                        <h4>Customer Problem</h4>
+                        <textarea class="framework-input framework-textarea" placeholder="What problem does this solve for customers?"></textarea>
+
+                        <h4>Key Benefit</h4>
+                        <input type="text" class="framework-input" placeholder="What's the #1 benefit customers will get?" />
+                    </div>
+                </div>
+
+                <div class="framework-card" onclick="openFramework('okrs')">
+                    <div class="framework-header">
+                        <h3 class="framework-title">OKR Planner</h3>
+                        <p class="framework-subtitle">Set ambitious goals and track progress</p>
+                    </div>
+                    <div class="framework-body">
+                        <h4>Objective (Qualitative Goal)</h4>
+                        <input type="text" class="framework-input" placeholder="What do you want to achieve?" />
+
+                        <h4>Key Result 1 (Measurable)</h4>
+                        <input type="text" class="framework-input" placeholder="How will you measure success?" />
+
+                        <h4>Key Result 2 (Measurable)</h4>
+                        <input type="text" class="framework-input" placeholder="What's another key metric?" />
+                    </div>
+                </div>
+
+                <div class="framework-card" onclick="openFramework('prioritization')">
+                    <div class="framework-header">
+                        <h3 class="framework-title">Smart Prioritization</h3>
+                        <p class="framework-subtitle">Score initiatives on impact vs effort</p>
+                    </div>
+                    <div class="framework-body">
+                        <h4>Initiative Name</h4>
+                        <input type="text" class="framework-input" placeholder="What feature or project?" />
+
+                        <h4>Expected Impact (1-10)</h4>
+                        <input type="number" class="framework-input" min="1" max="10" placeholder="10" />
+
+                        <h4>Implementation Effort (1-10)</h4>
+                        <input type="number" class="framework-input" min="1" max="10" placeholder="3" />
+                    </div>
+                </div>
+
+                <div class="framework-card" onclick="openFramework('lean-canvas')">
+                    <div class="framework-header">
+                        <h3 class="framework-title">Lean Discovery Canvas</h3>
+                        <p class="framework-subtitle">Map out your biggest assumptions</p>
+                    </div>
+                    <div class="framework-body">
+                        <h4>Problem Hypothesis</h4>
+                        <textarea class="framework-input framework-textarea" placeholder="What problem do you think exists?"></textarea>
+
+                        <h4>Solution Hypothesis</h4>
+                        <textarea class="framework-input framework-textarea" placeholder="How might you solve it?"></textarea>
+                    </div>
+                </div>
+
+                <div class="framework-card" onclick="openFramework('user-story')">
+                    <div class="framework-header">
+                        <h3 class="framework-title">User Story Builder</h3>
+                        <p class="framework-subtitle">Craft compelling user stories</p>
+                    </div>
+                    <div class="framework-body">
+                        <h4>As a...</h4>
+                        <input type="text" class="framework-input" placeholder="What type of user?" />
+
+                        <h4>I want to...</h4>
+                        <input type="text" class="framework-input" placeholder="What capability?" />
+
+                        <h4>So that I can...</h4>
+                        <input type="text" class="framework-input" placeholder="What's the benefit?" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="toolkit-section">
+        <div class="container">
+            <h2 class="section-title">Advanced Toolkit</h2>
+            <p class="section-subtitle">Power tools for the modern PM. These are the frameworks that separate good PMs from great ones.</p>
+
+            <div class="toolkit-grid">
+                <div class="tool-category">
+                    <div class="category-header">
+                        <div class="category-icon">🧠</div>
+                        <h3>Discovery & Research</h3>
+                    </div>
+                    <div class="tool-list">
+                        <div class="tool-item">
+                            <strong>Jobs-to-be-Done Framework</strong>
+                            <p>Understand the real "job" your product is hired to do</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                        <div class="tool-item">
+                            <strong>Assumption Mapping</strong>
+                            <p>Identify and prioritize your riskiest assumptions</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                        <div class="tool-item">
+                            <strong>User Interview Guide</strong>
+                            <p>Ask the right questions to uncover real insights</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-category">
+                    <div class="category-header">
+                        <div class="category-icon">⚡</div>
+                        <h3>Strategy & Planning</h3>
+                    </div>
+                    <div class="tool-list">
+                        <div class="tool-item">
+                            <strong>North Star Framework</strong>
+                            <p>Define your product's guiding metric and inputs</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                        <div class="tool-item">
+                            <strong>ICE Scoring Model</strong>
+                            <p>Prioritize features by Impact, Confidence, Ease</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                        <div class="tool-item">
+                            <strong>Product Roadmap Canvas</strong>
+                            <p>Visualize your product journey and key milestones</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool-category">
+                    <div class="category-header">
+                        <div class="category-icon">📊</div>
+                        <h3>Measurement & Analytics</h3>
+                    </div>
+                    <div class="tool-list">
+                        <div class="tool-item">
+                            <strong>AARRR Metrics Framework</strong>
+                            <p>Track the full customer lifecycle funnel</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                        <div class="tool-item">
+                            <strong>Cohort Analysis Builder</strong>
+                            <p>Understand user behavior over time</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                        <div class="tool-item">
+                            <strong>A/B Test Calculator</strong>
+                            <p>Calculate sample sizes and statistical significance</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="interactive-workshop">
+        <div class="container">
+            <h2 class="section-title">Interactive Workshop</h2>
+            <p class="section-subtitle">Learn by doing. Work through real product challenges with guided exercises.</p>
+
+            <div class="workshop-scenario">
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <h3>📱 Scenario: Recipe Sharing App</h3>
+                        <p>You're PM for a new app that lets home cooks share and discover recipes</p>
+                    </div>
+
+                    <div class="workshop-tabs">
+                        <button class="tab-button active" onclick="showTab('define-tab')">Define</button>
+                        <button class="tab-button" onclick="showTab('discover-tab')">Discover</button>
+                        <button class="tab-button" onclick="showTab('deliver-tab')">Deliver</button>
+                        <button class="tab-button" onclick="showTab('learn-tab')">Learn</button>
+                    </div>
+
+                    <div id="define-tab" class="tab-content active">
+                        <div class="exercise-card">
+                            <h4>🎯 Exercise 1: Define Your North Star</h4>
+                            <p>Every great product starts with clarity. Let's define what success looks like.</p>
+
+                            <div class="interactive-form">
+                                <div class="form-group">
+                                    <label>What's the core problem this app solves?</label>
+                                    <textarea class="smart-input" placeholder="Think about the pain points home cooks face when sharing recipes..."></textarea>
+                                    <div class="hint">💡 Hint: Consider discovery, organization, and social aspects</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Who is your primary user?</label>
+                                    <input type="text" class="smart-input" placeholder="Be specific about demographics, behaviors, and motivations..." />
+                                    <div class="hint">💡 Hint: "Home cooks" is too broad. What type of home cook?</div>
+                                </div>
+
+                                <div class="progress-indicator">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="discover-tab" class="tab-content">
+                        <div class="exercise-card">
+                            <h4>🔍 Exercise 2: Validate Assumptions</h4>
+                            <p>Time to test your assumptions. What do you need to prove before building?</p>
+
+                            <div class="assumption-builder">
+                                <div class="assumption-template">
+                                    <strong>We believe that</strong>
+                                    <input type="text" class="inline-input" placeholder="building this feature" />
+                                    <strong>for</strong>
+                                    <input type="text" class="inline-input" placeholder="these users" />
+                                    <strong>will achieve</strong>
+                                    <input type="text" class="inline-input" placeholder="this outcome" />
+                                    <strong>We'll know this when</strong>
+                                    <input type="text" class="inline-input" placeholder="we see this metric" />
+                                </div>
+
+                                <div class="risk-assessment">
+                                    <h5>Risk Level:</h5>
+                                    <div class="risk-buttons">
+                                        <button class="risk-btn low">Low</button>
+                                        <button class="risk-btn medium">Medium</button>
+                                        <button class="risk-btn high">High</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="deliver-tab" class="tab-content">
+                        <div class="exercise-card">
+                            <h4>🚀 Exercise 3: Build Your MVP</h4>
+                            <p>What's the smallest version that delivers real value?</p>
+
+                            <div class="feature-prioritizer">
+                                <div class="feature-list">
+                                    <div class="feature-item" draggable="true">
+                                        <span class="feature-name">Recipe Upload</span>
+                                        <div class="feature-score">Impact: 9, Effort: 3</div>
+                                    </div>
+                                    <div class="feature-item" draggable="true">
+                                        <span class="feature-name">Social Following</span>
+                                        <div class="feature-score">Impact: 6, Effort: 8</div>
+                                    </div>
+                                    <div class="feature-item" draggable="true">
+                                        <span class="feature-name">Recipe Search</span>
+                                        <div class="feature-score">Impact: 8, Effort: 4</div>
+                                    </div>
+                                </div>
+
+                                <div class="mvp-bucket">
+                                    <h5>MVP Features</h5>
+                                    <p>Drag features here to build your MVP</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="learn-tab" class="tab-content">
+                        <div class="exercise-card">
+                            <h4>📊 Exercise 4: Measure Success</h4>
+                            <p>How will you know if your product is working?</p>
+
+                            <div class="metrics-dashboard">
+                                <div class="metric-card">
+                                    <h5>Acquisition</h5>
+                                    <div class="metric-value">1,245</div>
+                                    <div class="metric-trend up">↗ +15%</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h5>Activation</h5>
+                                    <div class="metric-value">67%</div>
+                                    <div class="metric-trend down">↘ -3%</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h5>Retention</h5>
+                                    <div class="metric-value">34%</div>
+                                    <div class="metric-trend up">↗ +8%</div>
+                                </div>
+                            </div>
+
+                            <div class="insight-prompt">
+                                <h5>What do these metrics tell you?</h5>
+                                <textarea class="smart-input" placeholder="Analyze the data and identify your next steps..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const textareas = document.querySelectorAll('textarea[data-key]');
-
-            // 1. LocalStorage Persistence
-            function loadState() {
-                textareas.forEach(textarea => {
-                    const key = `PMPlaybook.${textarea.dataset.key}`;
-                    const savedValue = localStorage.getItem(key);
-                    if (savedValue) {
-                        textarea.value = savedValue;
-                    }
-                });
-            }
-
-            function saveState(key, value) {
-                localStorage.setItem(`PMPlaybook.${key}`, value);
-            }
-
-            textareas.forEach(textarea => {
-                textarea.addEventListener('input', () => {
-                    saveState(textarea.dataset.key, textarea.value);
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
                 });
             });
-
-            // Initial load
-            loadState();
-
-            // 2. Sidebar Navigation
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.sidebar nav a');
-
-            window.addEventListener('scroll', () => {
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (pageYOffset >= sectionTop - 60) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').includes(current)) {
-                        link.classList.add('active');
-                    }
-                });
-            });
-
-            // 3. Screenshot Export
-            document.querySelectorAll('.export-btn').forEach(button => {
-                button.addEventListener('click', () => {
-                    const card = button.closest('.card');
-                    const title = card.querySelector('h3').innerText.trim().replace(/\\s+/g, '_');
-                    html2canvas(card).then(canvas => {
-                        const link = document.createElement('a');
-                        link.download = `${title}.png`;
-                        link.href = canvas.toDataURL('image/png');
-                        link.click();
-                    });
-                });
-            });
-
-            // 4. Reset Functionality
-            document.querySelectorAll('.reset-btn').forEach(button => {
-                button.addEventListener('click', () => {
-                    if (confirm('Are you sure you want to reset this card?')) {
-                        const card = button.closest('.card');
-                        const textarea = card.querySelector('textarea[data-key]');
-                        if (textarea) {
-                            textarea.value = '';
-                            localStorage.removeItem(`PMPlaybook.${textarea.dataset.key}`);
-                        }
-                    }
-                });
-            });
-
-            // 5. Interactive Lifecycle Diagram
-            const lifecycleContainer = document.getElementById('lifecycle-diagram');
-            const phases = [
-                { name: 'Definition', id: 'phase1' },
-                { name: 'Discovery', id: 'phase2' },
-                { name: 'Delivery', id: 'phase3' },
-                { name: 'Learning', id: 'phase4' }
-            ];
-
-            phases.forEach(phase => {
-                const phaseEl = document.createElement('div');
-                phaseEl.className = 'lifecycle-phase';
-                phaseEl.innerHTML = `<div class="lifecycle-dot"></div><span>${phase.name}</span>`;
-                phaseEl.addEventListener('click', () => {
-                    document.getElementById(phase.id).scrollIntoView({ behavior: 'smooth' });
-                });
-                lifecycleContainer.appendChild(phaseEl);
-            });
-
-            // 6. Prioritization Framework
-            const prioritizationForm = document.querySelector('#prioritization-framework form');
-            const scoreEl = document.getElementById('total-score');
-
-            function calculateScore() {
-                const selects = prioritizationForm.querySelectorAll('select');
-                let totalScore = 0;
-                selects.forEach(select => {
-                    const weight = parseFloat(select.dataset.weight);
-                    const value = parseFloat(select.value);
-                    totalScore += weight * value;
-                });
-                scoreEl.textContent = totalScore.toFixed(2);
-            }
-
-            prioritizationForm.addEventListener('change', calculateScore);
-
-            // Initial calculation
-            calculateScore();
         });
+
+        // Floating navigation
+        const navDots = document.querySelectorAll('.nav-dot');
+        const sections = document.querySelectorAll('section');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.getAttribute('data-section') === current) {
+                    dot.classList.add('active');
+                }
+            });
+        });
+
+        navDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const section = document.getElementById(dot.getAttribute('data-section'));
+                section.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Framework interactions
+        function openFramework(type) {
+            // Add pulse animation
+            event.currentTarget.classList.add('pulse-animation');
+            setTimeout(() => {
+                event.currentTarget.classList.remove('pulse-animation');
+            }, 1000);
+        }
+
+        // Add interactive elements
+        document.querySelectorAll('.framework-input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentNode.style.background = 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)';
+            });
+
+            input.addEventListener('blur', function() {
+                this.parentNode.style.background = 'white';
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Workshop functionality
+        function showTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Progress tracking for forms
+        document.querySelectorAll('.smart-input').forEach(input => {
+            input.addEventListener('input', function() {
+                const form = this.closest('.interactive-form');
+                if (form) {
+                    const inputs = form.querySelectorAll('.smart-input');
+                    const filled = Array.from(inputs).filter(inp => inp.value.length > 0).length;
+                    const progress = (filled / inputs.length) * 100;
+                    const progressBar = form.querySelector('.progress-bar');
+                    if (progressBar) {
+                        progressBar.style.width = progress + '%';
+                    }
+                }
+            });
+        });
+
+        // Risk button interactions
+        document.querySelectorAll('.risk-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from siblings
+                this.parentNode.querySelectorAll('.risk-btn').forEach(b => {
+                    b.style.background = 'transparent';
+                    b.style.color = b.classList.contains('low') ? '#10b981' :
+                                   b.classList.contains('medium') ? '#f59e0b' : '#ef4444';
+                });
+
+                // Activate clicked button
+                this.style.background = this.style.borderColor;
+                this.style.color = 'white';
+            });
+        });
+
+        // Drag and drop for feature prioritization
+        let draggedElement = null;
+
+        document.querySelectorAll('.feature-item').forEach(item => {
+            item.addEventListener('dragstart', function(e) {
+                draggedElement = this;
+                this.style.opacity = '0.5';
+            });
+
+            item.addEventListener('dragend', function() {
+                this.style.opacity = '1';
+                draggedElement = null;
+            });
+        });
+
+        document.querySelector('.mvp-bucket').addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.style.background = '#f0f9ff';
+            this.style.borderColor = '#667eea';
+        });
+
+        document.querySelector('.mvp-bucket').addEventListener('dragleave', function() {
+            this.style.background = 'white';
+            this.style.borderColor = '#e2e8f0';
+        });
+
+        document.querySelector('.mvp-bucket').addEventListener('drop', function(e) {
+            e.preventDefault();
+            if (draggedElement) {
+                this.appendChild(draggedElement.cloneNode(true));
+                this.style.background = 'white';
+                this.style.borderColor = '#e2e8f0';
+
+                // Update bucket text
+                if (this.children.length > 1) {
+                    this.querySelector('p').style.display = 'none';
+                }
+            }
+        });
+
+        // Smart input enhancements
+        document.querySelectorAll('.smart-input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+
+            input.addEventListener('blur', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simulate real-time metrics updates
+        setInterval(() => {
+            const metricValues = document.querySelectorAll('.metric-value');
+            metricValues.forEach(metric => {
+                const currentValue = parseInt(metric.textContent.replace(/[,%]/g, ''));
+                if (!isNaN(currentValue) && Math.random() > 0.7) {
+                    const change = Math.floor(Math.random() * 10) - 5;
+                    const newValue = Math.max(0, currentValue + change);
+
+                    if (metric.textContent.includes('%')) {
+                        metric.textContent = Math.min(100, newValue) + '%';
+                    } else {
+                        metric.textContent = newValue.toLocaleString();
+                    }
+
+                    // Flash effect
+                    metric.style.color = '#667eea';
+                    setTimeout(() => {
+                        metric.style.color = '#333';
+                    }, 500);
+                }
+            });
+        }, 5000);
     </script>
 </body>
 </html>
