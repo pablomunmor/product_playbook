@@ -461,7 +461,7 @@
         
         .lean-canvas-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 1rem;
             margin-bottom: 2rem;
         }
@@ -479,6 +479,10 @@
         
         .canvas-section.span-3 {
             grid-column: span 3;
+        }
+        
+        .canvas-section.span-5 {
+            grid-column: span 5;
         }
         
         .canvas-section h5 {
@@ -1463,6 +1467,85 @@
             }
         }
         
+        .book-roadmap {
+            overflow-x: auto;
+            padding: 2rem 0;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            background: white;
+        }
+        .roadmap-container {
+            display: grid;
+            grid-template-columns: 150px repeat(12, 1fr);
+            min-width: 1400px;
+        }
+        .roadmap-header {
+            display: contents;
+        }
+        .roadmap-header > div {
+            text-align: center;
+            padding: 1rem;
+            font-weight: 700;
+            background: #f8fafc;
+            border-bottom: 2px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+        .roadmap-header .quarter {
+            grid-column: span 3;
+            border-right: 2px solid #e2e8f0;
+        }
+        .roadmap-header .month {
+            border-right: 1px solid #e2e8f0;
+        }
+        .roadmap-swimlane {
+            display: contents;
+        }
+        .swimlane-title {
+            grid-column: 1 / 2;
+            padding: 1rem;
+            font-weight: 700;
+            border-right: 2px solid #e2e8f0;
+            background: #f8fafc;
+            position: sticky;
+            left: 0;
+            z-index: 10;
+        }
+        .swimlane-initiatives {
+            grid-column: 2 / -1;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 0.5rem;
+            padding: 1rem 0;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .initiative-bar {
+            background: #e0f2fe;
+            border-left: 4px solid #0ea5e9;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.5rem;
+            grid-column: span 1;
+        }
+        .initiative-bar h5 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem 0;
+        }
+        .initiative-okrs {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .initiative-okrs li {
+            font-size: 0.8rem;
+            background: rgba(255,255,255,0.6);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.25rem;
+        }
+        
         @media (max-width: 768px) {
             .sidebar-nav {
                 width: 100%;
@@ -1592,7 +1675,6 @@
         <a href="#risks" class="nav-link" data-section="risks"><div class="icon">🎲</div><span>Risks</span></a>
         <a href="#phases" class="nav-link" data-section="phases"><div class="icon">🚀</div><span>Journey</span></a>
         <a href="#frameworks" class="nav-link" data-section="frameworks"><div class="icon">📋</div><span>Frameworks</span></a>
-        <a href="#social-proof" class="nav-link" data-section="social-proof"><div class="icon">💬</div><span>Reviews</span></a>
         <a href="#resources" class="nav-link" data-section="resources"><div class="icon">📚</div><span>Resources</span></a>
         <a href="#ai-assistant" class="nav-link" data-section="ai-assistant"><div class="icon">🤖</div><span>AI Assistant</span></a>
     </nav>
@@ -1936,35 +2018,35 @@
                                 </div>
                             </div>
                             <div class="lean-canvas-grid">
-                                <div class="canvas-section span-2">
+                                <div class="canvas-section span-3">
                                     <h5>1. Business Problem</h5>
                                     <textarea class="canvas-input" placeholder="What is the most important problem your business needs to focus on right now?" data-key="canvas-problem"></textarea>
                                 </div>
-                                <div class="canvas-section">
+                                <div class="canvas-section span-2">
                                     <h5>2. Users</h5>
                                     <textarea class="canvas-input" placeholder="Which users and customers should you focus on first? Who buys? Who uses? Who configures?" data-key="canvas-users"></textarea>
                                 </div>
-                                <div class="canvas-section">
+                                <div class="canvas-section span-2">
                                     <h5>3. User Outcomes & Benefits (JTBD)</h5>
                                     <textarea class="canvas-input" placeholder="Why would users seek out your product? What benefit would they gain? What job are they trying to do?" data-key="canvas-outcomes"></textarea>
                                 </div>
-                                <div class="canvas-section">
+                                <div class="canvas-section span-3">
                                     <h5>4. Solutions</h5>
                                     <textarea class="canvas-input" placeholder="What can we make that will solve our business problem and meet customer needs? List product, feature, or enhancement ideas." data-key="canvas-solutions"></textarea>
                                 </div>
-                                <div class="canvas-section">
+                                <div class="canvas-section span-2">
                                     <h5>5. Business Outcomes</h5>
                                     <textarea class="canvas-input" placeholder="How will you know you solved the business problem? What will you measure? (Who does what by how much)" data-key="canvas-business-outcomes"></textarea>
                                 </div>
-                                <div class="canvas-section span-3">
+                                <div class="canvas-section span-5">
                                     <h5>6. Hypotheses</h5>
                                     <textarea class="canvas-input" placeholder='Combine assumptions from boxes 2-5: "We believe that [business outcome] will be achieved if [user] attains [benefit] with [feature]."' data-key="canvas-hypotheses"></textarea>
                                 </div>
-                                <div class="canvas-section">
+                                <div class="canvas-section span-2">
                                     <h5>7. What's the most important thing we need to learn first?</h5>
                                     <textarea class="canvas-input" placeholder="Select hypothesis from Box 6 to test first. What's the riskiest assumption?" data-key="canvas-learn-first"></textarea>
                                 </div>
-                                <div class="canvas-section">
+                                <div class="canvas-section span-3">
                                     <h5>8. What's the least amount of work to learn the next most important thing?</h5>
                                     <textarea class="canvas-input" placeholder="Design experiments to learn quickly if your riskiest assumption is true. What could you learn in 1 day/week/month?" data-key="canvas-experiments"></textarea>
                                 </div>
@@ -1981,45 +2063,6 @@
                             </div>
                             <div class="canvas-attribution">
                                 <small>Canvas created by <strong>Jeff Gothelf</strong> • Download original at: <a href="https://www.senseandrespond.co/the-lean-product-canvas" target="_blank">senseandrespond.co</a></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="social-proof" class="social-proof-section">
-            <div class="container">
-                <h2 class="section-title">Trusted by Product Teams</h2>
-                <p class="section-subtitle">See what product managers are saying about the playbook.</p>
-                <div class="testimonial-grid">
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"This playbook is a game-changer. It's become my go-to resource for everything from discovery to delivery. The interactive templates save me hours every week."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">👩‍💻</div>
-                            <div class="author-info">
-                                <h4>Sarah L.</h4>
-                                <span>Senior Product Manager, TechCorp</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"As a new PM, this tool has been invaluable for getting up to speed. The frameworks are clearly explained and immediately applicable to my daily work."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">👨‍🚀</div>
-                            <div class="author-info">
-                                <h4>Mike R.</h4>
-                                <span>Product Manager, Innovate Inc.</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"I've rolled this out to my entire product team. It has standardized our processes and improved the quality of our product documentation immensely."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">🧑‍💼</div>
-                            <div class="author-info">
-                                <h4>Emily C.</h4>
-                                <span>Director of Product, Solutions Co.</span>
                             </div>
                         </div>
                     </div>
@@ -2077,61 +2120,105 @@
                         </div>
                         
                         <div class="resource-category-content" data-category="books">
-                            <div class="learning-path-header">
-                                <h3>12-Month PM Learning Journey</h3>
-                                <p>A progressive reading path designed to build your product management skills systematically</p>
-                                <button class="view-timeline-btn" onclick="showLearningTimeline()">View Full Timeline</button>
-                            </div>
-                            
-                            <div class="book-recommendations">
-                                <div class="book-card featured">
-                                    <div class="book-cover">📘</div>
-                                    <div class="book-info">
-                                        <div class="month-badge">Month 1</div>
-                                        <h4>Think Again by Adam Grant</h4>
-                                        <p class="book-description">Builds habit of questioning assumptions. Easier read to kick-off.</p>
-                                        <div class="book-rating">★★★★★ Essential Start</div>
-                                        <div class="book-tags">
-                                            <span class="tag">Mindset</span>
-                                            <span class="tag">Critical Thinking</span>
+                            <div class="book-roadmap">
+                                <div class="roadmap-container">
+                                    <div class="roadmap-header">
+                                        <div></div> <!-- Empty corner -->
+                                        <div class="quarter">Q1</div>
+                                        <div class="quarter">Q2</div>
+                                        <div class="quarter">Q3</div>
+                                        <div class="quarter">Q4</div>
+                                        <div></div> <!-- Empty cell for swimlane title -->
+                                        <div class="month">Jan</div>
+                                        <div class="month">Feb</div>
+                                        <div class="month">Mar</div>
+                                        <div class="month">Apr</div>
+                                        <div class="month">May</div>
+                                        <div class="month">Jun</div>
+                                        <div class="month">Jul</div>
+                                        <div class="month">Aug</div>
+                                        <div class="month">Sep</div>
+                                        <div class="month">Oct</div>
+                                        <div class="month">Nov</div>
+                                        <div class="month">Dec</div>
+                                    </div>
+                                    <div class="roadmap-swimlane">
+                                        <div class="swimlane-title">PM Learning Journey</div>
+                                        <div class="swimlane-initiatives">
+                                            <div class="initiative-bar">
+                                                <h5>Think Again</h5>
+                                                <ul class="initiative-okrs">
+                                                    <li>KR: Question 3 assumptions</li>
+                                                </ul>
+                                            </div>
+                                            <div class="initiative-bar">
+                                                <h5>Escaping the Build Trap</h5>
+                                                <ul class="initiative-okrs">
+                                                    <li>KR: Define 1 outcome metric</li>
+                                                </ul>
+                                            </div>
+                                            <div class="initiative-bar">
+                                                <h5>Inspired</h5>
+                                                <ul class="initiative-okrs">
+                                                    <li>KR: Draft a product brief</li>
+                                                </ul>
+                                            </div>
+                                            <div class="initiative-bar">
+                                                <h5>The Lean Product Playbook</h5>
+                                                <ul class="initiative-okrs">
+                                                    <li>KR: Create a proto-persona</li>
+                                                </ul>
+                                            </div>
+                                            <div class="initiative-bar">
+                                                <h5>Thinking in Systems</h5>
+                                                <ul class="initiative-okrs">
+                                                    <li>KR: Map one system loop</li>
+                                                </ul>
+                                            </div>
+                                            <div class="initiative-bar">
+                                                <h5>The Product Book</h5>
+                                                <ul class="initiative-okrs">
+                                                    <li>KR: Identify 3 PM anti-patterns</li>
+                                                </ul>
+                                            </div>
+                                            <div class="initiative-bar">
+                                                <h5>Empowered</h5>
+                                                <ul class="initiative-okrs">
+                                                    <li>KR: Coach one team member</li>
+                                                </ul>
+                                            </div>
+                                            <div class="initiative-bar">
+                                                <h5>Originals</h5>
+                                                <ul class="initiative-okrs">
+                                                    <li>KR: Pitch one new idea</li>
+                                                </ul>
+                                            </div>
+                                            <div class="initiative-bar">
+                                                <h5>Crossing the Chasm</h5>
+                                                <ul class="initiative-okrs">
+                                                    <li>KR: Define your "beachhead" market</li>
+                                                </ul>
+                                            </div>
+                                            <div class="initiative-bar">
+                                                <h5>The Mom Test</h5>
+                                                <ul class="initiative-okrs">
+                                                    <li>KR: Conduct one user interview</li>
+                                                </ul>
+                                            </div>
+                                            <div class="initiative-bar">
+                                                <h5>Multipliers</h5>
+                                                <ul class="initiative-okrs">
+                                                    <li>KR: Ask 3 challenging questions</li>
+                                                </ul>
+                                            </div>
+                                            <div class="initiative-bar">
+                                                <h5>High Output Management</h5>
+                                                <ul class="initiative-okrs">
+                                                    <li>KR: Identify your top 3 priorities</li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="book-card">
-                                    <div class="book-cover">📗</div>
-                                    <div class="book-info">
-                                        <div class="month-badge">Month 2</div>
-                                        <h4>Escaping the Build Trap by Melissa Perri</h4>
-                                        <p class="book-description">After mindset, need to shift from output to outcome.</p>
-                                        <div class="book-rating">★★★★★ Foundation</div>
-                                        <div class="book-tags">
-                                            <span class="tag">Outcomes</span>
-                                            <span class="tag">Product Culture</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="book-card">
-                                    <div class="book-cover">📙</div>
-                                    <div class="book-info">
-                                        <div class="month-badge">Month 3</div>
-                                        <h4>Inspired by Marty Cagan</h4>
-                                        <p class="book-description">Adds framework for what good product practice looks like.</p>
-                                        <div class="book-rating">★★★★★ Framework</div>
-                                        <div class="book-tags">
-                                            <span class="tag">Best Practices</span>
-                                            <span class="tag">Team Management</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="quick-preview">
-                                    <h4>Coming Next: Months 4-12</h4>
-                                    <ul>
-                                        <li><strong>Month 4:</strong> The Lean Product Playbook - Product-market fit process</li>
-                                        <li><strong>Month 5:</strong> Thinking in Systems - Strategic leverage</li>
-                                        <li><strong>Month 6:</strong> The Product Book - Broad survey integration</li>
-                                        <li>...and 6 more carefully sequenced books</li>
-                                    </ul>
-                                    <button class="see-all-btn" onclick="showLearningTimeline()">See Complete 12-Month Plan</button>
                                 </div>
                             </div>
                         </div>
@@ -2304,115 +2391,6 @@
         </footer>
     </main>
 
-    <!-- Learning Timeline Overlay -->
-    <div class="learning-timeline-overlay" id="timelineOverlay">
-        <div class="timeline-content">
-            <div class="timeline-header">
-                <button class="close-timeline" onclick="closeLearningTimeline()">×</button>
-                <h2>12-Month PM Learning Journey</h2>
-                <p>A progressive path designed to build product management mastery systematically</p>
-            </div>
-            
-            <div class="timeline-books">
-                <div class="timeline-month">
-                    <div class="month-number">1</div>
-                    <div class="month-details">
-                        <h4>Think Again</h4>
-                        <div class="author">by Adam Grant</div>
-                        <div class="reasoning">Builds habit of questioning assumptions. Easier read to kick-off.</div>
-                    </div>
-                </div>
-                <div class="timeline-month">
-                    <div class="month-number">2</div>
-                    <div class="month-details">
-                        <h4>Escaping the Build Trap</h4>
-                        <div class="author">by Melissa Perri</div>
-                        <div class="reasoning">After mindset, need to shift from output to outcome.</div>
-                    </div>
-                </div>
-                <div class="timeline-month">
-                    <div class="month-number">3</div>
-                    <div class="month-details">
-                        <h4>Inspired: How to Create Tech Products Customers Love</h4>
-                        <div class="author">by Marty Cagan</div>
-                        <div class="reasoning">Adds framework for what good product practice looks like.</div>
-                    </div>
-                </div>
-                <div class="timeline-month">
-                    <div class="month-number">4</div>
-                    <div class="month-details">
-                        <h4>The Lean Product Playbook</h4>
-                        <div class="author">by Dan Olsen</div>
-                        <div class="reasoning">Practical product-market fit process. Builds from lessons in #2-3.</div>
-                    </div>
-                </div>
-                <div class="timeline-month">
-                    <div class="month-number">5</div>
-                    <div class="month-details">
-                        <h4>Thinking in Systems</h4>
-                        <div class="author">by Donella Meadows</div>
-                        <div class="reasoning">Introduce systems thinking mid-journey for strategic leverage.</div>
-                    </div>
-                </div>
-                <div class="timeline-month">
-                    <div class="month-number">6</div>
-                    <div class="month-details">
-                        <h4>The Product Book</h4>
-                        <div class="author">by Product School</div>
-                        <div class="reasoning">Broad survey of tools, role definitions; solid mid-level integration.</div>
-                    </div>
-                </div>
-                <div class="timeline-month">
-                    <div class="month-number">7</div>
-                    <div class="month-details">
-                        <h4>Empowered</h4>
-                        <div class="author">by Marty Cagan & Chris Jones</div>
-                        <div class="reasoning">Now you have frameworks; shift to team structure & leadership.</div>
-                    </div>
-                </div>
-                <div class="timeline-month">
-                    <div class="month-number">8</div>
-                    <div class="month-details">
-                        <h4>Originals</h4>
-                        <div class="author">by Adam Grant</div>
-                        <div class="reasoning">Innovating, sparking new ideas; build on what you've learnt.</div>
-                    </div>
-                </div>
-                <div class="timeline-month">
-                    <div class="month-number">9</div>
-                    <div class="month-details">
-                        <h4>Crossing the Chasm</h4>
-                        <div class="author">by Geoffrey A. Moore</div>
-                        <div class="reasoning">As products mature, scaling to mainstream matters.</div>
-                    </div>
-                </div>
-                <div class="timeline-month">
-                    <div class="month-number">10</div>
-                    <div class="month-details">
-                        <h4>The Mom Test</h4>
-                        <div class="author">by Rob Fitzpatrick</div>
-                        <div class="reasoning">Deep dive on customer interviews; sharpens discovery skills.</div>
-                    </div>
-                </div>
-                <div class="timeline-month">
-                    <div class="month-number">11</div>
-                    <div class="month-details">
-                        <h4>Multipliers: How the Best Leaders Make Everyone Smarter</h4>
-                        <div class="author">by Liz Wiseman</div>
-                        <div class="reasoning">Leadership and influence matters more after earlier books.</div>
-                    </div>
-                </div>
-                <div class="timeline-month">
-                    <div class="month-number">12</div>
-                    <div class="month-details">
-                        <h4>High Output Management OR The Hard Thing About Hard Things</h4>
-                        <div class="author">by Andy Grove OR Ben Horowitz</div>
-                        <div class="reasoning">Cement leadership under pressure, scaling teams, tough trade-offs.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoVBL5gD5CMbaY9ojK0z75eDLRMA0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
@@ -2693,23 +2671,6 @@
             document.querySelectorAll('.priority-score').forEach(select => {
                 select.addEventListener('change', calculatePriorityScore);
             });
-        });
-        
-        // Learning timeline overlay functions
-        function showLearningTimeline() {
-            document.getElementById('timelineOverlay').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeLearningTimeline() {
-            document.getElementById('timelineOverlay').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-        
-        document.getElementById('timelineOverlay').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeLearningTimeline();
-            }
         });
         
         document.getElementById('ai-input').addEventListener('keypress', function(e) {
