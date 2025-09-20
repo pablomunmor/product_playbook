@@ -1467,85 +1467,78 @@
             }
         }
         
-        .book-roadmap {
-            overflow-x: auto;
-            padding: 2rem 0;
-            border: 1px solid #e2e8f0;
-            border-radius: 20px;
+        .roadmap-vertical {
+            padding: 1rem;
+        }
+        .roadmap-swimlane-vertical {
+            margin-bottom: 2rem;
             background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
         }
-        .roadmap-container {
-            display: grid;
-            grid-template-columns: 150px repeat(12, 1fr);
-            min-width: 1400px;
-        }
-        .roadmap-header {
-            display: contents;
-        }
-        .roadmap-header > div {
-            text-align: center;
-            padding: 1rem;
-            font-weight: 700;
-            background: #f8fafc;
-            border-bottom: 2px solid #e2e8f0;
-            position: sticky;
-            top: 0;
-            z-index: 20;
-        }
-        .roadmap-header .quarter {
-            grid-column: span 3;
-            border-right: 2px solid #e2e8f0;
-        }
-        .roadmap-header .month {
-            border-right: 1px solid #e2e8f0;
-        }
-        .roadmap-swimlane {
-            display: contents;
-        }
-        .swimlane-title {
-            grid-column: 1 / 2;
-            padding: 1rem;
-            font-weight: 700;
-            border-right: 2px solid #e2e8f0;
-            background: #f8fafc;
-            position: sticky;
-            left: 0;
-            z-index: 10;
-        }
-        .swimlane-initiatives {
-            grid-column: 2 / -1;
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 0.5rem;
-            padding: 1rem 0;
+        .swimlane-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
             border-bottom: 2px solid #e2e8f0;
         }
-        .initiative-bar {
-            background: #e0f2fe;
-            border-left: 4px solid #0ea5e9;
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 0.5rem;
-            grid-column: span 1;
+        .swimlane-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            background: linear-gradient(45deg, #001F3F, #1a3a5c);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .initiative-bar h5 {
-            font-size: 0.9rem;
+        .swimlane-header h3 {
+            font-size: 1.8rem;
             font-weight: 700;
-            margin: 0 0 0.5rem 0;
+            color: #333;
         }
-        .initiative-okrs {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .book-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
-        .initiative-okrs li {
-            font-size: 0.8rem;
-            background: rgba(255,255,255,0.6);
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
+        .book-card-vertical {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 1.5rem;
+            border-top: 4px solid #0ea5e9;
+        }
+        .book-card-vertical h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
             margin-bottom: 0.25rem;
         }
-        
+        .book-card-vertical .author {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        .book-card-vertical .okr-title {
+            font-weight: 700;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .book-card-vertical .okr-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.5rem;
+        }
+        .book-card-vertical .okr-list li {
+            background: #e0f2fe;
+            padding: 0.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
         @media (max-width: 768px) {
             .sidebar-nav {
                 width: 100%;
@@ -2120,103 +2113,112 @@
                         </div>
                         
                         <div class="resource-category-content" data-category="books">
-                            <div class="book-roadmap">
-                                <div class="roadmap-container">
-                                    <div class="roadmap-header">
-                                        <div></div> <!-- Empty corner -->
-                                        <div class="quarter">Q1</div>
-                                        <div class="quarter">Q2</div>
-                                        <div class="quarter">Q3</div>
-                                        <div class="quarter">Q4</div>
-                                        <div></div> <!-- Empty cell for swimlane title -->
-                                        <div class="month">Jan</div>
-                                        <div class="month">Feb</div>
-                                        <div class="month">Mar</div>
-                                        <div class="month">Apr</div>
-                                        <div class="month">May</div>
-                                        <div class="month">Jun</div>
-                                        <div class="month">Jul</div>
-                                        <div class="month">Aug</div>
-                                        <div class="month">Sep</div>
-                                        <div class="month">Oct</div>
-                                        <div class="month">Nov</div>
-                                        <div class="month">Dec</div>
+                            <div class="roadmap-vertical">
+                                <!-- Swimlane 1: Foundations -->
+                                <div class="roadmap-swimlane-vertical">
+                                    <div class="swimlane-header">
+                                        <div class="swimlane-icon">🧭</div>
+                                        <h3>Q1: Foundations & Mindset</h3>
                                     </div>
-                                    <div class="roadmap-swimlane">
-                                        <div class="swimlane-title">PM Learning Journey</div>
-                                        <div class="swimlane-initiatives">
-                                            <div class="initiative-bar">
-                                                <h5>Think Again</h5>
-                                                <ul class="initiative-okrs">
-                                                    <li>KR: Question 3 assumptions</li>
-                                                </ul>
-                                            </div>
-                                            <div class="initiative-bar">
-                                                <h5>Escaping the Build Trap</h5>
-                                                <ul class="initiative-okrs">
-                                                    <li>KR: Define 1 outcome metric</li>
-                                                </ul>
-                                            </div>
-                                            <div class="initiative-bar">
-                                                <h5>Inspired</h5>
-                                                <ul class="initiative-okrs">
-                                                    <li>KR: Draft a product brief</li>
-                                                </ul>
-                                            </div>
-                                            <div class="initiative-bar">
-                                                <h5>The Lean Product Playbook</h5>
-                                                <ul class="initiative-okrs">
-                                                    <li>KR: Create a proto-persona</li>
-                                                </ul>
-                                            </div>
-                                            <div class="initiative-bar">
-                                                <h5>Thinking in Systems</h5>
-                                                <ul class="initiative-okrs">
-                                                    <li>KR: Map one system loop</li>
-                                                </ul>
-                                            </div>
-                                            <div class="initiative-bar">
-                                                <h5>The Product Book</h5>
-                                                <ul class="initiative-okrs">
-                                                    <li>KR: Identify 3 PM anti-patterns</li>
-                                                </ul>
-                                            </div>
-                                            <div class="initiative-bar">
-                                                <h5>Empowered</h5>
-                                                <ul class="initiative-okrs">
-                                                    <li>KR: Coach one team member</li>
-                                                </ul>
-                                            </div>
-                                            <div class="initiative-bar">
-                                                <h5>Originals</h5>
-                                                <ul class="initiative-okrs">
-                                                    <li>KR: Pitch one new idea</li>
-                                                </ul>
-                                            </div>
-                                            <div class="initiative-bar">
-                                                <h5>Crossing the Chasm</h5>
-                                                <ul class="initiative-okrs">
-                                                    <li>KR: Define your "beachhead" market</li>
-                                                </ul>
-                                            </div>
-                                            <div class="initiative-bar">
-                                                <h5>The Mom Test</h5>
-                                                <ul class="initiative-okrs">
-                                                    <li>KR: Conduct one user interview</li>
-                                                </ul>
-                                            </div>
-                                            <div class="initiative-bar">
-                                                <h5>Multipliers</h5>
-                                                <ul class="initiative-okrs">
-                                                    <li>KR: Ask 3 challenging questions</li>
-                                                </ul>
-                                            </div>
-                                            <div class="initiative-bar">
-                                                <h5>High Output Management</h5>
-                                                <ul class="initiative-okrs">
-                                                    <li>KR: Identify your top 3 priorities</li>
-                                                </ul>
-                                            </div>
+                                    <div class="book-cards-grid">
+                                        <div class="book-card-vertical">
+                                            <h4>Think Again</h4>
+                                            <p class="author">by Adam Grant</p>
+                                            <p class="okr-title">Objective:</p>
+                                            <ul class="okr-list"><li>Build habit of questioning assumptions.</li></ul>
+                                        </div>
+                                        <div class="book-card-vertical">
+                                            <h4>Escaping the Build Trap</h4>
+                                            <p class="author">by Melissa Perri</p>
+                                            <p class="okr-title">Objective:</p>
+                                            <ul class="okr-list"><li>Shift focus from outputs to outcomes.</li></ul>
+                                        </div>
+                                        <div class="book-card-vertical">
+                                            <h4>Inspired</h4>
+                                            <p class="author">by Marty Cagan</p>
+                                            <p class="okr-title">Objective:</p>
+                                            <ul class="okr-list"><li>Learn the framework for great product practice.</li></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Swimlane 2: Discovery & Strategy -->
+                                <div class="roadmap-swimlane-vertical">
+                                    <div class="swimlane-header">
+                                        <div class="swimlane-icon">🗺️</div>
+                                        <h3>Q2: Discovery & Strategy</h3>
+                                    </div>
+                                    <div class="book-cards-grid">
+                                        <div class="book-card-vertical">
+                                            <h4>The Lean Product Playbook</h4>
+                                            <p class="author">by Dan Olsen</p>
+                                            <p class="okr-title">Objective:</p>
+                                            <ul class="okr-list"><li>Master the product-market fit process.</li></ul>
+                                        </div>
+                                        <div class="book-card-vertical">
+                                            <h4>Thinking in Systems</h4>
+                                            <p class="author">by Donella Meadows</p>
+                                            <p class="okr-title">Objective:</p>
+                                            <ul class="okr-list"><li>Understand strategic leverage points.</li></ul>
+                                        </div>
+                                        <div class="book-card-vertical">
+                                            <h4>The Mom Test</h4>
+                                            <p class="author">by Rob Fitzpatrick</p>
+                                            <p class="okr-title">Objective:</p>
+                                            <ul class="okr-list"><li>Improve customer interview skills.</li></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Swimlane 3: Execution & Leadership -->
+                                <div class="roadmap-swimlane-vertical">
+                                    <div class="swimlane-header">
+                                        <div class="swimlane-icon">🚀</div>
+                                        <h3>Q3: Execution & Leadership</h3>
+                                    </div>
+                                    <div class="book-cards-grid">
+                                        <div class="book-card-vertical">
+                                            <h4>Empowered</h4>
+                                            <p class="author">by Marty Cagan & Chris Jones</p>
+                                            <p class="okr-title">Objective:</p>
+                                            <ul class="okr-list"><li>Learn to build effective team structures.</li></ul>
+                                        </div>
+                                        <div class="book-card-vertical">
+                                            <h4>High Output Management</h4>
+                                            <p class="author">by Andy Grove</p>
+                                            <p class="okr-title">Objective:</p>
+                                            <ul class="okr-list"><li>Lead and scale teams under pressure.</li></ul>
+                                        </div>
+                                        <div class="book-card-vertical">
+                                            <h4>Multipliers</h4>
+                                            <p class="author">by Liz Wiseman</p>
+                                            <p class="okr-title">Objective:</p>
+                                            <ul class="okr-list"><li>Develop leadership and influence skills.</li></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Swimlane 4: Advanced Skills -->
+                                <div class="roadmap-swimlane-vertical">
+                                    <div class="swimlane-header">
+                                        <div class="swimlane-icon">🧠</div>
+                                        <h3>Q4: Advanced Skills</h3>
+                                    </div>
+                                    <div class="book-cards-grid">
+                                        <div class="book-card-vertical">
+                                            <h4>Originals</h4>
+                                            <p class="author">by Adam Grant</p>
+                                            <p class="okr-title">Objective:</p>
+                                            <ul class="okr-list"><li>Pitch one new idea using new knowledge.</li></ul>
+                                        </div>
+                                        <div class="book-card-vertical">
+                                            <h4>Crossing the Chasm</h4>
+                                            <p class="author">by Geoffrey A. Moore</p>
+                                            <p class="okr-title">Objective:</p>
+                                            <ul class="okr-list"><li>Define your product's "beachhead" market.</li></ul>
+                                        </div>
+                                        <div class="book-card-vertical">
+                                            <h4>The Hard Thing About Hard Things</h4>
+                                            <p class="author">by Ben Horowitz</p>
+                                            <p class="okr-title">Objective:</p>
+                                            <ul class="okr-list"><li>Make one tough but necessary decision.</li></ul>
                                         </div>
                                     </div>
                                 </div>
