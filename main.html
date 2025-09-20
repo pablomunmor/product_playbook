@@ -728,13 +728,445 @@
             }
         }
 
+        .resources-section {
+            background: white;
+            padding: 6rem 2rem;
+        }
+
+        .resource-tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .resource-tab {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .resource-tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .resource-category-content {
+            display: none;
+        }
+
+        .resource-category-content.active {
+            display: block;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .resource-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.15);
+        }
+
+        .resource-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource-card h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .resource-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .book-recommendations {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .book-card {
+            display: flex;
+            gap: 2rem;
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            align-items: center;
+        }
+
+        .book-cover {
+            font-size: 4rem;
+            flex-shrink: 0;
+        }
+
+        .book-info h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .book-rating {
+            margin: 1rem 0;
+            color: #f59e0b;
+        }
+
+        .book-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #667eea;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .tool-recommendation {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .tool-logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-pricing {
+            color: #10b981;
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+
+        .communities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .community-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .community-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .community-stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .join-btn {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ai-assistant-section {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            padding: 6rem 2rem;
+        }
+
+        .ai-assistant-card {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .ai-content {
+            color: white;
+        }
+
+        .ai-avatar {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .ai-capabilities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .capability {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .ai-chat-interface {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: #f8fafc;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .status-indicator {
+            font-size: 0.9rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .ai-message {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #667eea;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .message-content {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 15px;
+            max-width: 80%;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .send-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .quick-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .quick-q {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-q:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .footer-section {
+            background: #1f2937;
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-main h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #667eea;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .link-group h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .link-group a {
+            display: block;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .link-group a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .hero .subtitle { font-size: 1.2rem; }
-            .section-title { font-size: 2rem; }
-            .phase-item { flex-direction: column !important; }
-            .framework-grid { grid-template-columns: 1fr; }
-            .floating-nav { display: none; }
+            .ai-assistant-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+
+            .resource-tab-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
         }
 
         .pulse-animation {
@@ -1037,80 +1469,151 @@
         </div>
     </section>
 
-    <section class="toolkit-section">
+    <section class="resources-section">
         <div class="container">
-            <h2 class="section-title">Advanced Toolkit</h2>
-            <p class="section-subtitle">Power tools for the modern PM. These are the frameworks that separate good PMs from great ones.</p>
+            <h2 class="section-title">PM Resource Library</h2>
+            <p class="section-subtitle">Curated resources, templates, and inspiration from the best in product management</p>
 
-            <div class="toolkit-grid">
-                <div class="tool-category">
-                    <div class="category-header">
-                        <div class="category-icon">🧠</div>
-                        <h3>Discovery & Research</h3>
-                    </div>
-                    <div class="tool-list">
-                        <div class="tool-item">
-                            <strong>Jobs-to-be-Done Framework</strong>
-                            <p>Understand the real "job" your product is hired to do</p>
-                            <button class="tool-button">Use Template</button>
-                        </div>
-                        <div class="tool-item">
-                            <strong>Assumption Mapping</strong>
-                            <p>Identify and prioritize your riskiest assumptions</p>
-                            <button class="tool-button">Use Template</button>
-                        </div>
-                        <div class="tool-item">
-                            <strong>User Interview Guide</strong>
-                            <p>Ask the right questions to uncover real insights</p>
-                            <button class="tool-button">Use Template</button>
-                        </div>
-                    </div>
+            <div class="resource-categories">
+                <div class="resource-tab-nav">
+                    <button class="resource-tab active" data-category="templates">📋 Templates</button>
+                    <button class="resource-tab" data-category="books">📚 Essential Reading</button>
+                    <button class="resource-tab" data-category="tools">🛠️ Tools & Software</button>
+                    <button class="resource-tab" data-category="communities">👥 Communities</button>
                 </div>
 
-                <div class="tool-category">
-                    <div class="category-header">
-                        <div class="category-icon">⚡</div>
-                        <h3>Strategy & Planning</h3>
-                    </div>
-                    <div class="tool-list">
-                        <div class="tool-item">
-                            <strong>North Star Framework</strong>
-                            <p>Define your product's guiding metric and inputs</p>
-                            <button class="tool-button">Use Template</button>
-                        </div>
-                        <div class="tool-item">
-                            <strong>ICE Scoring Model</strong>
-                            <p>Prioritize features by Impact, Confidence, Ease</p>
-                            <button class="tool-button">Use Template</button>
-                        </div>
-                        <div class="tool-item">
-                            <strong>Product Roadmap Canvas</strong>
-                            <p>Visualize your product journey and key milestones</p>
-                            <button class="tool-button">Use Template</button>
-                        </div>
-                    </div>
-                </div>
+                <div class="resource-content">
+                    <div class="resource-category-content active" data-category="templates">
+                        <div class="resource-grid">
+                            <div class="resource-card downloadable">
+                                <div class="resource-icon">📊</div>
+                                <h4>Product Requirements Document (PRD)</h4>
+                                <p>Comprehensive template for documenting product specifications and requirements</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Google Docs</span>
+                                    <span class="resource-downloads">2.3k downloads</span>
+                                </div>
+                                <button class="download-btn">Download Template</button>
+                            </div>
 
-                <div class="tool-category">
-                    <div class="category-header">
-                        <div class="category-icon">📊</div>
-                        <h3>Measurement & Analytics</h3>
+                            <div class="resource-card downloadable">
+                                <div class="resource-icon">🎯</div>
+                                <h4>User Story Mapping Canvas</h4>
+                                <p>Visual template for mapping user journeys and identifying key features</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Miro Board</span>
+                                    <span class="resource-downloads">1.8k downloads</span>
+                                </div>
+                                <button class="download-btn">Download Template</button>
+                            </div>
+
+                            <div class="resource-card downloadable">
+                                <div class="resource-icon">📈</div>
+                                <h4>Product Metrics Dashboard</h4>
+                                <p>Ready-to-use analytics dashboard template with key product KPIs</p>
+                                <div class="resource-meta">
+                                    <span class="resource-type">Google Sheets</span>
+                                    <span class="resource-downloads">3.1k downloads</span>
+                                </div>
+                                <button class="download-btn">Download Template</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="tool-list">
-                        <div class="tool-item">
-                            <strong>AARRR Metrics Framework</strong>
-                            <p>Track the full customer lifecycle funnel</p>
-                            <button class="tool-button">Use Template</button>
+
+                    <div class="resource-category-content" data-category="books">
+                        <div class="book-recommendations">
+                            <div class="book-card">
+                                <div class="book-cover">📘</div>
+                                <div class="book-info">
+                                    <h4>Inspired by Marty Cagan</h4>
+                                    <p class="book-description">The definitive guide to creating products customers love</p>
+                                    <div class="book-rating">★★★★★ 4.8/5</div>
+                                    <div class="book-tags">
+                                        <span class="tag">Product Strategy</span>
+                                        <span class="tag">Team Management</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="book-card">
+                                <div class="book-cover">📗</div>
+                                <div class="book-info">
+                                    <h4>Escaping the Build Trap by Melissa Perri</h4>
+                                    <p class="book-description">How effective product management creates real value</p>
+                                    <div class="book-rating">★★★★☆ 4.6/5</div>
+                                    <div class="book-tags">
+                                        <span class="tag">Product Culture</span>
+                                        <span class="tag">Outcomes</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="book-card">
+                                <div class="book-cover">📙</div>
+                                <div class="book-info">
+                                    <h4>Hooked by Nir Eyal</h4>
+                                    <p class="book-description">How to build habit-forming products</p>
+                                    <div class="book-rating">★★★★☆ 4.4/5</div>
+                                    <div class="book-tags">
+                                        <span class="tag">User Psychology</span>
+                                        <span class="tag">Engagement</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="tool-item">
-                            <strong>Cohort Analysis Builder</strong>
-                            <p>Understand user behavior over time</p>
-                            <button class="tool-button">Use Template</button>
+                    </div>
+
+                    <div class="resource-category-content" data-category="tools">
+                        <div class="tools-grid">
+                            <div class="tool-recommendation">
+                                <div class="tool-logo">🎨</div>
+                                <h4>Figma</h4>
+                                <p>Collaborative design and prototyping</p>
+                                <div class="tool-pricing">Free - $45/month</div>
+                                <div class="tool-rating">★★★★★</div>
+                            </div>
+
+                            <div class="tool-recommendation">
+                                <div class="tool-logo">📊</div>
+                                <h4>Amplitude</h4>
+                                <p>Product analytics and user behavior tracking</p>
+                                <div class="tool-pricing">Free - $995/month</div>
+                                <div class="tool-rating">★★★★☆</div>
+                            </div>
+
+                            <div class="tool-recommendation">
+                                <div class="tool-logo">🗂️</div>
+                                <h4>Linear</h4>
+                                <p>Issue tracking and project management</p>
+                                <div class="tool-pricing">$8 - $16/month</div>
+                                <div class="tool-rating">★★★★★</div>
+                            </div>
                         </div>
-                        <div class="tool-item">
-                            <strong>A/B Test Calculator</strong>
-                            <p>Calculate sample sizes and statistical significance</p>
-                            <button class="tool-button">Use Template</button>
+                    </div>
+
+                    <div class="resource-category-content" data-category="communities">
+                        <div class="communities-grid">
+                            <div class="community-card">
+                                <div class="community-icon">💬</div>
+                                <h4>Product Manager HQ</h4>
+                                <p>45k+ product managers sharing insights and best practices</p>
+                                <div class="community-stats">
+                                    <span>45,892 members</span>
+                                    <span>Very Active</span>
+                                </div>
+                                <button class="join-btn">Join Community</button>
+                            </div>
+
+                            <div class="community-card">
+                                <div class="community-icon">🎯</div>
+                                <h4>Mind the Product</h4>
+                                <p>Global community with events, content, and career resources</p>
+                                <div class="community-stats">
+                                    <span>200k+ members</span>
+                                    <span>Events & Content</span>
+                                </div>
+                                <button class="join-btn">Join Community</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1118,141 +1621,97 @@
         </div>
     </section>
 
-    <section class="interactive-workshop">
+    <section class="ai-assistant-section">
         <div class="container">
-            <h2 class="section-title">Interactive Workshop</h2>
-            <p class="section-subtitle">Learn by doing. Work through real product challenges with guided exercises.</p>
+            <div class="ai-assistant-card">
+                <div class="ai-content">
+                    <div class="ai-avatar">🤖</div>
+                    <div class="ai-text">
+                        <h3>Meet Your AI Product Assistant</h3>
+                        <p>Get personalized advice, framework recommendations, and instant answers to your product questions. Trained on the latest PM best practices and industry insights.</p>
+                        <div class="ai-capabilities">
+                            <span class="capability">📊 Framework Selection</span>
+                            <span class="capability">🎯 Strategy Review</span>
+                            <span class="capability">💡 Problem Solving</span>
+                            <span class="capability">📈 Metrics Guidance</span>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="workshop-scenario">
-                <div class="scenario-card">
-                    <div class="scenario-header">
-                        <h3>📱 Scenario: Recipe Sharing App</h3>
-                        <p>You're PM for a new app that lets home cooks share and discover recipes</p>
+                <div class="ai-chat-interface">
+                    <div class="chat-header">
+                        <h4>Ask Your PM Assistant</h4>
+                        <div class="status-indicator">🟢 Online</div>
                     </div>
 
-                    <div class="workshop-tabs">
-                        <button class="tab-button active" onclick="showTab('define-tab')">Define</button>
-                        <button class="tab-button" onclick="showTab('discover-tab')">Discover</button>
-                        <button class="tab-button" onclick="showTab('deliver-tab')">Deliver</button>
-                        <button class="tab-button" onclick="showTab('learn-tab')">Learn</button>
-                    </div>
-
-                    <div id="define-tab" class="tab-content active">
-                        <div class="exercise-card">
-                            <h4>🎯 Exercise 1: Define Your North Star</h4>
-                            <p>Every great product starts with clarity. Let's define what success looks like.</p>
-
-                            <div class="interactive-form">
-                                <div class="form-group">
-                                    <label>What's the core problem this app solves?</label>
-                                    <textarea class="smart-input" placeholder="Think about the pain points home cooks face when sharing recipes..."></textarea>
-                                    <div class="hint">💡 Hint: Consider discovery, organization, and social aspects</div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Who is your primary user?</label>
-                                    <input type="text" class="smart-input" placeholder="Be specific about demographics, behaviors, and motivations..." />
-                                    <div class="hint">💡 Hint: "Home cooks" is too broad. What type of home cook?</div>
-                                </div>
-
-                                <div class="progress-indicator">
-                                    <div class="progress-bar" style="width: 0%"></div>
-                                </div>
+                    <div class="chat-messages">
+                        <div class="ai-message">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                Hi! I'm here to help you with product management challenges. What would you like to work on today?
                             </div>
                         </div>
                     </div>
 
-                    <div id="discover-tab" class="tab-content">
-                        <div class="exercise-card">
-                            <h4>🔍 Exercise 2: Validate Assumptions</h4>
-                            <p>Time to test your assumptions. What do you need to prove before building?</p>
-
-                            <div class="assumption-builder">
-                                <div class="assumption-template">
-                                    <strong>We believe that</strong>
-                                    <input type="text" class="inline-input" placeholder="building this feature" />
-                                    <strong>for</strong>
-                                    <input type="text" class="inline-input" placeholder="these users" />
-                                    <strong>will achieve</strong>
-                                    <input type="text" class="inline-input" placeholder="this outcome" />
-                                    <strong>We'll know this when</strong>
-                                    <input type="text" class="inline-input" placeholder="we see this metric" />
-                                </div>
-
-                                <div class="risk-assessment">
-                                    <h5>Risk Level:</h5>
-                                    <div class="risk-buttons">
-                                        <button class="risk-btn low">Low</button>
-                                        <button class="risk-btn medium">Medium</button>
-                                        <button class="risk-btn high">High</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="ai-input" placeholder="Ask about frameworks, metrics, strategy..." />
+                        <button class="send-btn" onclick="sendMessage()">Send</button>
                     </div>
 
-                    <div id="deliver-tab" class="tab-content">
-                        <div class="exercise-card">
-                            <h4>🚀 Exercise 3: Build Your MVP</h4>
-                            <p>What's the smallest version that delivers real value?</p>
-
-                            <div class="feature-prioritizer">
-                                <div class="feature-list">
-                                    <div class="feature-item" draggable="true">
-                                        <span class="feature-name">Recipe Upload</span>
-                                        <div class="feature-score">Impact: 9, Effort: 3</div>
-                                    </div>
-                                    <div class="feature-item" draggable="true">
-                                        <span class="feature-name">Social Following</span>
-                                        <div class="feature-score">Impact: 6, Effort: 8</div>
-                                    </div>
-                                    <div class="feature-item" draggable="true">
-                                        <span class="feature-name">Recipe Search</span>
-                                        <div class="feature-score">Impact: 8, Effort: 4</div>
-                                    </div>
-                                </div>
-
-                                <div class="mvp-bucket">
-                                    <h5>MVP Features</h5>
-                                    <p>Drag features here to build your MVP</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="learn-tab" class="tab-content">
-                        <div class="exercise-card">
-                            <h4>📊 Exercise 4: Measure Success</h4>
-                            <p>How will you know if your product is working?</p>
-
-                            <div class="metrics-dashboard">
-                                <div class="metric-card">
-                                    <h5>Acquisition</h5>
-                                    <div class="metric-value">1,245</div>
-                                    <div class="metric-trend up">↗ +15%</div>
-                                </div>
-                                <div class="metric-card">
-                                    <h5>Activation</h5>
-                                    <div class="metric-value">67%</div>
-                                    <div class="metric-trend down">↘ -3%</div>
-                                </div>
-                                <div class="metric-card">
-                                    <h5>Retention</h5>
-                                    <div class="metric-value">34%</div>
-                                    <div class="metric-trend up">↗ +8%</div>
-                                </div>
-                            </div>
-
-                            <div class="insight-prompt">
-                                <h5>What do these metrics tell you?</h5>
-                                <textarea class="smart-input" placeholder="Analyze the data and identify your next steps..."></textarea>
-                            </div>
-                        </div>
+                    <div class="quick-questions">
+                        <button class="quick-q" onclick="askQuestion('How do I prioritize features?')">How do I prioritize features?</button>
+                        <button class="quick-q" onclick="askQuestion('What metrics should I track?')">What metrics should I track?</button>
+                        <button class="quick-q" onclick="askQuestion('How to validate assumptions?')">How to validate assumptions?</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <h3>Product Manager's Playbook</h3>
+                    <p>Empowering product managers to build products that customers love and businesses thrive on.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link">📧 Newsletter</a>
+                        <a href="#" class="social-link">🐦 Twitter</a>
+                        <a href="#" class="social-link">💼 LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Frameworks</h4>
+                        <a href="#frameworks">Vision Canvas</a>
+                        <a href="#frameworks">PR/FAQ</a>
+                        <a href="#frameworks">OKRs</a>
+                        <a href="#frameworks">Lean Canvas</a>
+                    </div>
+
+                    <div class="link-group">
+                        <h4>Resources</h4>
+                        <a href="#resources">Templates</a>
+                        <a href="#resources">Books</a>
+                        <a href="#resources">Tools</a>
+                        <a href="#resources">Communities</a>
+                    </div>
+
+                    <div class="link-group">
+                        <h4>Learn</h4>
+                        <a href="#phases">Product Journey</a>
+                        <a href="#risks">Four Big Risks</a>
+                        <a href="#interactive-workshop">Workshop</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Product Manager's Playbook. Built with ❤️ for the PM community.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         // Smooth scrolling for navigation
@@ -1455,6 +1914,343 @@
                 }
             });
         }, 5000);
+
+        // Resource tabs functionality
+        document.querySelectorAll('.resource-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs and content
+                document.querySelectorAll('.resource-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.resource-category-content').forEach(c => c.classList.remove('active'));
+
+                // Add active class to clicked tab
+                this.classList.add('active');
+
+                // Show corresponding content
+                const category = this.dataset.category;
+                document.querySelector(`[data-category="${category}"].resource-category-content`).classList.add('active');
+            });
+        });
+
+        // AI Assistant functionality
+        function sendMessage() {
+            const input = document.getElementById('ai-input');
+            const message = input.value.trim();
+            if (message) {
+                addUserMessage(message);
+                input.value = '';
+
+                // Simulate AI response
+                setTimeout(() => {
+                    generateAIResponse(message);
+                }, 1000);
+            }
+        }
+
+        function askQuestion(question) {
+            document.getElementById('ai-input').value = question;
+            sendMessage();
+        }
+
+        function addUserMessage(message) {
+            const messagesContainer = document.querySelector('.chat-messages');
+            const userMessage = document.createElement('div');
+            userMessage.className = 'user-message';
+            userMessage.innerHTML = `
+                <div class="message-content user-content">${message}</div>
+                <div class="message-avatar user-avatar">👤</div>
+            `;
+            messagesContainer.appendChild(userMessage);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function generateAIResponse(userMessage) {
+            const responses = {
+                'How do I prioritize features?': "Great question! I recommend using the ICE framework (Impact, Confidence, Ease) or the Value vs Effort matrix. Consider these factors: 1) Business value/revenue impact, 2) User demand and feedback, 3) Technical feasibility, 4) Strategic alignment with your product vision. Would you like me to walk you through setting up a prioritization framework?",
+
+                'What metrics should I track?': "The key is to focus on metrics that drive your product strategy! Start with: 1) North Star Metric (your main success indicator), 2) AARRR metrics (Acquisition, Activation, Retention, Referral, Revenue), 3) Leading indicators that predict success. What's your product category? I can suggest more specific metrics.",
+
+                'How to validate assumptions?': "Assumption validation is crucial! Here's my recommended approach: 1) Map out your riskiest assumptions, 2) Turn them into testable hypotheses, 3) Design quick experiments (surveys, interviews, MVPs), 4) Set success criteria before testing, 5) Learn and iterate. Want help designing a specific validation test?"
+            };
+
+            const response = responses[userMessage] || "That's an interesting question! Product management involves balancing user needs, business goals, and technical constraints. Could you provide more context about your specific situation? I'd love to give you more targeted advice based on your product and challenges.";
+
+            const messagesContainer = document.querySelector('.chat-messages');
+            const aiMessage = document.createElement('div');
+            aiMessage.className = 'ai-message';
+            aiMessage.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">${response}</div>
+            `;
+            messagesContainer.appendChild(aiMessage);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Enter key support for AI chat
+        document.getElementById('ai-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Download functionality simulation
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const resourceName = this.parentNode.querySelector('h4').textContent;
+
+                // Simulate download
+                this.textContent = 'Downloading...';
+                this.style.background = '#10b981';
+
+                setTimeout(() => {
+                    this.textContent = '✓ Downloaded';
+                    setTimeout(() => {
+                        this.textContent = 'Download Template';
+                        this.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
+                    }, 2000);
+                }, 1500);
+            });
+        });
+
+        // Community join functionality
+        document.querySelectorAll('.join-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.textContent = 'Joined! ✓';
+                this.style.background = '#10b981';
+                this.disabled = true;
+            });
+        });
+
+        // Update floating navigation for new sections
+        const allNavDots = document.querySelectorAll('.nav-dot');
+        const allSections = document.querySelectorAll('section');
+
+        // Add new nav dots for additional sections
+        if (document.querySelectorAll('.nav-dot').length < 6) {
+            const floatingNav = document.querySelector('.floating-nav');
+            floatingNav.innerHTML = `
+                <div class="nav-dot active" data-section="hero"></div>
+                <div class="nav-dot" data-section="risks"></div>
+                <div class="nav-dot" data-section="phases"></div>
+                <div class="nav-dot" data-section="frameworks"></div>
+                <div class="nav-dot" data-section="resources-section"></div>
+                <div class="nav-dot" data-section="ai-assistant-section"></div>
+            `;
+
+            // Re-bind navigation events
+            document.querySelectorAll('.nav-dot').forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const sectionId = dot.getAttribute('data-section');
+                    const section = document.getElementById(sectionId) || document.querySelector(`.${sectionId}`);
+                    if (section) {
+                        section.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Enhanced scroll tracking for all sections
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id') || section.className.split(' ')[0];
+                }
+            });
+
+            document.querySelectorAll('.nav-dot').forEach(dot => {
+                dot.classList.remove('active');
+                const dotSection = dot.getAttribute('data-section');
+                if (dotSection === current || current.includes(dotSection)) {
+                    dot.classList.add('active');
+                }
+            });
+        });
+
+        // Add CSS for user messages in chat
+        const userMessageStyles = `
+            .user-message {
+                display: flex;
+                gap: 1rem;
+                margin-bottom: 1rem;
+                justify-content: flex-end;
+            }
+
+            .user-content {
+                background: #667eea;
+                color: white;
+            }
+
+            .user-avatar {
+                background: #374151;
+            }
+        `;
+
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = userMessageStyles;
+        document.head.appendChild(styleSheet);
+
+        // Animate elements on scroll with intersection observer
+        const animateOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+
+                    // Special animations for different elements
+                    if (entry.target.classList.contains('resource-card')) {
+                        entry.target.style.animationDelay = `${Math.random() * 0.3}s`;
+                        entry.target.classList.add('fade-in-up');
+                    }
+
+                    if (entry.target.classList.contains('book-card')) {
+                        entry.target.style.animationDelay = `${Math.random() * 0.2}s`;
+                        entry.target.classList.add('slide-in-left');
+                    }
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        // Apply observer to animated elements
+        document.querySelectorAll('.resource-card, .book-card, .tool-recommendation, .community-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            animateOnScroll.observe(el);
+        });
+
+        // Add more animation keyframes
+        const additionalAnimations = `
+            @keyframes fade-in-up {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes slide-in-left {
+                from {
+                    opacity: 0;
+                    transform: translateX(-30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            .fade-in-up {
+                animation: fade-in-up 0.6s ease-out forwards;
+            }
+
+            .slide-in-left {
+                animation: slide-in-left 0.6s ease-out forwards;
+            }
+
+            /* Typing indicator for AI */
+            .typing-indicator {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                color: #666;
+                font-style: italic;
+                padding: 1rem;
+            }
+
+            .typing-dots::after {
+                content: '...';
+                animation: typing-dots 1.5s infinite;
+            }
+
+            @keyframes typing-dots {
+                0%, 60% { content: '.'; }
+                30% { content: '..'; }
+                60% { content: '...'; }
+            }
+
+            /* Enhance resource cards with hover effects */
+            .resource-card:hover .resource-icon {
+                transform: scale(1.1) rotate(5deg);
+            }
+
+            .book-card:hover .book-cover {
+                transform: scale(1.05);
+            }
+
+            /* Smooth transitions for all interactive elements */
+            .resource-card *, .book-card *, .tool-recommendation *, .community-card * {
+                transition: all 0.3s ease;
+            }
+        `;
+
+        const additionalStyleSheet = document.createElement('style');
+        additionalStyleSheet.textContent = additionalAnimations;
+        document.head.appendChild(additionalStyleSheet);
+
+        // Add typing indicator to AI responses
+        function showTypingIndicator() {
+            const messagesContainer = document.querySelector('.chat-messages');
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'typing-indicator';
+            typingIndicator.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="typing-dots">AI is typing</div>
+            `;
+            messagesContainer.appendChild(typingIndicator);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            return typingIndicator;
+        }
+
+        // Enhanced AI response with typing indicator
+        const originalGenerateAIResponse = generateAIResponse;
+        generateAIResponse = function(userMessage) {
+            const typingIndicator = showTypingIndicator();
+
+            setTimeout(() => {
+                typingIndicator.remove();
+                originalGenerateAIResponse(userMessage);
+            }, 1500);
+        };
+
+        // Add tooltips for framework cards
+        document.querySelectorAll('.framework-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'framework-tooltip';
+                tooltip.textContent = 'Click to start using this framework';
+                tooltip.style.cssText = `
+                    position: absolute;
+                    background: rgba(0,0,0,0.8);
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    border-radius: 5px;
+                    font-size: 0.9rem;
+                    pointer-events: none;
+                    z-index: 1000;
+                    top: -40px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                `;
+                this.style.position = 'relative';
+                this.appendChild(tooltip);
+            });
+
+            card.addEventListener('mouseleave', function() {
+                const tooltip = this.querySelector('.framework-tooltip');
+                if (tooltip) tooltip.remove();
+            });
+        });
     </script>
 </body>
 </html>
