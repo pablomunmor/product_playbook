@@ -15,11 +15,11 @@
 - Auto-calculation for prioritization framework.
 - Inline reset (per-template + global).
 - Reference sections with curated external links.
+- AI Assistant with a RAG backend to answer questions about the playbook's content.
 
 ### Out-of-Scope
 - Multi-user collaboration.
 - Backend storage or authentication.
-- AI-driven personalization.
 
 ## Design & Theme
 - **Style:** Nike-inspired minimalism.

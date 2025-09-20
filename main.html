@@ -2438,15 +2438,17 @@
             if (message) {
                 addUserMessage(message);
                 input.value = '';
-                setTimeout(() => { generateAIResponse(message); }, 1000);
+                // Add a "typing" indicator for the AI for better UX
+                addAIMessage("Thinking...", true);
+                generateAIResponse(message);
             }
         }
-        
+
         function askQuestion(question) {
             document.getElementById('ai-input').value = question;
             sendMessage();
         }
-        
+
         function addUserMessage(message) {
             const messagesContainer = document.querySelector('.chat-messages');
             const userMessage = document.createElement('div');
@@ -2456,46 +2458,75 @@
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
         
-        function generateAIResponse(userMessage) {
-            const responses = {
-                'How do I prioritize features?': "I recommend using Pablo's flexible prioritization framework built into this playbook! It uses weighted scoring across four dimensions: Opportunity Value (35%), Customer Value (20%), Feasibility (10%), and Strategic Value (35%). The key insight is using percentages - you can quickly pivot strategy by adjusting weights. If you need to shift from revenue focus to customer focus, just rebalance the weights across your entire backlog instantly.",
-                'What metrics should I track?': "The key is to focus on metrics that drive your product strategy! Start with: 1) North Star Metric (your main success indicator), 2) AARRR metrics (Acquisition, Activation, Retention, Referral, Revenue), 3) Leading indicators that predict success. What's your product category? I can suggest more specific metrics.",
-                'How to validate assumptions?': "Assumption validation is crucial! Here's my recommended approach: 1) Map out your riskiest assumptions, 2) Turn them into testable hypotheses, 3) Design quick experiments (surveys, interviews, MVPs), 4) Set success criteria before testing, 5) Learn and iterate. Want help designing a specific validation test?",
-                'What\'s the difference between an outcome and an output?': "An **output** is the thing we build, like a new button or feature. An **outcome** is the change in user behavior that happens because of what we built, like 'a 15% increase in users sharing recipes.' Great product teams focus on outcomes, not just shipping features. It's about the treasure, not just the map!",
-                'How do I run a good user interview?': "To get real treasure from user interviews, you need to be a good listener. 1) Have a clear goal for what you want to learn. 2) Ask open-ended questions about their past behavior, not what they *would* do. For example, 'Tell me about the last time you...' is better than 'Would you use...'. 3) Avoid leading questions. Let them do most of the talking.",
-                'What is a North Star Metric?': "The North Star Metric is the one measurement that best captures the core value your product delivers to its customers. For example, for a recipe app, it might be 'Number of recipes successfully cooked per week.' All your efforts should be aimed at moving that one metric. It's the star you steer the ship by!",
-                'Should I build a roadmap?': "Yes, but not the old kind with rigid dates and features! Modern roadmaps, as Melissa Perri advocates, are about communicating strategy. They should focus on business outcomes and the problems you're solving for customers each quarter. Think themes and problems to solve, not a list of features to build. It's a strategic communication tool, not a project plan.",
-                'How do I use the Lean Product Canvas?': "Jeff Gothelf's Lean Product Canvas is perfect for systematic discovery! Start with Box 1 (Business Problem) - what's the most important challenge right now? Then identify your Users (Box 2) and their Jobs to be Done (Box 3). Map out potential Solutions (Box 4) and how you'll measure Business Outcomes (Box 5). Combine these into testable Hypotheses (Box 6), then focus on what you need to learn first (Box 7) and design quick experiments (Box 8).",
-                'What makes a good hypothesis?': "A strong product hypothesis follows this format from Jeff Gothelf: 'We believe that [business outcome] will be achieved if [user] attains [benefit] with [feature].' Each hypothesis should focus on one feature only. The key is making your assumptions explicit so you can test them quickly and cheaply before building anything.",
-                'How do I know which assumption to test first?': "Focus on your riskiest assumptions first! In early stages, prioritize risks to value over feasibility. Ask: 'What assumption, if wrong, would kill this idea?' Jeff Gothelf recommends using his Hypothesis Prioritization Canvas to systematically evaluate which assumptions have the highest risk and the biggest impact on your success.",
-                'Which assumption to test first?': "Focus on your riskiest assumptions first! In early stages, prioritize risks to value over feasibility. Ask: 'What assumption, if wrong, would kill this idea?' Jeff Gothelf recommends using his Hypothesis Prioritization Canvas to systematically evaluate which assumptions have the highest risk and the biggest impact on your success."
-            };
-            
-            if (userMessage.toLowerCase().includes('joke') || userMessage.toLowerCase().includes('funny')) {
-                const jokes = [
-                    "Why did the product manager cross the road? → To create a Jira ticket for engineering to figure out *why* the chicken crossed it.",
-                    "A developer, a tester, and a PM walk into a bar. Developer says: 'It works.' Tester says: 'It doesn't.' PM says: 'Is this bar even on the roadmap?'",
-                    "How many product managers does it take to change a lightbulb? → None. They just write a user story: *'As a user, I want light.'*",
-                    "What's the difference between a product manager and a project manager? → About three letters and 200 Jira tickets.",
-                    "Why do PMs love Gantt charts? → Because nothing says 'control' like a pretty picture of something that will never happen.",
-                ];
-                const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-                const messagesContainer = document.querySelector('.chat-messages');
-                const aiMessage = document.createElement('div');
-                aiMessage.className = 'ai-message';
-                aiMessage.innerHTML = `<div class="message-avatar">😄</div><div class="message-content">${randomJoke}</div>`;
-                messagesContainer.appendChild(aiMessage);
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                return;
-            }
-            
-            const response = responses[userMessage] || "That's an interesting question! Could you provide more context? I'd love to give you more targeted advice.";
+        function addAIMessage(message, isTyping = false) {
             const messagesContainer = document.querySelector('.chat-messages');
+            const existingTyping = document.getElementById('typing-indicator');
+            if (existingTyping) {
+                existingTyping.remove();
+            }
+
             const aiMessage = document.createElement('div');
             aiMessage.className = 'ai-message';
-            aiMessage.innerHTML = `<div class="message-avatar">🤖</div><div class="message-content">${response}</div>`;
+
+            // Format the message to render newlines from the backend correctly
+            const formattedMessage = message.replace(/\n/g, '<br/>');
+
+            aiMessage.innerHTML = `<div class="message-avatar">🤖</div><div class="message-content">${formattedMessage}</div>`;
+
+            if (isTyping) {
+                aiMessage.id = 'typing-indicator';
+            }
+
             messagesContainer.appendChild(aiMessage);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        async function generateAIResponse(userMessage) {
+            const apiUrl = 'http://127.0.0.1:5000/api/chat';
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: userMessage }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server responded with status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const typingIndicator = document.getElementById('typing-indicator');
+
+                // Update the "Thinking..." message with the actual response
+                if (typingIndicator) {
+                    const contentDiv = typingIndicator.querySelector('.message-content');
+                    if (contentDiv) {
+                        contentDiv.innerHTML = data.response.replace(/\n/g, '<br/>');
+                    }
+                    typingIndicator.id = ''; // Remove the ID to mark it as a final message
+                } else {
+                    // Fallback if the indicator was somehow removed
+                    addAIMessage(data.response);
+                }
+
+            } catch (error) {
+                console.error('Error fetching AI response:', error);
+                const errorMessage = "Sorry, I'm having trouble connecting to my brain. Please make sure the local backend server is running and try again.";
+                const typingIndicator = document.getElementById('typing-indicator');
+
+                if (typingIndicator) {
+                    const contentDiv = typingIndicator.querySelector('.message-content');
+                    if (contentDiv) {
+                        contentDiv.innerHTML = errorMessage;
+                    }
+                    typingIndicator.id = '';
+                } else {
+                    addAIMessage(errorMessage);
+                }
+            }
         }
         
         // Resource tabs functionality

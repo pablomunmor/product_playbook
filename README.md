@@ -45,14 +45,31 @@ Each template follows the **card format**:
 
 ---
 
-## Running Locally
-1. Clone repo:
-   ```bash
-   git clone https://github.com/your-org/product-managers-playbook.git
-   cd product-managers-playbook
-Open main.html in your browser.
+## Running the Application
+The application consists of two parts: the frontend (the HTML playbook) and the backend (the AI Assistant server).
 
-Deployment (GitHub Pages)
+### Frontend
+The main playbook interface is a single HTML file.
+1.  Clone this repository.
+2.  Open the `main.html` file directly in your web browser (e.g., Chrome, Firefox, Safari).
+
+### Backend (AI Assistant)
+The AI Assistant requires a local Python server to be running.
+1.  **Navigate to the backend directory:**
+    ```bash
+    cd backend
+    ```
+2.  **Install the required dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+3.  **Run the server:**
+    ```bash
+    python app.py
+    ```
+4.  The server will start and load the knowledge base. It will be available at `http://127.0.0.1:5000`. The frontend will automatically connect to it.
+
+## Deployment (GitHub Pages)
 
 Push to main branch.
 
