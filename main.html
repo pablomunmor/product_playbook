@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Manager's Playbook</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoVBL5gI9kLmbG0C+wFfsFPbAx0eCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        :root {
+            --marine-blue: #001F3F;
+            --white: #FFFFFF;
+            --light-gray: #f0f2f5;
+            --text-color: #333;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            background-color: var(--white);
+            padding: 2rem 1rem;
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            color: var(--marine-blue);
+            font-weight: 700;
+            margin-top: 0;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar nav li a {
+            display: block;
+            color: var(--marine-blue);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .sidebar nav li a:hover,
+        .sidebar nav li a.active {
+            background-color: var(--light-gray);
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 2rem;
+            width: calc(100% - 250px);
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+        }
+
+        .card-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            color: var(--marine-blue);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--marine-blue);
+            font-weight: 600;
+        }
+
+        button {
+            background-color: var(--marine-blue);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        textarea, input, select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .editable {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            border: 1px dashed var(--border-color);
+        }
+
+        #lifecycle-diagram {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            position: relative;
+        }
+
+        #lifecycle-diagram::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--border-color);
+            transform: translateY(-50%);
+        }
+
+        .lifecycle-phase {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .lifecycle-dot {
+            width: 20px;
+            height: 20px;
+            background-color: var(--white);
+            border: 2px solid var(--marine-blue);
+            border-radius: 50%;
+            margin-bottom: 0.5rem;
+            transition: background-color 0.3s;
+        }
+
+        .lifecycle-phase:hover .lifecycle-dot {
+            background-color: var(--marine-blue);
+        }
+
+        #prioritization-framework form {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        #prioritization-framework label {
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>PM's Playbook</h2>
+            <nav>
+                <ul>
+                    <li><a href="#intro" class="active">Intro</a></li>
+                    <li><a href="#phase1">Phase 1: Definition</a></li>
+                    <li><a href="#phase2">Phase 2: Discovery</a></li>
+                    <li><a href="#phase3">Phase 3: Delivery</a></li>
+                    <li><a href="#phase4">Phase 4: Learning</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="content">
+            <section id="intro">
+                <h1>Product Manager's Playbook</h1>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Welcome!</h3>
+                    </div>
+                    <p>This is an interactive, self-contained tool for Product Managers. It combines education with practicality.</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>What is a PM?</h3>
+                    </div>
+                    <p>A product manager is the person who identifies the customer need and the larger business objectives that a product or feature will fulfill, articulates what success looks like for a product, and rallies a team to turn that vision into a reality.</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Core Competencies</h3>
+                    </div>
+                     <p>Product Strategy, Execution, User Understanding, and Leadership.</p>
+                </div>
+                 <div class="card" id="lifecycle-diagram-card">
+                    <div class="card-header">
+                        <h3>Interactive Lifecycle Diagram</h3>
+                    </div>
+                    <div id="lifecycle-diagram">
+                        <!-- Diagram will be generated by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <section id="phase1">
+                <h2>Phase 1: Product Definition</h2>
+                <div class="card" id="vision-strategy">
+                    <div class="card-header"><h3>Vision & Strategy One-Pager</h3></div>
+                    <h4>What this is</h4><p>A concise document aligning everyone on the product's direction.</p>
+                    <h4>Editable Example</h4><div class="editable"><textarea data-key="phase1.vision.content" placeholder="Type your vision here..."></textarea></div>
+                    <button class="export-btn">Export as PNG</button> <button class="reset-btn">Reset</button>
+                </div>
+                <div class="card" id="pr-faq">
+                    <div class="card-header"><h3>PR/FAQ</h3></div>
+                     <h4>What this is</h4><p>A press release and frequently asked questions, written before development.</p>
+                    <h4>Editable Example</h4><div class="editable"><textarea data-key="phase1.prfaq.content" placeholder="Draft your PR/FAQ..."></textarea></div>
+                    <button class="export-btn">Export as PNG</button> <button class="reset-btn">Reset</button>
+                </div>
+            </section>
+
+            <section id="phase2">
+                <h2>Phase 2: Product Discovery</h2>
+                 <div class="card" id="lean-canvas">
+                    <div class="card-header"><h3>Lean Product Canvas</h3></div>
+                    <h4>What this is</h4><p>A tool to capture your product strategy on a single page.</p>
+                    <h4>Editable Example</h4><div class="editable"><textarea data-key="phase2.leancanvas.content" placeholder="Fill out your Lean Canvas..."></textarea></div>
+                    <button class="export-btn">Export as PNG</button> <button class="reset-btn">Reset</button>
+                </div>
+            </section>
+
+            <section id="phase3">
+                <h2>Phase 3: Product Delivery</h2>
+                <div class="card" id="prioritization">
+                    <div class="card-header"><h3>Prioritization Framework</h3></div>
+                    <h4>What this is</h4><p>A system for scoring and ranking initiatives.</p>
+                    <h4>Framework</h4>
+                    <div id="prioritization-framework">
+                        <form>
+                            <label>Opportunity Value (35%)</label>
+                            <select id="opp-value" data-weight="0.35">
+                                <option value="1">1 (&lt; $100K)</option>
+                                <option value="1.5">1.5 ($100K–$500K)</option>
+                                <option value="2">2 ($500K–$1M)</option>
+                                <option value="2.5">2.5 ($1M–$1.5M)</option>
+                                <option value="3">3 ($1.5M–$2.5M)</option>
+                                <option value="3.5">3.5 ($2.5M–$3.5M)</option>
+                                <option value="4">4 (&gt; $3.5M)</option>
+                            </select>
+                             <label>Customer Value (20%)</label>
+                            <select id="cust-value" data-weight="0.20">
+                                <option value="1">1 (Negligible)</option>
+                                <option value="2">2 (Moderate)</option>
+                                <option value="3">3 (Strong)</option>
+                                <option value="4">4 (Very High)</option>
+                            </select>
+                            <label>Feasibility Value (10%)</label>
+                            <select id="feas-value" data-weight="0.10">
+                                <option value="0">0 (None)</option>
+                                <option value="1">1 (Low)</option>
+                                <option value="2">2 (Low-Medium)</option>
+                                <option value="3">3 (Medium-High)</option>
+                                <option value="4">4 (High)</option>
+                            </select>
+                            <label>Strategic Value (35%)</label>
+                            <select id="strat-value" data-weight="0.35">
+                                <option value="1">1 (Negligible)</option>
+                                <option value="2">2 (Measurable)</option>
+                                <option value="3">3 (Significant)</option>
+                                <option value="4">4 (Critical)</option>
+                            </select>
+                        </form>
+                        <h4>Score: <span id="total-score">0.00</span></h4>
+                    </div>
+                    <h4>Editable Example</h4><div class="editable"><textarea data-key="phase3.prioritization.notes" placeholder="Notes on prioritization..."></textarea></div>
+                    <button class="export-btn">Export as PNG</button> <button class="reset-btn">Reset</button>
+                </div>
+            </section>
+
+            <section id="phase4">
+                <h2>Phase 4: Post-Release & Continuous Learning</h2>
+                <div class="card" id="kpi-dashboard">
+                    <div class="card-header"><h3>KPI Dashboard Starter</h3></div>
+                    <h4>What this is</h4><p>A starting point for tracking Key Performance Indicators.</p>
+                    <h4>Editable Example</h4><div class="editable"><textarea data-key="phase4.kpi.content" placeholder="List your KPIs..."></textarea></div>
+                    <button class="export-btn">Export as PNG</button> <button class="reset-btn">Reset</button>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const textareas = document.querySelectorAll('textarea[data-key]');
+
+            // 1. LocalStorage Persistence
+            function loadState() {
+                textareas.forEach(textarea => {
+                    const key = `PMPlaybook.${textarea.dataset.key}`;
+                    const savedValue = localStorage.getItem(key);
+                    if (savedValue) {
+                        textarea.value = savedValue;
+                    }
+                });
+            }
+
+            function saveState(key, value) {
+                localStorage.setItem(`PMPlaybook.${key}`, value);
+            }
+
+            textareas.forEach(textarea => {
+                textarea.addEventListener('input', () => {
+                    saveState(textarea.dataset.key, textarea.value);
+                });
+            });
+
+            // Initial load
+            loadState();
+
+            // 2. Sidebar Navigation
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.sidebar nav a');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 60) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // 3. Screenshot Export
+            document.querySelectorAll('.export-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const card = button.closest('.card');
+                    const title = card.querySelector('h3').innerText.trim().replace(/\\s+/g, '_');
+                    html2canvas(card).then(canvas => {
+                        const link = document.createElement('a');
+                        link.download = `${title}.png`;
+                        link.href = canvas.toDataURL('image/png');
+                        link.click();
+                    });
+                });
+            });
+
+            // 4. Reset Functionality
+            document.querySelectorAll('.reset-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    if (confirm('Are you sure you want to reset this card?')) {
+                        const card = button.closest('.card');
+                        const textarea = card.querySelector('textarea[data-key]');
+                        if (textarea) {
+                            textarea.value = '';
+                            localStorage.removeItem(`PMPlaybook.${textarea.dataset.key}`);
+                        }
+                    }
+                });
+            });
+
+            // 5. Interactive Lifecycle Diagram
+            const lifecycleContainer = document.getElementById('lifecycle-diagram');
+            const phases = [
+                { name: 'Definition', id: 'phase1' },
+                { name: 'Discovery', id: 'phase2' },
+                { name: 'Delivery', id: 'phase3' },
+                { name: 'Learning', id: 'phase4' }
+            ];
+
+            phases.forEach(phase => {
+                const phaseEl = document.createElement('div');
+                phaseEl.className = 'lifecycle-phase';
+                phaseEl.innerHTML = `<div class="lifecycle-dot"></div><span>${phase.name}</span>`;
+                phaseEl.addEventListener('click', () => {
+                    document.getElementById(phase.id).scrollIntoView({ behavior: 'smooth' });
+                });
+                lifecycleContainer.appendChild(phaseEl);
+            });
+
+            // 6. Prioritization Framework
+            const prioritizationForm = document.querySelector('#prioritization-framework form');
+            const scoreEl = document.getElementById('total-score');
+
+            function calculateScore() {
+                const selects = prioritizationForm.querySelectorAll('select');
+                let totalScore = 0;
+                selects.forEach(select => {
+                    const weight = parseFloat(select.dataset.weight);
+                    const value = parseFloat(select.value);
+                    totalScore += weight * value;
+                });
+                scoreEl.textContent = totalScore.toFixed(2);
+            }
+
+            prioritizationForm.addEventListener('change', calculateScore);
+
+            // Initial calculation
+            calculateScore();
+        });
+    </script>
+</body>
+</html>
