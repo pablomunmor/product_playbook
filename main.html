@@ -1,4 +1,400 @@
-<!DOCTYPE html>
+.resource-tab.active {
+            color: #001F        // Resource tabs functionality
+        document.querySelectorAll('.resource-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs and content
+                document.querySelectorAll('.resource-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.resource-category-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Show corresponding content
+                const category = this.dataset.category;
+                document.querySelector(`[data-category="${category}"].resource-category-content`).classList.add('active');
+            });
+        });
+        
+        // AI Assistant functionality
+        function sendMessage() {
+            const input = document.getElementById('ai-input');
+            const message = input.value.trim();
+            if (message) {
+                addUserMessage(message);
+                input.value = '';
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    generateAIResponse(message);
+                }, 1000);
+            }
+        }
+        
+        function askQuestion(question) {
+            document.getElementById('ai-input').value = question;
+            sendMessage();
+        }
+        
+        function addUserMessage(message) {
+            const messagesContainer = document.querySelector('.chat-messages');
+            const userMessage = document.createElement('div');
+            userMessage.className = 'user-message';
+            userMessage.innerHTML = `
+                <div class="message-content user-content">${message}</div>
+                <div class="message-avatar user-avatar">👤</div>
+            `;
+            messagesContainer.appendChild(userMessage);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        function generateAIResponse(userMessage) {
+            const responses = {
+                'How do I prioritize features?': "Great question! I recommend using the ICE framework (Impact, Confidence, Ease) or the Value vs Effort matrix. Consider these factors: 1) Business value/revenue impact, 2) User demand and feedback, 3) Technical feasibility, 4) Strategic alignment with your product vision. Would you like me to walk you through setting up a prioritization framework?",
+                
+                'What metrics should I track?': "The key is to focus on metrics that drive your product strategy! Start with: 1) North Star Metric (your main success indicator), 2) AARRR metrics (Acquisition, Activation, Retention, Referral, Revenue), 3) Leading indicators that predict success. What's your product category? I can suggest more specific metrics.",
+                
+                'How to validate assumptions?': "Assumption validation is crucial! Here's my recommended approach: 1) Map out your riskiest assumptions, 2) Turn them into testable hypotheses, 3) Design quick experiments (surveys, interviews, MVPs), 4) Set success criteria before testing, 5) Learn and iterate. Want help designing a specific validation test?"
+            };
+            
+            const response = responses[userMessage] || "That's an interesting question! Product management involves balancing user needs, business goals, and technical constraints. Could you provide more context about your specific situation? I'd love to give you more targeted advice based on your product and challenges.";
+            
+            const messagesContainer = document.querySelector('.chat-messages');
+            const aiMessage = document.createElement('div');
+            aiMessage.className = 'ai-message';
+            aiMessage.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">${response}</div>
+            `;
+            messagesContainer.appendChild(aiMessage);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        // Enter key support for AI chat
+        document.getElementById('ai-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // Download functionality simulation
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const resourceName = this.parentNode.querySelector('h4').textContent;
+                
+                // Simulate download
+                this.textContent = 'Downloading...';
+                this.style.background = '#10b981';
+                
+                setTimeout(() => {
+                    this.textContent = '✓ Downloaded';
+                    setTimeout(() => {
+                        this.textContent = 'Download Template';
+                        this.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
+                    }, 2000);
+                }, 1500);
+            });
+        });
+        
+        // Community join functionality
+        document.querySelectorAll('.join-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.textContent = 'Joined! ✓';
+                this.style.background = '#10b981';
+                this.disabled = true;
+            });
+        });
+        
+        // Update floating navigation for new sections
+        const allNavDots = document.querySelectorAll('.nav-dot');
+        const allSections = document.querySelectorAll('section');
+        
+        // Add new nav dots for additional sections
+        if (document.querySelectorAll('.nav-dot').length < 6) {
+            const floatingNav = document.querySelector('.floating-nav');
+            floatingNav.innerHTML = `
+                <div class="nav-dot active" data-section="hero"></div>
+                <div class="nav-dot" data-section="risks"></div>
+                <div class="nav-dot" data-section="phases"></div>
+                <div class="nav-dot" data-section="frameworks"></div>
+                <div class="nav-dot" data-section="resources-section"></div>
+                <div class="nav-dot" data-section="ai-assistant-section"></div>
+            `;
+            
+            // Re-bind navigation events
+            document.querySelectorAll('.nav-dot').forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const sectionId = dot.getAttribute('data-section');
+                    const section = document.getElementById(sectionId) || document.querySelector(`.${sectionId}`);
+                    if (section) {
+                        section.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+        
+        // Prioritization framework functionality
+        function updateWeights() {
+            const oppSlider = document.getElementById('opp-slider');
+            const custSlider = document.getElementById('cust-slider');
+            const feasSlider = document.getElementById('feas-slider');
+            const stratSlider = document.getElementById('strat-slider');
+            
+            let total = parseInt(oppSlider.value) + parseInt(custSlider.value) + 
+                       parseInt(feasSlider.value) + parseInt(stratSlider.value);
+            
+            // Auto-balance to 100%
+            if (total !== 100) {
+                const diff = 100 - total;
+                const adjustment = Math.round(diff / 4);
+                
+                oppSlider.value = Math.max(0, parseInt(oppSlider.value) + adjustment);
+                custSlider.value = Math.max(0, parseInt(custSlider.value) + adjustment);
+                feasSlider.value = Math.max(0, parseInt(feasSlider.value) + adjustment);
+                stratSlider.value = Math.max(0, parseInt(stratSlider.value) + adjustment);
+            }
+            
+            // Update display
+            document.getElementById('opp-weight').textContent = oppSlider.value;
+            document.getElementById('cust-weight').textContent = custSlider.value;
+            document.getElementById('feas-weight').textContent = feasSlider.value;
+            document.getElementById('strat-weight').textContent = stratSlider.value;
+            
+            calculateScore();
+        }
+        
+        function calculateScore() {
+            const oppWeight = parseInt(document.getElementById('opp-slider').value) / 100;
+            const custWeight = parseInt(document.getElementById('cust-slider').value) / 100;
+            const feasWeight = parseInt(document.getElementById('feas-slider').value) / 100;
+            const stratWeight = parseInt(document.getElementById('strat-slider').value) / 100;
+            
+            const scoreSelects = document.querySelectorAll('.score-select');
+            if (scoreSelects.length < 4) return;
+            
+            const oppScore = parseFloat(scoreSelects[0].value) || 0;
+            const custScore = parseFloat(scoreSelects[1].value) || 0;
+            const feasScore = parseFloat(scoreSelects[2].value) || 0;
+            const stratScore = parseFloat(scoreSelects[3].value) || 0;
+            
+            const oppContrib = oppScore * oppWeight;
+            const custContrib = custScore * custWeight;
+            const feasContrib = feasScore * feasWeight;
+            const stratContrib = stratScore * stratWeight;
+            
+            const finalScore = oppContrib + custContrib + feasContrib + stratContrib;
+            
+            // Update display
+            document.getElementById('final-score').textContent = finalScore.toFixed(2);
+            document.getElementById('opp-contrib').textContent = oppContrib.toFixed(2);
+            document.getElementById('cust-contrib').textContent = custContrib.toFixed(2);
+            document.getElementById('feas-contrib').textContent = feasContrib.toFixed(2);
+            document.getElementById('strat-contrib').textContent = stratContrib.toFixed(2);
+        }
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id') || section.className.split(' ')[0];
+                }
+            });
+            
+            document.querySelectorAll('.nav-dot').forEach(dot => {
+                dot.classList.remove('active');
+                const dotSection = dot.getAttribute('data-section');
+                if (dotSection === current || current.includes(dotSection)) {
+                    dot.classList.add('active');
+                }
+            });
+        });
+        
+        // Add CSS for user messages in chat
+        const userMessageStyles = `
+            .user-message {
+                display: flex;
+                gap: 1rem;
+                margin-bottom: 1rem;
+                justify-content: flex-end;
+            }
+            
+            .user-content {
+                background: #667eea;
+                color: white;
+            }
+            
+            .user-avatar {
+                background: #374151;
+            }
+        `;
+        
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = userMessageStyles;
+        document.head.appendChild(styleSheet);
+        
+        // Animate elements on scroll with intersection observer
+        const animateOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    
+                    // Special animations for different elements
+                    if (entry.target.classList.contains('resource-card')) {
+                        entry.target.style.animationDelay = `${Math.random() * 0.3}s`;
+                        entry.target.classList.add('fade-in-up');
+                    }
+                    
+                    if (entry.target.classList.contains('book-card')) {
+                        entry.target.style.animationDelay = `${Math.random() * 0.2}s`;
+                        entry.target.classList.add('slide-in-left');
+                    }
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        // Apply observer to animated elements
+        document.querySelectorAll('.resource-card, .book-card, .tool-recommendation, .community-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            animateOnScroll.observe(el);
+        });
+        
+        // Add more animation keyframes
+        const additionalAnimations = `
+            @keyframes fade-in-up {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            @keyframes slide-in-left {
+                from {
+                    opacity: 0;
+                    transform: translateX(-30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            .fade-in-up {
+                animation: fade-in-up 0.6s ease-out forwards;
+            }
+            
+            .slide-in-left {
+                animation: slide-in-left 0.6s ease-out forwards;
+            }
+            
+            /* Typing indicator for AI */
+            .typing-indicator {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                color: #666;
+                font-style: italic;
+                padding: 1rem;
+            }
+            
+            .typing-dots::after {
+                content: '...';
+                animation: typing-dots 1.5s infinite;
+            }
+            
+            @keyframes typing-dots {
+                0%, 60% { content: '.'; }
+                30% { content: '..'; }
+                60% { content: '...'; }
+            }
+            
+            /* Enhance resource cards with hover effects */
+            .resource-card:hover .resource-icon {
+                transform: scale(1.1) rotate(5deg);
+            }
+            
+            .book-card:hover .book-cover {
+                transform: scale(1.05);
+            }
+            
+            /* Smooth transitions for all interactive elements */
+            .resource-card *, .book-card *, .tool-recommendation *, .community-card * {
+                transition: all 0.3s ease;
+            }
+        `;
+        
+        const additionalStyleSheet = document.createElement('style');
+        additionalStyleSheet.textContent = additionalAnimations;
+        document.head.appendChild(additionalStyleSheet);
+        
+        // Add typing indicator to AI responses
+        function showTypingIndicator() {
+            const messagesContainer = document.querySelector('.chat-messages');
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'typing-indicator';
+            typingIndicator.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="typing-dots">AI is typing</div>
+            `;
+            messagesContainer.appendChild(typingIndicator);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            return typingIndicator;
+        }
+        
+        // Enhanced AI response with typing indicator
+        const originalGenerateAIResponse = generateAIResponse;
+        generateAIResponse = function(userMessage) {
+            const typingIndicator = showTypingIndicator();
+            
+            setTimeout(() => {
+                typingIndicator.remove();
+                originalGenerateAIResponse(userMessage);
+            }, 1500);
+        };
+        
+        // Add tooltips for framework cards
+        document.querySelectorAll('.framework-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'framework-tooltip';
+                tooltip.textContent = 'Click to start using this framework';
+                tooltip.style.cssText = `
+                    position: absolute;
+                    background: rgba(0,0,0,0.8);
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    border-radius: 5px;
+                    font-size: 0.9rem;
+                    pointer-events: none;
+                    z-index: 1000;
+                    top: -40px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                `;
+                this.style.position = 'relative';
+                this.appendChild(tooltip);
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                const tooltip = this.querySelector('.framework-tooltip');
+                if (tooltip) tooltip.remove();
+            });
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,15 +406,15 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #001F3F 0%, #1a3a5c 100%);
             min-height: 100vh;
             color: #333;
             overflow-x: hidden;
         }
-
+        
         .hero {
             min-height: 100vh;
             display: flex;
@@ -29,7 +425,7 @@
             padding: 2rem;
             position: relative;
         }
-
+        
         .hero::before {
             content: '';
             position: absolute;
@@ -40,13 +436,13 @@
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
             opacity: 0.5;
         }
-
+        
         .hero-content {
             position: relative;
             z-index: 1;
             max-width: 800px;
         }
-
+        
         .hero h1 {
             font-size: 4rem;
             font-weight: 800;
@@ -55,7 +451,7 @@
             text-shadow: 0 10px 30px rgba(0,0,0,0.3);
             animation: fadeInUp 1s ease-out;
         }
-
+        
         .hero .subtitle {
             font-size: 1.5rem;
             color: rgba(255,255,255,0.9);
@@ -63,9 +459,9 @@
             font-weight: 300;
             animation: fadeInUp 1s ease-out 0.2s both;
         }
-
+        
         .cta-button {
-            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            background: linear-gradient(45deg, #001F3F, #1a3a5c);
             color: white;
             padding: 1rem 2.5rem;
             border: none;
@@ -76,37 +472,37 @@
             text-decoration: none;
             display: inline-block;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 31, 63, 0.3);
             animation: fadeInUp 1s ease-out 0.4s both;
         }
-
+        
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 31, 63, 0.4);
         }
-
+        
         .risks-section {
             background: white;
             padding: 6rem 2rem;
             position: relative;
         }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
-
+        
         .section-title {
             font-size: 3rem;
             font-weight: 700;
             text-align: center;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #001F3F, #1a3a5c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
+        
         .section-subtitle {
             text-align: center;
             font-size: 1.2rem;
@@ -116,14 +512,14 @@
             margin-left: auto;
             margin-right: auto;
         }
-
+        
         .risks-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin-bottom: 4rem;
         }
-
+        
         .risk-card {
             background: white;
             border-radius: 20px;
@@ -135,7 +531,7 @@
             position: relative;
             overflow: hidden;
         }
-
+        
         .risk-card::before {
             content: '';
             position: absolute;
@@ -145,17 +541,17 @@
             height: 4px;
             background: var(--gradient);
         }
-
+        
         .risk-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 30px 80px rgba(0,0,0,0.15);
         }
-
-        .risk-card.value { --gradient: linear-gradient(45deg, #ff6b6b, #ff8e53); }
-        .risk-card.usability { --gradient: linear-gradient(45deg, #4ecdc4, #44a08d); }
-        .risk-card.feasibility { --gradient: linear-gradient(45deg, #667eea, #764ba2); }
-        .risk-card.viability { --gradient: linear-gradient(45deg, #f093fb, #f5576c); }
-
+        
+        .risk-card.value { --gradient: linear-gradient(45deg, #001F3F, #1a3a5c); }
+        .risk-card.usability { --gradient: linear-gradient(45deg, #2c5282, #3182ce); }
+        .risk-card.feasibility { --gradient: linear-gradient(45deg, #001F3F, #2c5282); }
+        .risk-card.viability { --gradient: linear-gradient(45deg, #1a3a5c, #2d3748); }
+        
         .risk-icon {
             width: 80px;
             height: 80px;
@@ -168,25 +564,25 @@
             color: white;
             background: var(--gradient);
         }
-
+        
         .risk-title {
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
             color: #333;
         }
-
+        
         .risk-description {
             color: #666;
             line-height: 1.6;
             font-size: 1rem;
         }
-
+        
         .phases-section {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             padding: 6rem 2rem;
         }
-
+        
         .phases-timeline {
             display: flex;
             flex-direction: column;
@@ -194,7 +590,7 @@
             max-width: 1000px;
             margin: 0 auto;
         }
-
+        
         .phase-item {
             display: flex;
             align-items: center;
@@ -202,27 +598,27 @@
             opacity: 0;
             animation: slideInLeft 0.8s ease-out forwards;
         }
-
+        
         .phase-item:nth-child(even) {
             flex-direction: row-reverse;
             animation: slideInRight 0.8s ease-out forwards;
         }
-
+        
         .phase-number {
             flex-shrink: 0;
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #001F3F, #1a3a5c);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
             font-weight: 700;
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 31, 63, 0.3);
         }
-
+        
         .phase-content {
             flex: 1;
             background: white;
@@ -230,28 +626,28 @@
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.1);
         }
-
+        
         .phase-title {
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 1rem;
             color: #333;
         }
-
+        
         .phase-description {
             color: #666;
             line-height: 1.6;
             margin-bottom: 2rem;
         }
-
+        
         .phase-tools {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
         }
-
+        
         .tool-tag {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #001F3F, #1a3a5c);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 25px;
@@ -260,67 +656,67 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
+        
         .tool-tag:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 31, 63, 0.3);
         }
-
+        
         .framework-section {
             background: white;
             padding: 6rem 2rem;
         }
-
+        
         .framework-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 3rem;
             margin-top: 4rem;
         }
-
+        
         .framework-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #001F3F 0%, #1a3a5c 100%);
             border-radius: 25px;
             padding: 0;
             overflow: hidden;
-            box-shadow: 0 25px 70px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 25px 70px rgba(0, 31, 63, 0.3);
             transition: all 0.3s ease;
             cursor: pointer;
         }
-
+        
         .framework-card:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 35px 90px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 35px 90px rgba(0, 31, 63, 0.4);
         }
-
+        
         .framework-header {
             padding: 2rem;
             color: white;
         }
-
+        
         .framework-title {
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
-
+        
         .framework-subtitle {
             opacity: 0.9;
             font-size: 1rem;
         }
-
+        
         .framework-body {
             background: white;
             padding: 2.5rem;
             min-height: 300px;
         }
-
+        
         .framework-body h4 {
             color: #333;
             margin-bottom: 1rem;
             font-weight: 600;
         }
-
+        
         .framework-input {
             width: 100%;
             padding: 1rem;
@@ -330,31 +726,31 @@
             font-family: inherit;
             transition: border-color 0.3s ease;
         }
-
+        
         .framework-input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #001F3F;
+            box-shadow: 0 0 0 3px rgba(0, 31, 63, 0.1);
         }
-
+        
         .framework-textarea {
             min-height: 120px;
             resize: vertical;
         }
-
+        
         .toolkit-section {
             background: linear-gradient(135deg, #2c3e50 0%, #4a6741 100%);
             padding: 6rem 2rem;
             color: white;
         }
-
+        
         .toolkit-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 3rem;
             margin-top: 4rem;
         }
-
+        
         .tool-category {
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
@@ -362,23 +758,23 @@
             padding: 2.5rem;
             border: 1px solid rgba(255,255,255,0.2);
         }
-
+        
         .category-header {
             display: flex;
             align-items: center;
             gap: 1rem;
             margin-bottom: 2rem;
         }
-
+        
         .category-icon {
             font-size: 2.5rem;
         }
-
+        
         .category-header h3 {
             font-size: 1.5rem;
             font-weight: 700;
         }
-
+        
         .tool-item {
             background: rgba(255,255,255,0.05);
             padding: 1.5rem;
@@ -386,19 +782,19 @@
             margin-bottom: 1rem;
             border-left: 4px solid #ff6b6b;
         }
-
+        
         .tool-item strong {
             display: block;
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
         }
-
+        
         .tool-item p {
             color: rgba(255,255,255,0.8);
             font-size: 0.9rem;
             margin-bottom: 1rem;
         }
-
+        
         .tool-button {
             background: linear-gradient(45deg, #ff6b6b, #ff8e53);
             color: white;
@@ -409,47 +805,47 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
+        
         .tool-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
         }
-
+        
         .interactive-workshop {
             background: #f8fafc;
             padding: 6rem 2rem;
         }
-
+        
         .workshop-scenario {
             max-width: 900px;
             margin: 0 auto;
         }
-
+        
         .scenario-card {
             background: white;
             border-radius: 25px;
             box-shadow: 0 25px 70px rgba(0,0,0,0.1);
             overflow: hidden;
         }
-
+        
         .scenario-header {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             padding: 2.5rem;
             text-align: center;
         }
-
+        
         .scenario-header h3 {
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 1rem;
         }
-
+        
         .workshop-tabs {
             display: flex;
             background: #e2e8f0;
         }
-
+        
         .tab-button {
             flex: 1;
             padding: 1.5rem;
@@ -460,50 +856,50 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
+        
         .tab-button.active {
             background: white;
-            color: #667eea;
+            color: #001F3F;
         }
-
+        
         .tab-content {
             display: none;
             padding: 3rem;
         }
-
+        
         .tab-content.active {
             display: block;
         }
-
+        
         .exercise-card {
             background: #f8fafc;
             padding: 2.5rem;
             border-radius: 20px;
-            border-left: 5px solid #667eea;
+            border-left: 5px solid #001F3F;
         }
-
+        
         .exercise-card h4 {
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
             color: #333;
         }
-
+        
         .interactive-form {
             margin-top: 2rem;
         }
-
+        
         .form-group {
             margin-bottom: 2rem;
         }
-
+        
         .form-group label {
             display: block;
             font-weight: 600;
             margin-bottom: 0.5rem;
             color: #333;
         }
-
+        
         .smart-input {
             width: 100%;
             padding: 1rem;
@@ -512,34 +908,34 @@
             font-family: inherit;
             transition: all 0.3s ease;
         }
-
+        
         .smart-input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #001F3F;
+            box-shadow: 0 0 0 3px rgba(0, 31, 63, 0.1);
         }
-
+        
         .hint {
             font-size: 0.9rem;
             color: #666;
             margin-top: 0.5rem;
             font-style: italic;
         }
-
+        
         .progress-indicator {
             height: 4px;
             background: #e2e8f0;
             border-radius: 2px;
             margin-top: 2rem;
         }
-
+        
         .progress-bar {
             height: 100%;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #001F3F, #1a3a5c);
             border-radius: 2px;
             transition: width 0.3s ease;
         }
-
+        
         .assumption-template {
             background: white;
             padding: 2rem;
@@ -547,29 +943,29 @@
             margin-bottom: 2rem;
             line-height: 2;
         }
-
+        
         .inline-input {
             border: none;
-            border-bottom: 2px solid #667eea;
+            border-bottom: 2px solid #001F3F;
             background: transparent;
             padding: 0.25rem;
             margin: 0 0.5rem;
             min-width: 100px;
             font-weight: 600;
         }
-
+        
         .risk-assessment {
             background: white;
             padding: 1.5rem;
             border-radius: 15px;
         }
-
+        
         .risk-buttons {
             display: flex;
             gap: 1rem;
             margin-top: 1rem;
         }
-
+        
         .risk-btn {
             padding: 0.5rem 1rem;
             border: 2px solid;
@@ -578,46 +974,46 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
+        
         .risk-btn.low { border-color: #10b981; color: #10b981; }
         .risk-btn.medium { border-color: #f59e0b; color: #f59e0b; }
         .risk-btn.high { border-color: #ef4444; color: #ef4444; }
-
+        
         .risk-btn:hover {
             background: currentColor;
             color: white;
         }
-
+        
         .feature-prioritizer {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
         }
-
+        
         .feature-list {
             background: white;
             padding: 2rem;
             border-radius: 15px;
         }
-
+        
         .feature-item {
             background: #f8fafc;
             padding: 1rem;
             border-radius: 10px;
             margin-bottom: 1rem;
             cursor: move;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #001F3F;
         }
-
+        
         .feature-name {
             font-weight: 600;
         }
-
+        
         .feature-score {
             font-size: 0.9rem;
             color: #666;
         }
-
+        
         .mvp-bucket {
             background: white;
             padding: 2rem;
@@ -626,21 +1022,21 @@
             text-align: center;
             min-height: 200px;
         }
-
+        
         .metrics-dashboard {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
             margin-bottom: 2rem;
         }
-
+        
         .metric-card {
             background: white;
             padding: 1.5rem;
             border-radius: 15px;
             text-align: center;
         }
-
+        
         .metric-card h5 {
             color: #666;
             font-size: 0.9rem;
@@ -648,28 +1044,197 @@
             letter-spacing: 1px;
             margin-bottom: 0.5rem;
         }
-
+        
         .metric-value {
             font-size: 2rem;
             font-weight: 700;
             color: #333;
         }
-
+        
         .metric-trend {
             font-size: 0.9rem;
             font-weight: 600;
             margin-top: 0.5rem;
         }
-
+        
         .metric-trend.up { color: #10b981; }
         .metric-trend.down { color: #ef4444; }
-
-        .insight-prompt {
+        
+        .prioritization-weights {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .weight-controls h4 {
+            color: #001F3F;
+            margin-bottom: 1rem;
+        }
+        
+        .weight-sliders {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .weight-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .weight-item label {
+            min-width: 150px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .weight-item input[type="range"] {
+            flex: 1;
+            height: 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .weight-item input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #001F3F;
+            cursor: pointer;
+        }
+        
+        .weight-note {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(0, 31, 63, 0.1);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: #001F3F;
+            font-style: italic;
+        }
+        
+        .scoring-section {
             background: white;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 15px;
         }
-
+        
+        .score-inputs {
+            display: grid;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .score-item label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .score-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        
+        .score-select:focus {
+            outline: none;
+            border-color: #001F3F;
+        }
+        
+        .priority-score {
+            background: linear-gradient(135deg, #001F3F, #1a3a5c);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        .priority-score h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .score-breakdown {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        .canvas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .canvas-section {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 10px;
+            border-top: 3px solid #001F3F;
+        }
+        
+        .canvas-section h5 {
+            color: #001F3F;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .canvas-input {
+            width: 100%;
+            min-height: 80px;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        
+        .lean-canvas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .canvas-section.span-2 {
+            grid-column: span 2;
+        }
+        
+        .canvas-section.span-3 {
+            grid-column: span 3;
+        }
+        
+        .canvas-attribution {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 1rem;
+            border-top: 2px solid #001F3F;
+        }
+        
+        .canvas-attribution a {
+            color: #001F3F;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .canvas-attribution a:hover {
+            text-decoration: underline;
+        }
+        
         .floating-nav {
             position: fixed;
             right: 2rem;
@@ -680,7 +1245,7 @@
             flex-direction: column;
             gap: 1rem;
         }
-
+        
         .nav-dot {
             width: 12px;
             height: 12px;
@@ -689,12 +1254,12 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
+        
         .nav-dot.active {
-            background: #667eea;
+            background: #001F3F;
             transform: scale(1.5);
         }
-
+        
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -705,7 +1270,7 @@
                 transform: translateY(0);
             }
         }
-
+        
         @keyframes slideInLeft {
             from {
                 opacity: 0;
@@ -716,7 +1281,7 @@
                 transform: translateX(0);
             }
         }
-
+        
         @keyframes slideInRight {
             from {
                 opacity: 0;
@@ -727,12 +1292,12 @@
                 transform: translateX(0);
             }
         }
-
+        
         .resources-section {
             background: white;
             padding: 6rem 2rem;
         }
-
+        
         .resource-tab-nav {
             display: flex;
             justify-content: center;
@@ -740,7 +1305,7 @@
             margin-bottom: 3rem;
             border-bottom: 2px solid #e2e8f0;
         }
-
+        
         .resource-tab {
             padding: 1rem 2rem;
             background: transparent;
@@ -751,26 +1316,26 @@
             border-bottom: 3px solid transparent;
             transition: all 0.3s ease;
         }
-
+        
         .resource-tab.active {
-            color: #667eea;
-            border-bottom-color: #667eea;
+            color: #001F3F;
+            border-bottom-color: #001F3F;
         }
-
+        
         .resource-category-content {
             display: none;
         }
-
+        
         .resource-category-content.active {
             display: block;
         }
-
+        
         .resource-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-
+        
         .resource-card {
             background: #f8fafc;
             padding: 2rem;
@@ -779,25 +1344,25 @@
             border: 2px solid transparent;
             transition: all 0.3s ease;
         }
-
+        
         .resource-card:hover {
-            border-color: #667eea;
+            border-color: #001F3F;
             transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 31, 63, 0.15);
         }
-
+        
         .resource-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
         }
-
+        
         .resource-card h4 {
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 1rem;
             color: #333;
         }
-
+        
         .resource-meta {
             display: flex;
             justify-content: space-between;
@@ -806,9 +1371,9 @@
             font-size: 0.9rem;
             color: #666;
         }
-
+        
         .download-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #001F3F, #1a3a5c);
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
@@ -817,18 +1382,18 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
+        
         .download-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 31, 63, 0.3);
         }
-
+        
         .book-recommendations {
             display: flex;
             flex-direction: column;
             gap: 2rem;
         }
-
+        
         .book-card {
             display: flex;
             gap: 2rem;
@@ -837,80 +1402,80 @@
             border-radius: 20px;
             align-items: center;
         }
-
+        
         .book-cover {
             font-size: 4rem;
             flex-shrink: 0;
         }
-
+        
         .book-info h4 {
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
             color: #333;
         }
-
+        
         .book-rating {
             margin: 1rem 0;
             color: #f59e0b;
         }
-
+        
         .book-tags {
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
         }
-
+        
         .tag {
-            background: #667eea;
+            background: #001F3F;
             color: white;
             padding: 0.25rem 0.75rem;
             border-radius: 15px;
             font-size: 0.8rem;
         }
-
+        
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
-
+        
         .tool-recommendation {
             background: #f8fafc;
             padding: 2rem;
             border-radius: 20px;
             text-align: center;
         }
-
+        
         .tool-logo {
             font-size: 3rem;
             margin-bottom: 1rem;
         }
-
+        
         .tool-pricing {
             color: #10b981;
             font-weight: 600;
             margin: 1rem 0;
         }
-
+        
         .communities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-
+        
         .community-card {
             background: #f8fafc;
             padding: 2rem;
             border-radius: 20px;
             text-align: center;
         }
-
+        
         .community-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
         }
-
+        
         .community-stats {
             display: flex;
             justify-content: space-between;
@@ -918,7 +1483,7 @@
             font-size: 0.9rem;
             color: #666;
         }
-
+        
         .join-btn {
             background: linear-gradient(45deg, #10b981, #059669);
             color: white;
@@ -929,12 +1494,12 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
+        
         .ai-assistant-section {
             background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
             padding: 6rem 2rem;
         }
-
+        
         .ai-assistant-card {
             max-width: 1000px;
             margin: 0 auto;
@@ -948,36 +1513,36 @@
             gap: 3rem;
             align-items: center;
         }
-
+        
         .ai-content {
             color: white;
         }
-
+        
         .ai-avatar {
             font-size: 4rem;
             margin-bottom: 1.5rem;
         }
-
+        
         .ai-content h3 {
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 1rem;
         }
-
+        
         .ai-capabilities {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
             margin-top: 2rem;
         }
-
+        
         .capability {
             background: rgba(255,255,255,0.2);
             padding: 0.5rem 1rem;
             border-radius: 20px;
             font-size: 0.9rem;
         }
-
+        
         .ai-chat-interface {
             background: white;
             border-radius: 20px;
@@ -986,7 +1551,7 @@
             display: flex;
             flex-direction: column;
         }
-
+        
         .chat-header {
             background: #f8fafc;
             padding: 1rem;
@@ -995,23 +1560,23 @@
             align-items: center;
             border-bottom: 1px solid #e2e8f0;
         }
-
+        
         .status-indicator {
             font-size: 0.9rem;
         }
-
+        
         .chat-messages {
             flex: 1;
             padding: 1rem;
             overflow-y: auto;
         }
-
+        
         .ai-message {
             display: flex;
             gap: 1rem;
             margin-bottom: 1rem;
         }
-
+        
         .message-avatar {
             width: 32px;
             height: 32px;
@@ -1022,21 +1587,21 @@
             border-radius: 50%;
             flex-shrink: 0;
         }
-
+        
         .message-content {
             background: #f8fafc;
             padding: 1rem;
             border-radius: 15px;
             max-width: 80%;
         }
-
+        
         .chat-input-area {
             display: flex;
             gap: 1rem;
             padding: 1rem;
             border-top: 1px solid #e2e8f0;
         }
-
+        
         .chat-input-area input {
             flex: 1;
             padding: 0.75rem;
@@ -1044,7 +1609,7 @@
             border-radius: 20px;
             outline: none;
         }
-
+        
         .send-btn {
             background: #667eea;
             color: white;
@@ -1053,7 +1618,7 @@
             border-radius: 20px;
             cursor: pointer;
         }
-
+        
         .quick-questions {
             display: flex;
             flex-wrap: wrap;
@@ -1061,7 +1626,7 @@
             padding: 1rem;
             border-top: 1px solid #e2e8f0;
         }
-
+        
         .quick-q {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
@@ -1071,38 +1636,38 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
+        
         .quick-q:hover {
             background: #667eea;
             color: white;
             border-color: #667eea;
         }
-
+        
         .footer-section {
             background: #1f2937;
             color: white;
             padding: 4rem 2rem 2rem;
         }
-
+        
         .footer-content {
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 4rem;
             margin-bottom: 2rem;
         }
-
+        
         .footer-main h3 {
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
         }
-
+        
         .footer-social {
             display: flex;
             gap: 1rem;
             margin-top: 2rem;
         }
-
+        
         .social-link {
             color: white;
             text-decoration: none;
@@ -1111,24 +1676,24 @@
             border-radius: 20px;
             transition: all 0.3s ease;
         }
-
+        
         .social-link:hover {
             background: #667eea;
         }
-
+        
         .footer-links {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
         }
-
+        
         .link-group h4 {
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: #667eea;
         }
-
+        
         .link-group a {
             display: block;
             color: rgba(255,255,255,0.8);
@@ -1136,70 +1701,92 @@
             margin-bottom: 0.5rem;
             transition: color 0.3s ease;
         }
-
+        
         .link-group a:hover {
             color: white;
         }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.6);
+        
+        .credits {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            opacity: 0.8;
+            line-height: 1.4;
         }
-
+        
+        .credits p {
+            margin-bottom: 0.5rem;
+        }
+        
         @media (max-width: 768px) {
             .ai-assistant-card {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-
+            
             .footer-content {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-
+            
             .footer-links {
                 grid-template-columns: 1fr;
             }
-
+            
             .resource-tab-nav {
                 flex-direction: column;
                 gap: 1rem;
             }
         }
-
-        .pulse-animation {
-            animation: pulse 2s infinite;
+        
+        .pm-definition {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+            border: 1px solid rgba(255,255,255,0.2);
         }
-
+        
+        .pm-definition h3 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .pm-definition p {
+            color: rgba(255,255,255,0.9);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
-
+        
         .risk-metrics {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
             margin-top: 1.5rem;
         }
-
+        
         .metric-item {
-            background: rgba(102, 126, 234, 0.1);
+            background: rgba(0, 31, 63, 0.1);
             padding: 1rem;
             border-radius: 10px;
             text-align: left;
         }
-
+        
         .metric-label {
             font-size: 0.8rem;
             color: #666;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
+        
         .metric-value {
             font-size: 1.5rem;
             font-weight: 700;
@@ -1219,6 +1806,10 @@
         <div class="hero-content">
             <h1>Product Manager's Playbook</h1>
             <p class="subtitle">Your intelligent companion for building products that customers love and businesses thrive on</p>
+            <div class="pm-definition">
+                <h3>What is a PM?</h3>
+                <p>Product Managers are the bridge between customer needs, business goals, and technical possibilities. They discover what to build, define why it matters, deliver solutions that work, and learn from real-world impact.</p>
+            </div>
             <a href="#risks" class="cta-button">Start Your Journey</a>
         </div>
     </section>
@@ -1227,7 +1818,7 @@
         <div class="container">
             <h2 class="section-title">The Four Big Risks</h2>
             <p class="section-subtitle">Every product faces these fundamental challenges. Master them, and you'll build products that win.</p>
-
+            
             <div class="risks-grid">
                 <div class="risk-card value">
                     <div class="risk-icon">💎</div>
@@ -1244,7 +1835,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="risk-card usability">
                     <div class="risk-icon">🎯</div>
                     <h3 class="risk-title">Usability Risk</h3>
@@ -1260,7 +1851,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="risk-card feasibility">
                     <div class="risk-icon">⚡</div>
                     <h3 class="risk-title">Feasibility Risk</h3>
@@ -1276,7 +1867,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="risk-card viability">
                     <div class="risk-icon">🚀</div>
                     <h3 class="risk-title">Viability Risk</h3>
@@ -1300,7 +1891,7 @@
         <div class="container">
             <h2 class="section-title">The Product Journey</h2>
             <p class="section-subtitle">Four phases that transform ideas into impact. Each phase has its purpose, tools, and mindset.</p>
-
+            
             <div class="phases-timeline">
                 <div class="phase-item" style="animation-delay: 0.2s;">
                     <div class="phase-number">1</div>
@@ -1315,7 +1906,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="phase-item" style="animation-delay: 0.4s;">
                     <div class="phase-number">2</div>
                     <div class="phase-content">
@@ -1329,7 +1920,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="phase-item" style="animation-delay: 0.6s;">
                     <div class="phase-number">3</div>
                     <div class="phase-content">
@@ -1343,7 +1934,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="phase-item" style="animation-delay: 0.8s;">
                     <div class="phase-number">4</div>
                     <div class="phase-content">
@@ -1365,7 +1956,7 @@
         <div class="container">
             <h2 class="section-title">Interactive Frameworks</h2>
             <p class="section-subtitle">Ready-to-use tools that help you think through problems and communicate solutions. Click to start using.</p>
-
+            
             <div class="framework-grid">
                 <div class="framework-card" onclick="openFramework('vision')">
                     <div class="framework-header">
@@ -1375,15 +1966,15 @@
                     <div class="framework-body">
                         <h4>Mission Statement</h4>
                         <input type="text" class="framework-input" placeholder="What's your product's core purpose?" />
-
+                        
                         <h4>Target User</h4>
                         <input type="text" class="framework-input" placeholder="Who are you building this for?" />
-
+                        
                         <h4>Key Value Proposition</h4>
                         <textarea class="framework-input framework-textarea" placeholder="What unique value do you deliver?"></textarea>
                     </div>
                 </div>
-
+                
                 <div class="framework-card" onclick="openFramework('prfaq')">
                     <div class="framework-header">
                         <h3 class="framework-title">PR/FAQ Builder</h3>
@@ -1392,15 +1983,15 @@
                     <div class="framework-body">
                         <h4>Headline</h4>
                         <input type="text" class="framework-input" placeholder="Write your product launch headline..." />
-
+                        
                         <h4>Customer Problem</h4>
                         <textarea class="framework-input framework-textarea" placeholder="What problem does this solve for customers?"></textarea>
-
+                        
                         <h4>Key Benefit</h4>
                         <input type="text" class="framework-input" placeholder="What's the #1 benefit customers will get?" />
                     </div>
                 </div>
-
+                
                 <div class="framework-card" onclick="openFramework('okrs')">
                     <div class="framework-header">
                         <h3 class="framework-title">OKR Planner</h3>
@@ -1409,46 +2000,167 @@
                     <div class="framework-body">
                         <h4>Objective (Qualitative Goal)</h4>
                         <input type="text" class="framework-input" placeholder="What do you want to achieve?" />
-
+                        
                         <h4>Key Result 1 (Measurable)</h4>
                         <input type="text" class="framework-input" placeholder="How will you measure success?" />
-
+                        
                         <h4>Key Result 2 (Measurable)</h4>
                         <input type="text" class="framework-input" placeholder="What's another key metric?" />
                     </div>
                 </div>
-
+                
                 <div class="framework-card" onclick="openFramework('prioritization')">
                     <div class="framework-header">
-                        <h3 class="framework-title">Smart Prioritization</h3>
-                        <p class="framework-subtitle">Score initiatives on impact vs effort</p>
+                        <h3 class="framework-title">Smart Prioritization Framework</h3>
+                        <p class="framework-subtitle">Flexible weighted scoring with % allocation</p>
                     </div>
                     <div class="framework-body">
-                        <h4>Initiative Name</h4>
-                        <input type="text" class="framework-input" placeholder="What feature or project?" />
-
-                        <h4>Expected Impact (1-10)</h4>
-                        <input type="number" class="framework-input" min="1" max="10" placeholder="10" />
-
-                        <h4>Implementation Effort (1-10)</h4>
-                        <input type="number" class="framework-input" min="1" max="10" placeholder="3" />
+                        <div class="prioritization-weights">
+                            <div class="weight-controls">
+                                <h4>Weight Configuration (Total: 100%)</h4>
+                                <div class="weight-sliders">
+                                    <div class="weight-item">
+                                        <label>Opportunity Value: <span id="opp-weight">35</span>%</label>
+                                        <input type="range" id="opp-slider" min="0" max="100" value="35" onchange="updateWeights()">
+                                    </div>
+                                    <div class="weight-item">
+                                        <label>Customer Value: <span id="cust-weight">20</span>%</label>
+                                        <input type="range" id="cust-slider" min="0" max="100" value="20" onchange="updateWeights()">
+                                    </div>
+                                    <div class="weight-item">
+                                        <label>Feasibility: <span id="feas-weight">10</span>%</label>
+                                        <input type="range" id="feas-slider" min="0" max="100" value="10" onchange="updateWeights()">
+                                    </div>
+                                    <div class="weight-item">
+                                        <label>Strategic Value: <span id="strat-weight">35</span>%</label>
+                                        <input type="range" id="strat-slider" min="0" max="100" value="35" onchange="updateWeights()">
+                                    </div>
+                                </div>
+                                <div class="weight-note">
+                                    💡 Quick strategy pivot? Adjust weights to shift from Revenue focus to Customer focus instantly across your entire backlog
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="scoring-section">
+                            <h4>Initiative Scoring</h4>
+                            <input type="text" class="framework-input" placeholder="Initiative name..." />
+                            
+                            <div class="score-inputs">
+                                <div class="score-item">
+                                    <label>Opportunity Value (1-4)</label>
+                                    <select class="score-select" onchange="calculateScore()">
+                                        <option value="1">1 - <$100K revenue or <$1M savings</option>
+                                        <option value="1.5">1.5 - $100K-$500K revenue</option>
+                                        <option value="2">2 - $500K-$1M revenue or $1M-$3M savings</option>
+                                        <option value="2.5">2.5 - $1M-$1.5M revenue</option>
+                                        <option value="3">3 - $1.5M-$2.5M revenue or $3M-$5M savings</option>
+                                        <option value="3.5">3.5 - $2.5M-$3.5M revenue</option>
+                                        <option value="4">4 - >$3.5M revenue or >$5M savings</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="score-item">
+                                    <label>Customer Value (1-4)</label>
+                                    <select class="score-select" onchange="calculateScore()">
+                                        <option value="1">1 - Negligible improvement, low desirability</option>
+                                        <option value="2">2 - Moderate improvement, some interest</option>
+                                        <option value="3">3 - High desirability, strong alignment</option>
+                                        <option value="4">4 - Very high desirability and reach</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="score-item">
+                                    <label>Feasibility (0-4)</label>
+                                    <select class="score-select" onchange="calculateScore()">
+                                        <option value="0">0 - No available tech, no confidence</option>
+                                        <option value="1">1 - New tech required, low confidence</option>
+                                        <option value="2">2 - Significant enhancements, medium confidence</option>
+                                        <option value="3">3 - Moderate enhancements, high confidence</option>
+                                        <option value="4">4 - Existing tech, very high confidence</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="score-item">
+                                    <label>Strategic Value (1-4)</label>
+                                    <select class="score-select" onchange="calculateScore()">
+                                        <option value="1">1 - Negligible impact, not foundational</option>
+                                        <option value="2">2 - Measurable contribution, somewhat foundational</option>
+                                        <option value="3">3 - Significant impact, foundational to unlocks</option>
+                                        <option value="4">4 - Critical contribution, foundational unlock</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="priority-score">
+                                <h3>Priority Score: <span id="final-score">0.00</span></h3>
+                                <div class="score-breakdown">
+                                    <small>
+                                        Opportunity: <span id="opp-contrib">0</span> + 
+                                        Customer: <span id="cust-contrib">0</span> + 
+                                        Feasibility: <span id="feas-contrib">0</span> + 
+                                        Strategic: <span id="strat-contrib">0</span>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
+                
                 <div class="framework-card" onclick="openFramework('lean-canvas')">
                     <div class="framework-header">
-                        <h3 class="framework-title">Lean Discovery Canvas</h3>
-                        <p class="framework-subtitle">Map out your biggest assumptions</p>
+                        <h3 class="framework-title">Lean Product Canvas</h3>
+                        <p class="framework-subtitle">By Jeff Gothelf - Systematic approach to product discovery</p>
                     </div>
                     <div class="framework-body">
-                        <h4>Problem Hypothesis</h4>
-                        <textarea class="framework-input framework-textarea" placeholder="What problem do you think exists?"></textarea>
-
-                        <h4>Solution Hypothesis</h4>
-                        <textarea class="framework-input framework-textarea" placeholder="How might you solve it?"></textarea>
+                        <div class="lean-canvas-grid">
+                            <div class="canvas-section span-2">
+                                <h5>1. Business Problem</h5>
+                                <textarea class="canvas-input" placeholder="What is the most important problem your business needs to focus on right now?"></textarea>
+                            </div>
+                            
+                            <div class="canvas-section">
+                                <h5>2. Users</h5>
+                                <textarea class="canvas-input" placeholder="Which users and customers should you focus on first? Who buys? Who uses? Who configures?"></textarea>
+                            </div>
+                            
+                            <div class="canvas-section">
+                                <h5>3. User Outcomes & Benefits (JTBD)</h5>
+                                <textarea class="canvas-input" placeholder="Why would users seek out your product? What benefit would they gain? What job are they trying to do?"></textarea>
+                            </div>
+                            
+                            <div class="canvas-section">
+                                <h5>4. Solutions</h5>
+                                <textarea class="canvas-input" placeholder="What can we make that will solve our business problem and meet customer needs? List product, feature, or enhancement ideas."></textarea>
+                            </div>
+                            
+                            <div class="canvas-section">
+                                <h5>5. Business Outcomes</h5>
+                                <textarea class="canvas-input" placeholder="How will you know you solved the business problem? What will you measure? (Who does what by how much)"></textarea>
+                            </div>
+                            
+                            <div class="canvas-section span-3">
+                                <h5>6. Hypotheses</h5>
+                                <textarea class="canvas-input" placeholder='Combine assumptions from boxes 2-5: "We believe that [business outcome] will be achieved if [user] attains [benefit] with [feature]."'></textarea>
+                            </div>
+                            
+                            <div class="canvas-section">
+                                <h5>7. What's the most important thing we need to learn first?</h5>
+                                <textarea class="canvas-input" placeholder="Select hypothesis from Box 6 to test first. What's the riskiest assumption?"></textarea>
+                            </div>
+                            
+                            <div class="canvas-section">
+                                <h5>8. What's the least amount of work to learn the next most important thing?</h5>
+                                <textarea class="canvas-input" placeholder="Design experiments to learn quickly if your riskiest assumption is true. What could you learn in 1 day/week/month?"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="canvas-attribution">
+                            <small>Canvas created by <strong>Jeff Gothelf</strong> • Download original at: <a href="https://www.senseandrespond.co/the-lean-product-canvas" target="_blank">senseandrespond.co</a></small>
+                        </div>
                     </div>
                 </div>
-
+                
                 <div class="framework-card" onclick="openFramework('user-story')">
                     <div class="framework-header">
                         <h3 class="framework-title">User Story Builder</h3>
@@ -1457,12 +2169,229 @@
                     <div class="framework-body">
                         <h4>As a...</h4>
                         <input type="text" class="framework-input" placeholder="What type of user?" />
-
+                        
                         <h4>I want to...</h4>
                         <input type="text" class="framework-input" placeholder="What capability?" />
-
+                        
                         <h4>So that I can...</h4>
                         <input type="text" class="framework-input" placeholder="What's the benefit?" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="toolkit-section">
+        <div class="container">
+            <h2 class="section-title">Advanced Toolkit</h2>
+            <p class="section-subtitle">Power tools for the modern PM. These are the frameworks that separate good PMs from great ones.</p>
+            
+            <div class="toolkit-grid">
+                <div class="tool-category">
+                    <div class="category-header">
+                        <div class="category-icon">🧠</div>
+                        <h3>Discovery & Research</h3>
+                    </div>
+                    <div class="tool-list">
+                        <div class="tool-item">
+                            <strong>Jobs-to-be-Done Framework</strong>
+                            <p>Understand the real "job" your product is hired to do</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                        <div class="tool-item">
+                            <strong>Assumption Mapping</strong>
+                            <p>Identify and prioritize your riskiest assumptions</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                        <div class="tool-item">
+                            <strong>User Interview Guide</strong>
+                            <p>Ask the right questions to uncover real insights</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tool-category">
+                    <div class="category-header">
+                        <div class="category-icon">⚡</div>
+                        <h3>Strategy & Planning</h3>
+                    </div>
+                    <div class="tool-list">
+                        <div class="tool-item">
+                            <strong>North Star Framework</strong>
+                            <p>Define your product's guiding metric and inputs</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                        <div class="tool-item">
+                            <strong>ICE Scoring Model</strong>
+                            <p>Prioritize features by Impact, Confidence, Ease</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                        <div class="tool-item">
+                            <strong>Product Roadmap Canvas</strong>
+                            <p>Visualize your product journey and key milestones</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tool-category">
+                    <div class="category-header">
+                        <div class="category-icon">📊</div>
+                        <h3>Measurement & Analytics</h3>
+                    </div>
+                    <div class="tool-list">
+                        <div class="tool-item">
+                            <strong>AARRR Metrics Framework</strong>
+                            <p>Track the full customer lifecycle funnel</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                        <div class="tool-item">
+                            <strong>Cohort Analysis Builder</strong>
+                            <p>Understand user behavior over time</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                        <div class="tool-item">
+                            <strong>A/B Test Calculator</strong>
+                            <p>Calculate sample sizes and statistical significance</p>
+                            <button class="tool-button">Use Template</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="interactive-workshop">
+        <div class="container">
+            <h2 class="section-title">Interactive Workshop</h2>
+            <p class="section-subtitle">Learn by doing. Work through real product challenges with guided exercises.</p>
+            
+            <div class="workshop-scenario">
+                <div class="scenario-card">
+                    <div class="scenario-header">
+                        <h3>📱 Scenario: Recipe Sharing App</h3>
+                        <p>You're PM for a new app that lets home cooks share and discover recipes</p>
+                    </div>
+                    
+                    <div class="workshop-tabs">
+                        <button class="tab-button active" onclick="showTab('define-tab')">Define</button>
+                        <button class="tab-button" onclick="showTab('discover-tab')">Discover</button>
+                        <button class="tab-button" onclick="showTab('deliver-tab')">Deliver</button>
+                        <button class="tab-button" onclick="showTab('learn-tab')">Learn</button>
+                    </div>
+                    
+                    <div id="define-tab" class="tab-content active">
+                        <div class="exercise-card">
+                            <h4>🎯 Exercise 1: Define Your North Star</h4>
+                            <p>Every great product starts with clarity. Let's define what success looks like.</p>
+                            
+                            <div class="interactive-form">
+                                <div class="form-group">
+                                    <label>What's the core problem this app solves?</label>
+                                    <textarea class="smart-input" placeholder="Think about the pain points home cooks face when sharing recipes..."></textarea>
+                                    <div class="hint">💡 Hint: Consider discovery, organization, and social aspects</div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Who is your primary user?</label>
+                                    <input type="text" class="smart-input" placeholder="Be specific about demographics, behaviors, and motivations..." />
+                                    <div class="hint">💡 Hint: "Home cooks" is too broad. What type of home cook?</div>
+                                </div>
+                                
+                                <div class="progress-indicator">
+                                    <div class="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="discover-tab" class="tab-content">
+                        <div class="exercise-card">
+                            <h4>🔍 Exercise 2: Validate Assumptions</h4>
+                            <p>Time to test your assumptions. What do you need to prove before building?</p>
+                            
+                            <div class="assumption-builder">
+                                <div class="assumption-template">
+                                    <strong>We believe that</strong>
+                                    <input type="text" class="inline-input" placeholder="building this feature" />
+                                    <strong>for</strong>
+                                    <input type="text" class="inline-input" placeholder="these users" />
+                                    <strong>will achieve</strong>
+                                    <input type="text" class="inline-input" placeholder="this outcome" />
+                                    <strong>We'll know this when</strong>
+                                    <input type="text" class="inline-input" placeholder="we see this metric" />
+                                </div>
+                                
+                                <div class="risk-assessment">
+                                    <h5>Risk Level:</h5>
+                                    <div class="risk-buttons">
+                                        <button class="risk-btn low">Low</button>
+                                        <button class="risk-btn medium">Medium</button>
+                                        <button class="risk-btn high">High</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="deliver-tab" class="tab-content">
+                        <div class="exercise-card">
+                            <h4>🚀 Exercise 3: Build Your MVP</h4>
+                            <p>What's the smallest version that delivers real value?</p>
+                            
+                            <div class="feature-prioritizer">
+                                <div class="feature-list">
+                                    <div class="feature-item" draggable="true">
+                                        <span class="feature-name">Recipe Upload</span>
+                                        <div class="feature-score">Impact: 9, Effort: 3</div>
+                                    </div>
+                                    <div class="feature-item" draggable="true">
+                                        <span class="feature-name">Social Following</span>
+                                        <div class="feature-score">Impact: 6, Effort: 8</div>
+                                    </div>
+                                    <div class="feature-item" draggable="true">
+                                        <span class="feature-name">Recipe Search</span>
+                                        <div class="feature-score">Impact: 8, Effort: 4</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mvp-bucket">
+                                    <h5>MVP Features</h5>
+                                    <p>Drag features here to build your MVP</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="learn-tab" class="tab-content">
+                        <div class="exercise-card">
+                            <h4>📊 Exercise 4: Measure Success</h4>
+                            <p>How will you know if your product is working?</p>
+                            
+                            <div class="metrics-dashboard">
+                                <div class="metric-card">
+                                    <h5>Acquisition</h5>
+                                    <div class="metric-value">1,245</div>
+                                    <div class="metric-trend up">↗ +15%</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h5>Activation</h5>
+                                    <div class="metric-value">67%</div>
+                                    <div class="metric-trend down">↘ -3%</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h5>Retention</h5>
+                                    <div class="metric-value">34%</div>
+                                    <div class="metric-trend up">↗ +8%</div>
+                                </div>
+                            </div>
+                            
+                            <div class="insight-prompt">
+                                <h5>What do these metrics tell you?</h5>
+                                <textarea class="smart-input" placeholder="Analyze the data and identify your next steps..."></textarea>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1473,7 +2402,7 @@
         <div class="container">
             <h2 class="section-title">PM Resource Library</h2>
             <p class="section-subtitle">Curated resources, templates, and inspiration from the best in product management</p>
-
+            
             <div class="resource-categories">
                 <div class="resource-tab-nav">
                     <button class="resource-tab active" data-category="templates">📋 Templates</button>
@@ -1481,7 +2410,7 @@
                     <button class="resource-tab" data-category="tools">🛠️ Tools & Software</button>
                     <button class="resource-tab" data-category="communities">👥 Communities</button>
                 </div>
-
+                
                 <div class="resource-content">
                     <div class="resource-category-content active" data-category="templates">
                         <div class="resource-grid">
@@ -1495,7 +2424,7 @@
                                 </div>
                                 <button class="download-btn">Download Template</button>
                             </div>
-
+                            
                             <div class="resource-card downloadable">
                                 <div class="resource-icon">🎯</div>
                                 <h4>User Story Mapping Canvas</h4>
@@ -1506,7 +2435,7 @@
                                 </div>
                                 <button class="download-btn">Download Template</button>
                             </div>
-
+                            
                             <div class="resource-card downloadable">
                                 <div class="resource-icon">📈</div>
                                 <h4>Product Metrics Dashboard</h4>
@@ -1519,7 +2448,7 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="resource-category-content" data-category="books">
                         <div class="book-recommendations">
                             <div class="book-card">
@@ -1534,7 +2463,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div class="book-card">
                                 <div class="book-cover">📗</div>
                                 <div class="book-info">
@@ -1547,7 +2476,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div class="book-card">
                                 <div class="book-cover">📙</div>
                                 <div class="book-info">
@@ -1562,7 +2491,7 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="resource-category-content" data-category="tools">
                         <div class="tools-grid">
                             <div class="tool-recommendation">
@@ -1572,7 +2501,7 @@
                                 <div class="tool-pricing">Free - $45/month</div>
                                 <div class="tool-rating">★★★★★</div>
                             </div>
-
+                            
                             <div class="tool-recommendation">
                                 <div class="tool-logo">📊</div>
                                 <h4>Amplitude</h4>
@@ -1580,7 +2509,7 @@
                                 <div class="tool-pricing">Free - $995/month</div>
                                 <div class="tool-rating">★★★★☆</div>
                             </div>
-
+                            
                             <div class="tool-recommendation">
                                 <div class="tool-logo">🗂️</div>
                                 <h4>Linear</h4>
@@ -1590,7 +2519,7 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="resource-category-content" data-category="communities">
                         <div class="communities-grid">
                             <div class="community-card">
@@ -1603,7 +2532,7 @@
                                 </div>
                                 <button class="join-btn">Join Community</button>
                             </div>
-
+                            
                             <div class="community-card">
                                 <div class="community-icon">🎯</div>
                                 <h4>Mind the Product</h4>
@@ -1637,13 +2566,13 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="ai-chat-interface">
                     <div class="chat-header">
                         <h4>Ask Your PM Assistant</h4>
                         <div class="status-indicator">🟢 Online</div>
                     </div>
-
+                    
                     <div class="chat-messages">
                         <div class="ai-message">
                             <div class="message-avatar">🤖</div>
@@ -1652,16 +2581,19 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="chat-input-area">
                         <input type="text" id="ai-input" placeholder="Ask about frameworks, metrics, strategy..." />
                         <button class="send-btn" onclick="sendMessage()">Send</button>
                     </div>
-
+                    
                     <div class="quick-questions">
                         <button class="quick-q" onclick="askQuestion('How do I prioritize features?')">How do I prioritize features?</button>
                         <button class="quick-q" onclick="askQuestion('What metrics should I track?')">What metrics should I track?</button>
                         <button class="quick-q" onclick="askQuestion('How to validate assumptions?')">How to validate assumptions?</button>
+                        <button class="quick-q" onclick="askQuestion('How do I use the Lean Product Canvas?')">How do I use the Lean Product Canvas?</button>
+                        <button class="quick-q" onclick="askQuestion('What makes a good hypothesis?')">What makes a good hypothesis?</button>
+                        <button class="quick-q" onclick="askQuestion('What is a North Star Metric?')">What is a North Star Metric?</button>
                     </div>
                 </div>
             </div>
@@ -1680,7 +2612,7 @@
                         <a href="#" class="social-link">💼 LinkedIn</a>
                     </div>
                 </div>
-
+                
                 <div class="footer-links">
                     <div class="link-group">
                         <h4>Frameworks</h4>
@@ -1689,7 +2621,7 @@
                         <a href="#frameworks">OKRs</a>
                         <a href="#frameworks">Lean Canvas</a>
                     </div>
-
+                    
                     <div class="link-group">
                         <h4>Resources</h4>
                         <a href="#resources">Templates</a>
@@ -1697,7 +2629,7 @@
                         <a href="#resources">Tools</a>
                         <a href="#resources">Communities</a>
                     </div>
-
+                    
                     <div class="link-group">
                         <h4>Learn</h4>
                         <a href="#phases">Product Journey</a>
@@ -1706,9 +2638,13 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="footer-bottom">
-                <p>&copy; 2024 Product Manager's Playbook. Built with ❤️ for the PM community.</p>
+                <p>&copy; 2024 Product Playbook by Pablo Munoz. Built with ❤️ for the PM community.</p>
+                <div class="credits">
+                    <p><strong>Framework Credits:</strong> Four Big Risks by Marty Cagan (SVPG) • Lean Product Canvas by Jeff Gothelf • Prioritization Framework by Pablo Munoz</p>
+                    <p><strong>Inspired by:</strong> Melissa Perri, Jeff Gothelf, Marty Cagan, and the broader PM community</p>
+                </div>
             </div>
         </div>
     </footer>
@@ -1725,11 +2661,11 @@
                 });
             });
         });
-
+        
         // Floating navigation
         const navDots = document.querySelectorAll('.nav-dot');
         const sections = document.querySelectorAll('section');
-
+        
         window.addEventListener('scroll', () => {
             let current = '';
             sections.forEach(section => {
@@ -1739,7 +2675,7 @@
                     current = section.getAttribute('id');
                 }
             });
-
+            
             navDots.forEach(dot => {
                 dot.classList.remove('active');
                 if (dot.getAttribute('data-section') === current) {
@@ -1747,7 +2683,7 @@
                 }
             });
         });
-
+        
         navDots.forEach(dot => {
             dot.addEventListener('click', () => {
                 const section = document.getElementById(dot.getAttribute('data-section'));
@@ -1757,7 +2693,7 @@
                 });
             });
         });
-
+        
         // Framework interactions
         function openFramework(type) {
             // Add pulse animation
@@ -1766,24 +2702,24 @@
                 event.currentTarget.classList.remove('pulse-animation');
             }, 1000);
         }
-
+        
         // Add interactive elements
         document.querySelectorAll('.framework-input').forEach(input => {
             input.addEventListener('focus', function() {
                 this.parentNode.style.background = 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)';
             });
-
+            
             input.addEventListener('blur', function() {
                 this.parentNode.style.background = 'white';
             });
         });
-
+        
         // Animate elements on scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
-
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1792,7 +2728,7 @@
                 }
             });
         }, observerOptions);
-
+        
         // Workshop functionality
         function showTab(tabId) {
             // Hide all tabs
@@ -1802,12 +2738,12 @@
             document.querySelectorAll('.tab-button').forEach(btn => {
                 btn.classList.remove('active');
             });
-
+            
             // Show selected tab
             document.getElementById(tabId).classList.add('active');
             event.target.classList.add('active');
         }
-
+        
         // Progress tracking for forms
         document.querySelectorAll('.smart-input').forEach(input => {
             input.addEventListener('input', function() {
@@ -1823,74 +2759,74 @@
                 }
             });
         });
-
+        
         // Risk button interactions
         document.querySelectorAll('.risk-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 // Remove active class from siblings
                 this.parentNode.querySelectorAll('.risk-btn').forEach(b => {
                     b.style.background = 'transparent';
-                    b.style.color = b.classList.contains('low') ? '#10b981' :
+                    b.style.color = b.classList.contains('low') ? '#10b981' : 
                                    b.classList.contains('medium') ? '#f59e0b' : '#ef4444';
                 });
-
+                
                 // Activate clicked button
                 this.style.background = this.style.borderColor;
                 this.style.color = 'white';
             });
         });
-
+        
         // Drag and drop for feature prioritization
         let draggedElement = null;
-
+        
         document.querySelectorAll('.feature-item').forEach(item => {
             item.addEventListener('dragstart', function(e) {
                 draggedElement = this;
                 this.style.opacity = '0.5';
             });
-
+            
             item.addEventListener('dragend', function() {
                 this.style.opacity = '1';
                 draggedElement = null;
             });
         });
-
+        
         document.querySelector('.mvp-bucket').addEventListener('dragover', function(e) {
             e.preventDefault();
             this.style.background = '#f0f9ff';
             this.style.borderColor = '#667eea';
         });
-
+        
         document.querySelector('.mvp-bucket').addEventListener('dragleave', function() {
             this.style.background = 'white';
             this.style.borderColor = '#e2e8f0';
         });
-
+        
         document.querySelector('.mvp-bucket').addEventListener('drop', function(e) {
             e.preventDefault();
             if (draggedElement) {
                 this.appendChild(draggedElement.cloneNode(true));
                 this.style.background = 'white';
                 this.style.borderColor = '#e2e8f0';
-
+                
                 // Update bucket text
                 if (this.children.length > 1) {
                     this.querySelector('p').style.display = 'none';
                 }
             }
         });
-
+        
         // Smart input enhancements
         document.querySelectorAll('.smart-input').forEach(input => {
             input.addEventListener('focus', function() {
                 this.style.transform = 'scale(1.02)';
             });
-
+            
             input.addEventListener('blur', function() {
                 this.style.transform = 'scale(1)';
             });
         });
-
+        
         // Simulate real-time metrics updates
         setInterval(() => {
             const metricValues = document.querySelectorAll('.metric-value');
@@ -1899,13 +2835,13 @@
                 if (!isNaN(currentValue) && Math.random() > 0.7) {
                     const change = Math.floor(Math.random() * 10) - 5;
                     const newValue = Math.max(0, currentValue + change);
-
+                    
                     if (metric.textContent.includes('%')) {
                         metric.textContent = Math.min(100, newValue) + '%';
                     } else {
                         metric.textContent = newValue.toLocaleString();
                     }
-
+                    
                     // Flash effect
                     metric.style.color = '#667eea';
                     setTimeout(() => {
@@ -1914,351 +2850,6 @@
                 }
             });
         }, 5000);
-
-        // Resource tabs functionality
-        document.querySelectorAll('.resource-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                // Remove active class from all tabs and content
-                document.querySelectorAll('.resource-tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.resource-category-content').forEach(c => c.classList.remove('active'));
-
-                // Add active class to clicked tab
-                this.classList.add('active');
-
-                // Show corresponding content
-                const category = this.dataset.category;
-                document.querySelector(`[data-category="${category}"].resource-category-content`).classList.add('active');
-            });
-        });
-
-        // AI Assistant functionality
-        function sendMessage() {
-            const input = document.getElementById('ai-input');
-            const message = input.value.trim();
-            if (message) {
-                addUserMessage(message);
-                input.value = '';
-
-                // Simulate AI response
-                setTimeout(() => {
-                    generateAIResponse(message);
-                }, 1000);
-            }
-        }
-
-        function askQuestion(question) {
-            document.getElementById('ai-input').value = question;
-            sendMessage();
-        }
-
-        function addUserMessage(message) {
-            const messagesContainer = document.querySelector('.chat-messages');
-            const userMessage = document.createElement('div');
-            userMessage.className = 'user-message';
-            userMessage.innerHTML = `
-                <div class="message-content user-content">${message}</div>
-                <div class="message-avatar user-avatar">👤</div>
-            `;
-            messagesContainer.appendChild(userMessage);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function generateAIResponse(userMessage) {
-            const responses = {
-                'How do I prioritize features?': "Great question! I recommend using the ICE framework (Impact, Confidence, Ease) or the Value vs Effort matrix. Consider these factors: 1) Business value/revenue impact, 2) User demand and feedback, 3) Technical feasibility, 4) Strategic alignment with your product vision. Would you like me to walk you through setting up a prioritization framework?",
-
-                'What metrics should I track?': "The key is to focus on metrics that drive your product strategy! Start with: 1) North Star Metric (your main success indicator), 2) AARRR metrics (Acquisition, Activation, Retention, Referral, Revenue), 3) Leading indicators that predict success. What's your product category? I can suggest more specific metrics.",
-
-                'How to validate assumptions?': "Assumption validation is crucial! Here's my recommended approach: 1) Map out your riskiest assumptions, 2) Turn them into testable hypotheses, 3) Design quick experiments (surveys, interviews, MVPs), 4) Set success criteria before testing, 5) Learn and iterate. Want help designing a specific validation test?",
-
-                'What\'s the difference between an outcome and an output?': "A fine question, matey! An **output** is the thing we build, like a new button or feature. An **outcome** is the change in user behavior that happens because of what we built, like 'a 15% increase in users sharing recipes.' Great product teams focus on outcomes, not just shipping features. It's about the treasure, not just the map!",
-
-                'How do I run a good user interview?': "To get real treasure from user interviews, you need to be a good listener. 1) Have a clear goal for what you want to learn. 2) Ask open-ended questions about their past behavior, not what they *would* do. For example, 'Tell me about the last time you...' is better than 'Would you use...'. 3) Avoid leading questions. Let them do most of the talking. Savvy?",
-
-                'What is a North Star Metric?': "The North Star Metric is the one measurement that best captures the core value your product delivers to its customers. For example, for a recipe app, it might be 'Number of recipes successfully cooked per week.' All your efforts should be aimed at moving that one metric. It's the star you steer the ship by!",
-
-                'Should I build a roadmap?': "Aye, but not the old kind with rigid dates and features! Modern roadmaps, as Melissa Perri advocates, are about communicating strategy. They should focus on business outcomes and the problems you're solving for customers each quarter. Think themes and problems to solve, not a list of features to build. It's a strategic communication tool, not a project plan."
-            };
-
-            const response = responses[userMessage] || "That's an interesting question! Product management involves balancing user needs, business goals, and technical constraints. Could you provide more context about your specific situation? I'd love to give you more targeted advice based on your product and challenges.";
-
-            const messagesContainer = document.querySelector('.chat-messages');
-            const aiMessage = document.createElement('div');
-            aiMessage.className = 'ai-message';
-            aiMessage.innerHTML = `
-                <div class="message-avatar">🤖</div>
-                <div class="message-content">${response}</div>
-            `;
-            messagesContainer.appendChild(aiMessage);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        // Enter key support for AI chat
-        document.getElementById('ai-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-
-        // Download functionality simulation
-        document.querySelectorAll('.download-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const resourceName = this.parentNode.querySelector('h4').textContent;
-
-                // Simulate download
-                this.textContent = 'Downloading...';
-                this.style.background = '#10b981';
-
-                setTimeout(() => {
-                    this.textContent = '✓ Downloaded';
-                    setTimeout(() => {
-                        this.textContent = 'Download Template';
-                        this.style.background = 'linear-gradient(45deg, #667eea, #764ba2)';
-                    }, 2000);
-                }, 1500);
-            });
-        });
-
-        // Community join functionality
-        document.querySelectorAll('.join-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                this.textContent = 'Joined! ✓';
-                this.style.background = '#10b981';
-                this.disabled = true;
-            });
-        });
-
-        // Update floating navigation for new sections
-        const allNavDots = document.querySelectorAll('.nav-dot');
-        const allSections = document.querySelectorAll('section');
-
-        // Add new nav dots for additional sections
-        if (document.querySelectorAll('.nav-dot').length < 6) {
-            const floatingNav = document.querySelector('.floating-nav');
-            floatingNav.innerHTML = `
-                <div class="nav-dot active" data-section="hero"></div>
-                <div class="nav-dot" data-section="risks"></div>
-                <div class="nav-dot" data-section="phases"></div>
-                <div class="nav-dot" data-section="frameworks"></div>
-                <div class="nav-dot" data-section="resources-section"></div>
-                <div class="nav-dot" data-section="ai-assistant-section"></div>
-            `;
-
-            // Re-bind navigation events
-            document.querySelectorAll('.nav-dot').forEach(dot => {
-                dot.addEventListener('click', () => {
-                    const sectionId = dot.getAttribute('data-section');
-                    const section = document.getElementById(sectionId) || document.querySelector(`.${sectionId}`);
-                    if (section) {
-                        section.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        }
-
-        // Enhanced scroll tracking for all sections
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const sections = document.querySelectorAll('section');
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id') || section.className.split(' ')[0];
-                }
-            });
-
-            document.querySelectorAll('.nav-dot').forEach(dot => {
-                dot.classList.remove('active');
-                const dotSection = dot.getAttribute('data-section');
-                if (dotSection === current || current.includes(dotSection)) {
-                    dot.classList.add('active');
-                }
-            });
-        });
-
-        // Add CSS for user messages in chat
-        const userMessageStyles = `
-            .user-message {
-                display: flex;
-                gap: 1rem;
-                margin-bottom: 1rem;
-                justify-content: flex-end;
-            }
-
-            .user-content {
-                background: #667eea;
-                color: white;
-            }
-
-            .user-avatar {
-                background: #374151;
-            }
-        `;
-
-        const styleSheet = document.createElement('style');
-        styleSheet.textContent = userMessageStyles;
-        document.head.appendChild(styleSheet);
-
-        // Animate elements on scroll with intersection observer
-        const animateOnScroll = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-
-                    // Special animations for different elements
-                    if (entry.target.classList.contains('resource-card')) {
-                        entry.target.style.animationDelay = `${Math.random() * 0.3}s`;
-                        entry.target.classList.add('fade-in-up');
-                    }
-
-                    if (entry.target.classList.contains('book-card')) {
-                        entry.target.style.animationDelay = `${Math.random() * 0.2}s`;
-                        entry.target.classList.add('slide-in-left');
-                    }
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-
-        // Apply observer to animated elements
-        document.querySelectorAll('.resource-card, .book-card, .tool-recommendation, .community-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            animateOnScroll.observe(el);
-        });
-
-        // Add more animation keyframes
-        const additionalAnimations = `
-            @keyframes fade-in-up {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            @keyframes slide-in-left {
-                from {
-                    opacity: 0;
-                    transform: translateX(-30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
-            }
-
-            .fade-in-up {
-                animation: fade-in-up 0.6s ease-out forwards;
-            }
-
-            .slide-in-left {
-                animation: slide-in-left 0.6s ease-out forwards;
-            }
-
-            /* Typing indicator for AI */
-            .typing-indicator {
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                color: #666;
-                font-style: italic;
-                padding: 1rem;
-            }
-
-            .typing-dots::after {
-                content: '...';
-                animation: typing-dots 1.5s infinite;
-            }
-
-            @keyframes typing-dots {
-                0%, 60% { content: '.'; }
-                30% { content: '..'; }
-                60% { content: '...'; }
-            }
-
-            /* Enhance resource cards with hover effects */
-            .resource-card:hover .resource-icon {
-                transform: scale(1.1) rotate(5deg);
-            }
-
-            .book-card:hover .book-cover {
-                transform: scale(1.05);
-            }
-
-            /* Smooth transitions for all interactive elements */
-            .resource-card *, .book-card *, .tool-recommendation *, .community-card * {
-                transition: all 0.3s ease;
-            }
-        `;
-
-        const additionalStyleSheet = document.createElement('style');
-        additionalStyleSheet.textContent = additionalAnimations;
-        document.head.appendChild(additionalStyleSheet);
-
-        // Add typing indicator to AI responses
-        function showTypingIndicator() {
-            const messagesContainer = document.querySelector('.chat-messages');
-            const typingIndicator = document.createElement('div');
-            typingIndicator.className = 'typing-indicator';
-            typingIndicator.innerHTML = `
-                <div class="message-avatar">🤖</div>
-                <div class="typing-dots">AI is typing</div>
-            `;
-            messagesContainer.appendChild(typingIndicator);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            return typingIndicator;
-        }
-
-        // Enhanced AI response with typing indicator
-        const originalGenerateAIResponse = generateAIResponse;
-        generateAIResponse = function(userMessage) {
-            const typingIndicator = showTypingIndicator();
-
-            setTimeout(() => {
-                typingIndicator.remove();
-                originalGenerateAIResponse(userMessage);
-            }, 1500);
-        };
-
-        // Add tooltips for framework cards
-        document.querySelectorAll('.framework-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                const tooltip = document.createElement('div');
-                tooltip.className = 'framework-tooltip';
-                tooltip.textContent = 'Click to start using this framework';
-                tooltip.style.cssText = `
-                    position: absolute;
-                    background: rgba(0,0,0,0.8);
-                    color: white;
-                    padding: 0.5rem 1rem;
-                    border-radius: 5px;
-                    font-size: 0.9rem;
-                    pointer-events: none;
-                    z-index: 1000;
-                    top: -40px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                `;
-                this.style.position = 'relative';
-                this.appendChild(tooltip);
-            });
-
-            card.addEventListener('mouseleave', function() {
-                const tooltip = this.querySelector('.framework-tooltip');
-                if (tooltip) tooltip.remove();
-            });
-        });
     </script>
 </body>
 </html>
