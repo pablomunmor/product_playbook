@@ -19,6 +19,83 @@
             color: #333;
             overflow-x: hidden;
         }
+
+        .sidebar-nav {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 90px;
+            background: #001224;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 2rem;
+            z-index: 1001;
+            transition: width 0.3s ease;
+        }
+
+        .sidebar-nav:hover {
+            width: 220px;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            padding: 1rem;
+            width: 100%;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 28px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .sidebar-nav:hover .nav-link {
+            padding-left: 1.5rem;
+        }
+
+        .nav-link.active {
+            color: white;
+            background: rgba(0, 31, 63, 0.8);
+            border-left: 4px solid #38bdf8;
+        }
+        
+        .nav-link.active span {
+            font-weight: 600;
+        }
+
+        .nav-link:hover {
+            color: white;
+            background: rgba(0, 31, 63, 1);
+        }
+
+        .nav-link .icon {
+            font-size: 1.5rem;
+            min-width: 35px;
+            text-align: center;
+        }
+
+        .nav-link span {
+            display: none;
+            margin-left: 1rem;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .sidebar-nav:hover .nav-link span {
+            display: inline;
+            opacity: 1;
+        }
+
+        .main-content {
+            margin-left: 90px;
+            transition: margin-left 0.3s ease;
+        }
         
         .hero {
             min-height: 100vh;
@@ -88,27 +165,27 @@
         }
         
         .cta-button {
-            background: linear-gradient(45deg, #001F3F, #1a3a5c);
+            background: linear-gradient(45deg, #38bdf8, #0ea5e9);
             color: white;
-            padding: 1rem 2.5rem;
+            padding: 1.2rem 3.5rem;
             border: none;
             border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
+            font-size: 1.4rem;
+            font-weight: 700;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(0, 31, 63, 0.3);
-            animation: fadeInUp 1s ease-out 0.4s both;
+            animation: fadeInUp 1s ease-out 0.4s both, pulse 2s infinite 2s;
         }
         
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 31, 63, 0.4);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(14, 165, 233, 0.4);
         }
         
-        .risks-section {
+        .risks-section, .framework-section, .resources-section, .ai-assistant-section, .social-proof-section {
             background: white;
             padding: 6rem 2rem;
             position: relative;
@@ -289,11 +366,6 @@
             box-shadow: 0 5px 15px rgba(0, 31, 63, 0.3);
         }
         
-        .framework-section {
-            background: white;
-            padding: 6rem 2rem;
-        }
-        
         .framework-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -313,12 +385,29 @@
             overflow: hidden;
             box-shadow: 0 25px 70px rgba(0, 31, 63, 0.3);
             transition: all 0.3s ease;
-            cursor: pointer;
+            position: relative;
         }
         
         .framework-card:hover {
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 35px 90px rgba(0, 31, 63, 0.4);
+        }
+
+        .framework-card.used .framework-header {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+        }
+
+        .framework-card.used::after {
+            content: '✓ In Progress';
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.35rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
         
         .framework-header {
@@ -433,10 +522,43 @@
         .canvas-attribution a:hover {
             text-decoration: underline;
         }
-        
-        .resources-section {
-            background: white;
-            padding: 6rem 2rem;
+
+        .prioritization-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr) 1.5fr;
+            gap: 1.5rem;
+            align-items: end;
+        }
+        .priority-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .priority-item label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .priority-item-score {
+            text-align: center;
+            background: #001F3F;
+            color: white;
+            padding: 1rem;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .priority-item-score h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .total-score {
+            font-size: 2.5rem;
+            font-weight: 800;
         }
         
         .resource-tab-nav {
@@ -718,6 +840,47 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+        }
+
+        .social-proof-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        .author-avatar {
+            font-size: 2.5rem;
+            margin-right: 1rem;
+        }
+        .author-info h4 {
+            font-weight: 700;
+            color: #001F3F;
+        }
+        .author-info span {
+            color: #666;
+            font-size: 0.9rem;
         }
         
         .learning-timeline-overlay {
@@ -1255,31 +1418,6 @@
             margin-bottom: 0.5rem;
         }
         
-        .floating-nav {
-            position: fixed;
-            right: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .nav-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-dot.active {
-            background: #001F3F;
-            transform: scale(1.5);
-        }
-        
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -1312,14 +1450,53 @@
                 transform: translateX(0);
             }
         }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
         
         @media (max-width: 768px) {
+            .sidebar-nav {
+                width: 100%;
+                height: auto;
+                bottom: 0;
+                top: auto;
+                flex-direction: row;
+                justify-content: space-around;
+                border-top: 1px solid rgba(255,255,255,0.1);
+                border-right: none;
+                padding-top: 0;
+            }
+            .sidebar-nav:hover {
+                width: 100%;
+            }
+            .nav-link {
+                padding: 0.8rem 0.5rem;
+                justify-content: center;
+            }
+            .sidebar-nav:hover .nav-link {
+                padding-left: 0.5rem;
+            }
+            .nav-link span {
+                display: none !important;
+            }
+            .main-content {
+                margin-left: 0;
+                padding-bottom: 60px; /* Space for bottom nav */
+            }
             .hero h1 { font-size: 2.5rem; }
             .hero .subtitle { font-size: 1.2rem; }
             .section-title { font-size: 2rem; }
             .phase-item { flex-direction: column !important; }
             .framework-grid { grid-template-columns: 1fr; }
-            .floating-nav { display: none; }
             
             .ai-assistant-card {
                 grid-template-columns: 1fr;
@@ -1403,653 +1580,729 @@
                 min-height: 60px;
                 font-size: 0.9rem;
             }
+            .prioritization-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="floating-nav">
-        <div class="nav-dot active" data-section="hero"></div>
-        <div class="nav-dot" data-section="risks"></div>
-        <div class="nav-dot" data-section="phases"></div>
-        <div class="nav-dot" data-section="frameworks"></div>
-    </div>
-
-    <section id="hero" class="hero">
-        <div class="hero-content">
-            <h1>Product Playbook by Pablo Munoz</h1>
-            <p class="subtitle">Your intelligent companion for building products that customers love and businesses thrive on</p>
-            <div class="pm-definition">
-                <h3>What is a PM?</h3>
-                <p>Product Managers are the bridge between customer needs, business goals, and technical possibilities. They discover what to build, define why it matters, deliver solutions that work, and learn from real-world impact.</p>
+    <nav class="sidebar-nav">
+        <a href="#hero" class="nav-link active" data-section="hero"><div class="icon">🏠</div><span>Home</span></a>
+        <a href="#risks" class="nav-link" data-section="risks"><div class="icon">🎲</div><span>Risks</span></a>
+        <a href="#phases" class="nav-link" data-section="phases"><div class="icon">🚀</div><span>Journey</span></a>
+        <a href="#frameworks" class="nav-link" data-section="frameworks"><div class="icon">📋</div><span>Frameworks</span></a>
+        <a href="#social-proof" class="nav-link" data-section="social-proof"><div class="icon">💬</div><span>Reviews</span></a>
+        <a href="#resources" class="nav-link" data-section="resources"><div class="icon">📚</div><span>Resources</span></a>
+        <a href="#ai-assistant" class="nav-link" data-section="ai-assistant"><div class="icon">🤖</div><span>AI Assistant</span></a>
+    </nav>
+    <main class="main-content">
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <h1>Product Playbook by Pablo Munoz</h1>
+                <p class="subtitle">Your intelligent companion for building products that customers love and businesses thrive on</p>
+                <div class="pm-definition">
+                    <h3>What is a PM?</h3>
+                    <p>Product Managers are the bridge between customer needs, business goals, and technical possibilities. They discover what to build, define why it matters, deliver solutions that work, and learn from real-world impact.</p>
+                </div>
+                <a href="#risks" class="cta-button">Start Your Journey</a>
             </div>
-            <a href="#risks" class="cta-button">Start Your Journey</a>
-        </div>
-    </section>
+        </section>
 
-    <section id="risks" class="risks-section">
-        <div class="container">
-            <h2 class="section-title">The Four Big Risks</h2>
-            <p class="section-subtitle">Every product faces these fundamental challenges. Master them, and you'll build products that win.</p>
-            
-            <div class="risks-grid">
-                <div class="risk-card value">
-                    <div class="risk-icon">💎</div>
-                    <h3 class="risk-title">Value Risk</h3>
-                    <p class="risk-description">Will customers actually want this? The graveyard of products is full of "solutions" nobody asked for.</p>
-                </div>
+        <section id="risks" class="risks-section">
+            <div class="container">
+                <h2 class="section-title">The Four Big Risks</h2>
+                <p class="section-subtitle">Every product faces these fundamental challenges. Master them, and you'll build products that win.</p>
                 
-                <div class="risk-card usability">
-                    <div class="risk-icon">🎯</div>
-                    <h3 class="risk-title">Usability Risk</h3>
-                    <p class="risk-description">Can users actually figure out how to use it? Even the most valuable solution fails if it's confusing.</p>
-                </div>
-                
-                <div class="risk-card feasibility">
-                    <div class="risk-icon">⚡</div>
-                    <h3 class="risk-title">Feasibility Risk</h3>
-                    <p class="risk-description">Can we actually build this with our team, timeline, and tech stack? Dreams meet reality here.</p>
-                </div>
-                
-                <div class="risk-card viability">
-                    <div class="risk-icon">🚀</div>
-                    <h3 class="risk-title">Viability Risk</h3>
-                    <p class="risk-description">Will this work for our business? Legal, financial, operational - the business model has to add up.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="phases" class="phases-section">
-        <div class="container">
-            <h2 class="section-title">The Product Journey</h2>
-            <p class="section-subtitle">Four phases that transform ideas into impact. Each phase has its purpose, tools, and mindset.</p>
-            
-            <div class="phases-timeline">
-                <div class="phase-item" style="animation-delay: 0.2s;">
-                    <div class="phase-number">1</div>
-                    <div class="phase-content">
-                        <h3 class="phase-title">Define</h3>
-                        <p class="phase-description">Start with the end in mind. What's the vision? Who are we serving? What problem are we solving? This phase is about getting crystal clear on direction before you start building.</p>
-                        <div class="phase-tools">
-                            <span class="tool-tag">Vision Canvas</span>
-                            <span class="tool-tag">PR/FAQ</span>
-                            <span class="tool-tag">Strategy Map</span>
-                            <span class="tool-tag">User Personas</span>
-                        </div>
+                <div class="risks-grid">
+                    <div class="risk-card value">
+                        <div class="risk-icon">💎</div>
+                        <h3 class="risk-title">Value Risk</h3>
+                        <p class="risk-description">Will customers actually want this? The graveyard of products is full of "solutions" nobody asked for.</p>
                     </div>
-                </div>
-                
-                <div class="phase-item" style="animation-delay: 0.4s;">
-                    <div class="phase-number">2</div>
-                    <div class="phase-content">
-                        <h3 class="phase-title">Discover</h3>
-                        <p class="phase-description">Fall in love with the problem, not the solution. Validate assumptions, talk to users, run experiments. This is where hypotheses meet reality.</p>
-                        <div class="phase-tools">
-                            <span class="tool-tag">Lean Canvas</span>
-                            <span class="tool-tag">User Interviews</span>
-                            <span class="tool-tag">A/B Tests</span>
-                            <span class="tool-tag">Prototype</span>
-                        </div>
+                    
+                    <div class="risk-card usability">
+                        <div class="risk-icon">🎯</div>
+                        <h3 class="risk-title">Usability Risk</h3>
+                        <p class="risk-description">Can users actually figure out how to use it? Even the most valuable solution fails if it's confusing.</p>
                     </div>
-                </div>
-                
-                <div class="phase-item" style="animation-delay: 0.6s;">
-                    <div class="phase-number">3</div>
-                    <div class="phase-content">
-                        <h3 class="phase-title">Deliver</h3>
-                        <p class="phase-description">Execute with precision. Prioritize ruthlessly, coordinate teams, and ship iteratively. This is where planning meets execution.</p>
-                        <div class="phase-tools">
-                            <span class="tool-tag">OKRs</span>
-                            <span class="tool-tag">Roadmap</span>
-                            <span class="tool-tag">RACI Matrix</span>
-                            <span class="tool-tag">Sprint Planning</span>
-                        </div>
+                    
+                    <div class="risk-card feasibility">
+                        <div class="risk-icon">⚡</div>
+                        <h3 class="risk-title">Feasibility Risk</h3>
+                        <p class="risk-description">Can we actually build this with our team, timeline, and tech stack? Dreams meet reality here.</p>
                     </div>
-                </div>
-                
-                <div class="phase-item" style="animation-delay: 0.8s;">
-                    <div class="phase-number">4</div>
-                    <div class="phase-content">
-                        <h3 class="phase-title">Learn</h3>
-                        <p class="phase-description">Measure what matters. Analyze user behavior, gather feedback, iterate based on data. This is where products evolve from good to great.</p>
-                        <div class="phase-tools">
-                            <span class="tool-tag">Analytics Dashboard</span>
-                            <span class="tool-tag">User Feedback</span>
-                            <span class="tool-tag">Cohort Analysis</span>
-                            <span class="tool-tag">Retrospectives</span>
-                        </div>
+                    
+                    <div class="risk-card viability">
+                        <div class="risk-icon">🚀</div>
+                        <h3 class="risk-title">Viability Risk</h3>
+                        <p class="risk-description">Will this work for our business? Legal, financial, operational - the business model has to add up.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="frameworks" class="framework-section">
-        <div class="container">
-            <h2 class="section-title">Interactive Frameworks</h2>
-            <p class="section-subtitle">Ready-to-use tools that help you think through problems and communicate solutions. Click to start using.</p>
-            
-            <div class="framework-grid">
-                <div class="framework-card" onclick="openFramework('vision')">
-                    <div class="framework-header">
-                        <h3 class="framework-title">Vision & Strategy Canvas</h3>
-                        <p class="framework-subtitle">Define your North Star and strategic direction</p>
+        <section id="phases" class="phases-section">
+            <div class="container">
+                <h2 class="section-title">The Product Journey</h2>
+                <p class="section-subtitle">Four phases that transform ideas into impact. Each phase has its purpose, tools, and mindset.</p>
+                
+                <div class="phases-timeline">
+                    <div class="phase-item" style="animation-delay: 0.2s;">
+                        <div class="phase-number">1</div>
+                        <div class="phase-content">
+                            <h3 class="phase-title">Define</h3>
+                            <p class="phase-description">Start with the end in mind. What's the vision? Who are we serving? What problem are we solving? This phase is about getting crystal clear on direction before you start building.</p>
+                            <div class="phase-tools">
+                                <span class="tool-tag">Vision Canvas</span>
+                                <span class="tool-tag">PR/FAQ</span>
+                                <span class="tool-tag">Strategy Map</span>
+                                <span class="tool-tag">User Personas</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="framework-body">
-                        <div class="template-explanation">
-                            <div class="explanation-section">
-                                <h4>What this is</h4>
-                                <p>A one-page strategic document that aligns your product's direction with company mission and customer needs.</p>
-                            </div>
-                            
-                            <div class="explanation-section">
-                                <h4>Why it's helpful</h4>
-                                <p>Forces clarity of thought and ensures every feature is valuable, viable, usable, and feasible. Acts as your product's North Star.</p>
-                            </div>
-                            
-                            <div class="explanation-section">
-                                <h4>When to use</h4>
-                                <p>At the start of any new product or major feature initiative, or when your team lacks clear direction.</p>
+                    
+                    <div class="phase-item" style="animation-delay: 0.4s;">
+                        <div class="phase-number">2</div>
+                        <div class="phase-content">
+                            <h3 class="phase-title">Discover</h3>
+                            <p class="phase-description">Fall in love with the problem, not the solution. Validate assumptions, talk to users, run experiments. This is where hypotheses meet reality.</p>
+                            <div class="phase-tools">
+                                <span class="tool-tag">Lean Canvas</span>
+                                <span class="tool-tag">User Interviews</span>
+                                <span class="tool-tag">A/B Tests</span>
+                                <span class="tool-tag">Prototype</span>
                             </div>
                         </div>
-                        
-                        <div class="editable-template">
-                            <h4>Mission Statement</h4>
-                            <input type="text" class="framework-input" placeholder="What's your product's core purpose?" data-key="vision-mission" />
-                            
-                            <h4>Target User</h4>
-                            <input type="text" class="framework-input" placeholder="Who are you building this for?" data-key="vision-user" />
-                            
-                            <h4>Key Value Proposition</h4>
-                            <textarea class="framework-input framework-textarea" placeholder="What unique value do you deliver?" data-key="vision-value"></textarea>
+                    </div>
+                    
+                    <div class="phase-item" style="animation-delay: 0.6s;">
+                        <div class="phase-number">3</div>
+                        <div class="phase-content">
+                            <h3 class="phase-title">Deliver</h3>
+                            <p class="phase-description">Execute with precision. Prioritize ruthlessly, coordinate teams, and ship iteratively. This is where planning meets execution.</p>
+                            <div class="phase-tools">
+                                <span class="tool-tag">OKRs</span>
+                                <span class="tool-tag">Roadmap</span>
+                                <span class="tool-tag">RACI Matrix</span>
+                                <span class="tool-tag">Sprint Planning</span>
+                            </div>
                         </div>
-                        
-                        <div class="template-controls">
-                            <button class="btn-save" onclick="saveTemplate('vision')">Save</button>
-                            <button class="btn-reset" onclick="showResetConfirmation('vision')">Reset</button>
-                            <button class="btn-export" onclick="exportTemplate('vision')">Export PNG</button>
-                        </div>
-                        
-                        <div class="reset-confirmation" id="reset-vision" style="display: none;">
-                            <p>Are you sure you want to reset this template?</p>
-                            <button class="btn-confirm" onclick="resetTemplate('vision')">Yes</button>
-                            <button class="btn-cancel" onclick="hideResetConfirmation('vision')">Cancel</button>
+                    </div>
+                    
+                    <div class="phase-item" style="animation-delay: 0.8s;">
+                        <div class="phase-number">4</div>
+                        <div class="phase-content">
+                            <h3 class="phase-title">Learn</h3>
+                            <p class="phase-description">Measure what matters. Analyze user behavior, gather feedback, iterate based on data. This is where products evolve from good to great.</p>
+                            <div class="phase-tools">
+                                <span class="tool-tag">Analytics Dashboard</span>
+                                <span class="tool-tag">User Feedback</span>
+                                <span class="tool-tag">Cohort Analysis</span>
+                                <span class="tool-tag">Retrospectives</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section id="frameworks" class="framework-section">
+            <div class="container">
+                <h2 class="section-title">Interactive Frameworks</h2>
+                <p class="section-subtitle">Ready-to-use tools that help you think through problems and communicate solutions. Click to start using.</p>
                 
-                <div class="framework-card" onclick="openFramework('prfaq')">
-                    <div class="framework-header">
-                        <h3 class="framework-title">PR/FAQ Builder</h3>
-                        <p class="framework-subtitle">Work backwards from the customer experience</p>
-                    </div>
-                    <div class="framework-body">
-                        <div class="template-explanation">
-                            <div class="explanation-section">
-                                <h4>What this is</h4>
-                                <p>A press release and FAQ written before building anything, popularized by Amazon's "working backwards" method.</p>
-                            </div>
-                            
-                            <div class="explanation-section">
-                                <h4>Why it's helpful</h4>
-                                <p>Forces you to think from the customer's perspective and anticipate hard questions before writing code.</p>
-                            </div>
-                            
-                            <div class="explanation-section">
-                                <h4>Common pitfalls</h4>
-                                <p>Writing marketing fluff instead of clear customer benefits, or being too vague about the actual value delivered.</p>
-                            </div>
+                <div class="framework-grid">
+                    <div class="framework-card" data-framework-id="vision">
+                        <div class="framework-header">
+                            <h3 class="framework-title">Vision & Strategy Canvas</h3>
+                            <p class="framework-subtitle">Define your North Star and strategic direction</p>
                         </div>
-                        
-                        <div class="editable-template">
-                            <h4>Headline</h4>
-                            <input type="text" class="framework-input" placeholder="Write your product launch headline..." data-key="prfaq-headline" />
-                            
-                            <h4>Customer Problem</h4>
-                            <textarea class="framework-input framework-textarea" placeholder="What problem does this solve for customers?" data-key="prfaq-problem"></textarea>
-                            
-                            <h4>Key Benefit</h4>
-                            <input type="text" class="framework-input" placeholder="What's the #1 benefit customers will get?" data-key="prfaq-benefit" />
-                        </div>
-                        
-                        <div class="template-controls">
-                            <button class="btn-save" onclick="saveTemplate('prfaq')">Save</button>
-                            <button class="btn-reset" onclick="showResetConfirmation('prfaq')">Reset</button>
-                            <button class="btn-export" onclick="exportTemplate('prfaq')">Export PNG</button>
-                        </div>
-                        
-                        <div class="reset-confirmation" id="reset-prfaq" style="display: none;">
-                            <p>Are you sure you want to reset this template?</p>
-                            <button class="btn-confirm" onclick="resetTemplate('prfaq')">Yes</button>
-                            <button class="btn-cancel" onclick="hideResetConfirmation('prfaq')">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="framework-card" onclick="openFramework('okrs')">
-                    <div class="framework-header">
-                        <h3 class="framework-title">OKR Planner</h3>
-                        <p class="framework-subtitle">Set ambitious goals and track progress</p>
-                    </div>
-                    <div class="framework-body">
-                        <div class="template-explanation">
-                            <div class="explanation-section">
-                                <h4>What this is</h4>
-                                <p>Objectives (qualitative goals) paired with Key Results (quantitative measures) to drive focus and alignment.</p>
-                            </div>
-                            
-                            <div class="explanation-section">
-                                <h4>Done right looks like</h4>
-                                <p>Objectives inspire action, Key Results are measurable and time-bound, and the team knows exactly what success means.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="editable-template">
-                            <h4>Objective (Qualitative Goal)</h4>
-                            <input type="text" class="framework-input" placeholder="What do you want to achieve?" data-key="okr-objective" />
-                            
-                            <h4>Key Result 1 (Measurable)</h4>
-                            <input type="text" class="framework-input" placeholder="How will you measure success?" data-key="okr-kr1" />
-                            
-                            <h4>Key Result 2 (Measurable)</h4>
-                            <input type="text" class="framework-input" placeholder="What's another key metric?" data-key="okr-kr2" />
-                        </div>
-                        
-                        <div class="template-controls">
-                            <button class="btn-save" onclick="saveTemplate('okrs')">Save</button>
-                            <button class="btn-reset" onclick="showResetConfirmation('okrs')">Reset</button>
-                            <button class="btn-export" onclick="exportTemplate('okrs')">Export PNG</button>
-                        </div>
-                        
-                        <div class="reset-confirmation" id="reset-okrs" style="display: none;">
-                            <p>Are you sure you want to reset this template?</p>
-                            <button class="btn-confirm" onclick="resetTemplate('okrs')">Yes</button>
-                            <button class="btn-cancel" onclick="hideResetConfirmation('okrs')">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="framework-card full-width" onclick="openFramework('lean-canvas')">
-                    <div class="framework-header">
-                        <h3 class="framework-title">Lean Product Canvas</h3>
-                        <p class="framework-subtitle">By Jeff Gothelf - Systematic approach to product discovery</p>
-                    </div>
-                    <div class="framework-body">
-                        <div class="template-explanation canvas-explanation">
-                            <div class="explanation-grid">
+                        <div class="framework-body">
+                            <div class="template-explanation">
                                 <div class="explanation-section">
                                     <h4>What this is</h4>
-                                    <p>Jeff Gothelf's systematic framework for turning product assumptions into testable hypotheses.</p>
+                                    <p>A one-page strategic document that aligns your product's direction with company mission and customer needs.</p>
                                 </div>
-                                
                                 <div class="explanation-section">
                                     <h4>Why it's helpful</h4>
-                                    <p>Prevents building features nobody wants by forcing you to identify and test your riskiest assumptions first.</p>
+                                    <p>Forces clarity of thought and ensures every feature is valuable, viable, usable, and feasible. Acts as your product's North Star.</p>
                                 </div>
-                                
                                 <div class="explanation-section">
                                     <h4>When to use</h4>
-                                    <p>During discovery phase when exploring new features, products, or when validating product-market fit.</p>
+                                    <p>At the start of any new product or major feature initiative, or when your team lacks clear direction.</p>
                                 </div>
-                                
+                            </div>
+                            <div class="editable-template">
+                                <h4>Mission Statement</h4>
+                                <input type="text" class="framework-input" placeholder="What's your product's core purpose?" data-key="vision-mission" />
+                                <h4>Target User</h4>
+                                <input type="text" class="framework-input" placeholder="Who are you building this for?" data-key="vision-user" />
+                                <h4>Key Value Proposition</h4>
+                                <textarea class="framework-input framework-textarea" placeholder="What unique value do you deliver?" data-key="vision-value"></textarea>
+                            </div>
+                            <div class="template-controls">
+                                <button class="btn-save" onclick="saveTemplate('vision')">Save</button>
+                                <button class="btn-reset" onclick="showResetConfirmation('vision')">Reset</button>
+                                <button class="btn-export" onclick="exportTemplate(event, 'vision')">Export PNG</button>
+                            </div>
+                            <div class="reset-confirmation" id="reset-vision" style="display: none;">
+                                <p>Are you sure you want to reset this template?</p>
+                                <button class="btn-confirm" onclick="resetTemplate('vision')">Yes</button>
+                                <button class="btn-cancel" onclick="hideResetConfirmation('vision')">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="framework-card" data-framework-id="prfaq">
+                        <div class="framework-header">
+                            <h3 class="framework-title">PR/FAQ Builder</h3>
+                            <p class="framework-subtitle">Work backwards from the customer experience</p>
+                        </div>
+                        <div class="framework-body">
+                            <div class="template-explanation">
+                                <div class="explanation-section">
+                                    <h4>What this is</h4>
+                                    <p>A press release and FAQ written before building anything, popularized by Amazon's "working backwards" method.</p>
+                                </div>
+                                <div class="explanation-section">
+                                    <h4>Why it's helpful</h4>
+                                    <p>Forces you to think from the customer's perspective and anticipate hard questions before writing code.</p>
+                                </div>
+                                <div class="explanation-section">
+                                    <h4>Common pitfalls</h4>
+                                    <p>Writing marketing fluff instead of clear customer benefits, or being too vague about the actual value delivered.</p>
+                                </div>
+                            </div>
+                            <div class="editable-template">
+                                <h4>Headline</h4>
+                                <input type="text" class="framework-input" placeholder="Write your product launch headline..." data-key="prfaq-headline" />
+                                <h4>Customer Problem</h4>
+                                <textarea class="framework-input framework-textarea" placeholder="What problem does this solve for customers?" data-key="prfaq-problem"></textarea>
+                                <h4>Key Benefit</h4>
+                                <input type="text" class="framework-input" placeholder="What's the #1 benefit customers will get?" data-key="prfaq-benefit" />
+                            </div>
+                            <div class="template-controls">
+                                <button class="btn-save" onclick="saveTemplate('prfaq')">Save</button>
+                                <button class="btn-reset" onclick="showResetConfirmation('prfaq')">Reset</button>
+                                <button class="btn-export" onclick="exportTemplate(event, 'prfaq')">Export PNG</button>
+                            </div>
+                            <div class="reset-confirmation" id="reset-prfaq" style="display: none;">
+                                <p>Are you sure you want to reset this template?</p>
+                                <button class="btn-confirm" onclick="resetTemplate('prfaq')">Yes</button>
+                                <button class="btn-cancel" onclick="hideResetConfirmation('prfaq')">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="framework-card" data-framework-id="okrs">
+                        <div class="framework-header">
+                            <h3 class="framework-title">OKR Planner</h3>
+                            <p class="framework-subtitle">Set ambitious goals and track progress</p>
+                        </div>
+                        <div class="framework-body">
+                            <div class="template-explanation">
+                                <div class="explanation-section">
+                                    <h4>What this is</h4>
+                                    <p>Objectives (qualitative goals) paired with Key Results (quantitative measures) to drive focus and alignment.</p>
+                                </div>
+                                <div class="explanation-section">
+                                    <h4>Done right looks like</h4>
+                                    <p>Objectives inspire action, Key Results are measurable and time-bound, and the team knows exactly what success means.</p>
+                                </div>
+                            </div>
+                            <div class="editable-template">
+                                <h4>Objective (Qualitative Goal)</h4>
+                                <input type="text" class="framework-input" placeholder="What do you want to achieve?" data-key="okr-objective" />
+                                <h4>Key Result 1 (Measurable)</h4>
+                                <input type="text" class="framework-input" placeholder="How will you measure success?" data-key="okr-kr1" />
+                                <h4>Key Result 2 (Measurable)</h4>
+                                <input type="text" class="framework-input" placeholder="What's another key metric?" data-key="okr-kr2" />
+                            </div>
+                            <div class="template-controls">
+                                <button class="btn-save" onclick="saveTemplate('okrs')">Save</button>
+                                <button class="btn-reset" onclick="showResetConfirmation('okrs')">Reset</button>
+                                <button class="btn-export" onclick="exportTemplate(event, 'okrs')">Export PNG</button>
+                            </div>
+                            <div class="reset-confirmation" id="reset-okrs" style="display: none;">
+                                <p>Are you sure you want to reset this template?</p>
+                                <button class="btn-confirm" onclick="resetTemplate('okrs')">Yes</button>
+                                <button class="btn-cancel" onclick="hideResetConfirmation('okrs')">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="framework-card full-width" data-framework-id="prioritization">
+                        <div class="framework-header">
+                            <h3 class="framework-title">Prioritization Framework</h3>
+                            <p class="framework-subtitle">Use weighted scoring to prioritize initiatives objectively</p>
+                        </div>
+                        <div class="framework-body">
+                            <div class="template-explanation">
+                                <div class="explanation-section">
+                                    <h4>What this is</h4>
+                                    <p>A flexible prioritization framework that uses weighted scoring across four dimensions: Opportunity, Customer, Feasibility, and Strategic Value.</p>
+                                </div>
                                 <div class="explanation-section">
                                     <h4>How to use</h4>
-                                    <p>Start with Business Problem (1), identify Users (2) and their outcomes (3), then systematically work through each section.</p>
+                                    <p>For each initiative, select a score from 1-4 for each category. The total score will be calculated automatically based on the predefined weights.</p>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="lean-canvas-grid">
-                            <div class="canvas-section span-2">
-                                <h5>1. Business Problem</h5>
-                                <textarea class="canvas-input" placeholder="What is the most important problem your business needs to focus on right now?" data-key="canvas-problem"></textarea>
-                            </div>
-                            
-                            <div class="canvas-section">
-                                <h5>2. Users</h5>
-                                <textarea class="canvas-input" placeholder="Which users and customers should you focus on first? Who buys? Who uses? Who configures?" data-key="canvas-users"></textarea>
-                            </div>
-                            
-                            <div class="canvas-section">
-                                <h5>3. User Outcomes & Benefits (JTBD)</h5>
-                                <textarea class="canvas-input" placeholder="Why would users seek out your product? What benefit would they gain? What job are they trying to do?" data-key="canvas-outcomes"></textarea>
-                            </div>
-                            
-                            <div class="canvas-section">
-                                <h5>4. Solutions</h5>
-                                <textarea class="canvas-input" placeholder="What can we make that will solve our business problem and meet customer needs? List product, feature, or enhancement ideas." data-key="canvas-solutions"></textarea>
-                            </div>
-                            
-                            <div class="canvas-section">
-                                <h5>5. Business Outcomes</h5>
-                                <textarea class="canvas-input" placeholder="How will you know you solved the business problem? What will you measure? (Who does what by how much)" data-key="canvas-business-outcomes"></textarea>
-                            </div>
-                            
-                            <div class="canvas-section span-3">
-                                <h5>6. Hypotheses</h5>
-                                <textarea class="canvas-input" placeholder='Combine assumptions from boxes 2-5: "We believe that [business outcome] will be achieved if [user] attains [benefit] with [feature]."' data-key="canvas-hypotheses"></textarea>
-                            </div>
-                            
-                            <div class="canvas-section">
-                                <h5>7. What's the most important thing we need to learn first?</h5>
-                                <textarea class="canvas-input" placeholder="Select hypothesis from Box 6 to test first. What's the riskiest assumption?" data-key="canvas-learn-first"></textarea>
-                            </div>
-                            
-                            <div class="canvas-section">
-                                <h5>8. What's the least amount of work to learn the next most important thing?</h5>
-                                <textarea class="canvas-input" placeholder="Design experiments to learn quickly if your riskiest assumption is true. What could you learn in 1 day/week/month?" data-key="canvas-experiments"></textarea>
-                            </div>
-                        </div>
-                        
-                        <div class="template-controls">
-                            <button class="btn-save" onclick="saveTemplate('lean-canvas')">Save</button>
-                            <button class="btn-reset" onclick="showResetConfirmation('lean-canvas')">Reset</button>
-                            <button class="btn-export" onclick="exportTemplate('lean-canvas')">Export PNG</button>
-                        </div>
-                        
-                        <div class="reset-confirmation" id="reset-lean-canvas" style="display: none;">
-                            <p>Are you sure you want to reset this template?</p>
-                            <button class="btn-confirm" onclick="resetTemplate('lean-canvas')">Yes</button>
-                            <button class="btn-cancel" onclick="hideResetConfirmation('lean-canvas')">Cancel</button>
-                        </div>
-                        
-                        <div class="canvas-attribution">
-                            <small>Canvas created by <strong>Jeff Gothelf</strong> • Download original at: <a href="https://www.senseandrespond.co/the-lean-product-canvas" target="_blank">senseandrespond.co</a></small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="resources-section">
-        <div class="container">
-            <h2 class="section-title">PM Resource Library</h2>
-            <p class="section-subtitle">Curated resources, templates, and inspiration from the best in product management</p>
-            
-            <div class="resource-categories">
-                <div class="resource-tab-nav">
-                    <button class="resource-tab active" data-category="templates">📋 Templates</button>
-                    <button class="resource-tab" data-category="books">📚 Essential Reading</button>
-                    <button class="resource-tab" data-category="tools">🛠️ Tools & Software</button>
-                    <button class="resource-tab" data-category="communities">👥 Communities</button>
-                </div>
-                
-                <div class="resource-content">
-                    <div class="resource-category-content active" data-category="templates">
-                        <div class="resource-grid">
-                            <div class="resource-card downloadable">
-                                <div class="resource-icon">📊</div>
-                                <h4>Product Requirements Document (PRD)</h4>
-                                <p>Comprehensive template for documenting product specifications and requirements</p>
-                                <div class="resource-meta">
-                                    <span class="resource-type">Google Docs</span>
-                                    <span class="resource-downloads">2.3k downloads</span>
-                                </div>
-                                <button class="download-btn">Download Template</button>
-                            </div>
-                            
-                            <div class="resource-card downloadable">
-                                <div class="resource-icon">🎯</div>
-                                <h4>User Story Mapping Canvas</h4>
-                                <p>Visual template for mapping user journeys and identifying key features</p>
-                                <div class="resource-meta">
-                                    <span class="resource-type">Miro Board</span>
-                                    <span class="resource-downloads">1.8k downloads</span>
-                                </div>
-                                <button class="download-btn">Download Template</button>
-                            </div>
-                            
-                            <div class="resource-card downloadable">
-                                <div class="resource-icon">📈</div>
-                                <h4>Product Metrics Dashboard</h4>
-                                <p>Ready-to-use analytics dashboard template with key product KPIs</p>
-                                <div class="resource-meta">
-                                    <span class="resource-type">Google Sheets</span>
-                                    <span class="resource-downloads">3.1k downloads</span>
-                                </div>
-                                <button class="download-btn">Download Template</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="resource-category-content" data-category="books">
-                        <div class="learning-path-header">
-                            <h3>12-Month PM Learning Journey</h3>
-                            <p>A progressive reading path designed to build your product management skills systematically</p>
-                            <button class="view-timeline-btn" onclick="showLearningTimeline()">View Full Timeline</button>
-                        </div>
-                        
-                        <div class="book-recommendations">
-                            <div class="book-card featured">
-                                <div class="book-cover">📘</div>
-                                <div class="book-info">
-                                    <div class="month-badge">Month 1</div>
-                                    <h4>Think Again by Adam Grant</h4>
-                                    <p class="book-description">Builds habit of questioning assumptions. Easier read to kick-off.</p>
-                                    <div class="book-rating">★★★★★ Essential Start</div>
-                                    <div class="book-tags">
-                                        <span class="tag">Mindset</span>
-                                        <span class="tag">Critical Thinking</span>
+                            <div class="editable-template" id="prioritization-template">
+                                <div class="prioritization-grid">
+                                    <div class="priority-item">
+                                        <label>Initiative Name</label>
+                                        <input type="text" class="framework-input" placeholder="e.g., New feature, tech debt..." data-key="prio-name" />
+                                    </div>
+                                    <div class="priority-item">
+                                        <label>Opportunity (35%)</label>
+                                        <select class="framework-input priority-score" data-key="prio-opp">
+                                            <option value="1">1 - Low</option>
+                                            <option value="2">2 - Medium</option>
+                                            <option value="3">3 - High</option>
+                                            <option value="4">4 - Very High</option>
+                                        </select>
+                                    </div>
+                                    <div class="priority-item">
+                                        <label>Customer (20%)</label>
+                                        <select class="framework-input priority-score" data-key="prio-cust">
+                                            <option value="1">1 - Low</option>
+                                            <option value="2">2 - Medium</option>
+                                            <option value="3">3 - High</option>
+                                            <option value="4">4 - Very High</option>
+                                        </select>
+                                    </div>
+                                    <div class="priority-item">
+                                        <label>Feasibility (10%)</label>
+                                        <select class="framework-input priority-score" data-key="prio-feas">
+                                            <option value="1">1 - Low</option>
+                                            <option value="2">2 - Medium</option>
+                                            <option value="3">3 - High</option>
+                                            <option value="4">4 - Very High</option>
+                                        </select>
+                                    </div>
+                                    <div class="priority-item">
+                                        <label>Strategy (35%)</label>
+                                        <select class="framework-input priority-score" data-key="prio-strat">
+                                            <option value="1">1 - Low</option>
+                                            <option value="2">2 - Medium</option>
+                                            <option value="3">3 - High</option>
+                                            <option value="4">4 - Very High</option>
+                                        </select>
+                                    </div>
+                                    <div class="priority-item-score">
+                                        <h4>Total Score</h4>
+                                        <div class="total-score" id="total-score">1.00</div>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div class="book-card">
-                                <div class="book-cover">📗</div>
-                                <div class="book-info">
-                                    <div class="month-badge">Month 2</div>
-                                    <h4>Escaping the Build Trap by Melissa Perri</h4>
-                                    <p class="book-description">After mindset, need to shift from output to outcome.</p>
-                                    <div class="book-rating">★★★★★ Foundation</div>
-                                    <div class="book-tags">
-                                        <span class="tag">Outcomes</span>
-                                        <span class="tag">Product Culture</span>
-                                    </div>
-                                </div>
+                             <div class="template-controls">
+                                <button class="btn-save" onclick="saveTemplate('prioritization')">Save</button>
+                                <button class="btn-reset" onclick="showResetConfirmation('prioritization')">Reset</button>
+                                <button class="btn-export" onclick="exportTemplate(event, 'prioritization')">Export PNG</button>
                             </div>
-                            
-                            <div class="book-card">
-                                <div class="book-cover">📙</div>
-                                <div class="book-info">
-                                    <div class="month-badge">Month 3</div>
-                                    <h4>Inspired by Marty Cagan</h4>
-                                    <p class="book-description">Adds framework for what good product practice looks like.</p>
-                                    <div class="book-rating">★★★★★ Framework</div>
-                                    <div class="book-tags">
-                                        <span class="tag">Best Practices</span>
-                                        <span class="tag">Team Management</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="quick-preview">
-                                <h4>Coming Next: Months 4-12</h4>
-                                <ul>
-                                    <li><strong>Month 4:</strong> The Lean Product Playbook - Product-market fit process</li>
-                                    <li><strong>Month 5:</strong> Thinking in Systems - Strategic leverage</li>
-                                    <li><strong>Month 6:</strong> The Product Book - Broad survey integration</li>
-                                    <li>...and 6 more carefully sequenced books</li>
-                                </ul>
-                                <button class="see-all-btn" onclick="showLearningTimeline()">See Complete 12-Month Plan</button>
+                            <div class="reset-confirmation" id="reset-prioritization" style="display: none;">
+                                <p>Are you sure you want to reset this template?</p>
+                                <button class="btn-confirm" onclick="resetTemplate('prioritization')">Yes</button>
+                                <button class="btn-cancel" onclick="hideResetConfirmation('prioritization')">Cancel</button>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="resource-category-content" data-category="tools">
-                        <div class="tools-grid">
-                            <div class="tool-recommendation">
-                                <div class="tool-logo">🎨</div>
-                                <h4>Figma</h4>
-                                <p>Collaborative design and prototyping</p>
-                                <div class="tool-pricing">Free - $45/month</div>
-                                <div class="tool-rating">★★★★★</div>
-                            </div>
-                            
-                            <div class="tool-recommendation">
-                                <div class="tool-logo">📊</div>
-                                <h4>Amplitude</h4>
-                                <p>Product analytics and user behavior tracking</p>
-                                <div class="tool-pricing">Free - $995/month</div>
-                                <div class="tool-rating">★★★★☆</div>
-                            </div>
-                            
-                            <div class="tool-recommendation">
-                                <div class="tool-logo">🗂️</div>
-                                <h4>Linear</h4>
-                                <p>Issue tracking and project management</p>
-                                <div class="tool-pricing">$8 - $16/month</div>
-                                <div class="tool-rating">★★★★★</div>
-                            </div>
+                    <div class="framework-card full-width" data-framework-id="lean-canvas">
+                        <div class="framework-header">
+                            <h3 class="framework-title">Lean Product Canvas</h3>
+                            <p class="framework-subtitle">By Jeff Gothelf - Systematic approach to product discovery</p>
                         </div>
-                    </div>
-                    
-                    <div class="resource-category-content" data-category="communities">
-                        <div class="communities-grid">
-                            <div class="community-card">
-                                <div class="community-icon">💬</div>
-                                <h4>Product Manager HQ</h4>
-                                <p>45k+ product managers sharing insights and best practices</p>
-                                <div class="community-stats">
-                                    <span>45,892 members</span>
-                                    <span>Very Active</span>
+                        <div class="framework-body">
+                            <div class="template-explanation canvas-explanation">
+                                <div class="explanation-grid">
+                                    <div class="explanation-section">
+                                        <h4>What this is</h4>
+                                        <p>Jeff Gothelf's systematic framework for turning product assumptions into testable hypotheses.</p>
+                                    </div>
+                                    <div class="explanation-section">
+                                        <h4>Why it's helpful</h4>
+                                        <p>Prevents building features nobody wants by forcing you to identify and test your riskiest assumptions first.</p>
+                                    </div>
+                                    <div class="explanation-section">
+                                        <h4>When to use</h4>
+                                        <p>During discovery phase when exploring new features, products, or when validating product-market fit.</p>
+                                    </div>
+                                    <div class="explanation-section">
+                                        <h4>How to use</h4>
+                                        <p>Start with Business Problem (1), identify Users (2) and their outcomes (3), then systematically work through each section.</p>
+                                    </div>
                                 </div>
-                                <button class="join-btn">Join Community</button>
                             </div>
-                            
-                            <div class="community-card">
-                                <div class="community-icon">🎯</div>
-                                <h4>Mind the Product</h4>
-                                <p>Global community with events, content, and career resources</p>
-                                <div class="community-stats">
-                                    <span>200k+ members</span>
-                                    <span>Events & Content</span>
+                            <div class="lean-canvas-grid">
+                                <div class="canvas-section span-2">
+                                    <h5>1. Business Problem</h5>
+                                    <textarea class="canvas-input" placeholder="What is the most important problem your business needs to focus on right now?" data-key="canvas-problem"></textarea>
                                 </div>
-                                <button class="join-btn">Join Community</button>
+                                <div class="canvas-section">
+                                    <h5>2. Users</h5>
+                                    <textarea class="canvas-input" placeholder="Which users and customers should you focus on first? Who buys? Who uses? Who configures?" data-key="canvas-users"></textarea>
+                                </div>
+                                <div class="canvas-section">
+                                    <h5>3. User Outcomes & Benefits (JTBD)</h5>
+                                    <textarea class="canvas-input" placeholder="Why would users seek out your product? What benefit would they gain? What job are they trying to do?" data-key="canvas-outcomes"></textarea>
+                                </div>
+                                <div class="canvas-section">
+                                    <h5>4. Solutions</h5>
+                                    <textarea class="canvas-input" placeholder="What can we make that will solve our business problem and meet customer needs? List product, feature, or enhancement ideas." data-key="canvas-solutions"></textarea>
+                                </div>
+                                <div class="canvas-section">
+                                    <h5>5. Business Outcomes</h5>
+                                    <textarea class="canvas-input" placeholder="How will you know you solved the business problem? What will you measure? (Who does what by how much)" data-key="canvas-business-outcomes"></textarea>
+                                </div>
+                                <div class="canvas-section span-3">
+                                    <h5>6. Hypotheses</h5>
+                                    <textarea class="canvas-input" placeholder='Combine assumptions from boxes 2-5: "We believe that [business outcome] will be achieved if [user] attains [benefit] with [feature]."' data-key="canvas-hypotheses"></textarea>
+                                </div>
+                                <div class="canvas-section">
+                                    <h5>7. What's the most important thing we need to learn first?</h5>
+                                    <textarea class="canvas-input" placeholder="Select hypothesis from Box 6 to test first. What's the riskiest assumption?" data-key="canvas-learn-first"></textarea>
+                                </div>
+                                <div class="canvas-section">
+                                    <h5>8. What's the least amount of work to learn the next most important thing?</h5>
+                                    <textarea class="canvas-input" placeholder="Design experiments to learn quickly if your riskiest assumption is true. What could you learn in 1 day/week/month?" data-key="canvas-experiments"></textarea>
+                                </div>
+                            </div>
+                            <div class="template-controls">
+                                <button class="btn-save" onclick="saveTemplate('lean-canvas')">Save</button>
+                                <button class="btn-reset" onclick="showResetConfirmation('lean-canvas')">Reset</button>
+                                <button class="btn-export" onclick="exportTemplate(event, 'lean-canvas')">Export PNG</button>
+                            </div>
+                            <div class="reset-confirmation" id="reset-lean-canvas" style="display: none;">
+                                <p>Are you sure you want to reset this template?</p>
+                                <button class="btn-confirm" onclick="resetTemplate('lean-canvas')">Yes</button>
+                                <button class="btn-cancel" onclick="hideResetConfirmation('lean-canvas')">Cancel</button>
+                            </div>
+                            <div class="canvas-attribution">
+                                <small>Canvas created by <strong>Jeff Gothelf</strong> • Download original at: <a href="https://www.senseandrespond.co/the-lean-product-canvas" target="_blank">senseandrespond.co</a></small>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="ai-assistant-section">
-        <div class="container">
-            <div class="ai-assistant-card">
-                <div class="ai-content">
-                    <div class="ai-avatar">🤖</div>
-                    <div class="ai-text">
-                        <h3>Meet Your AI Product Assistant</h3>
-                        <p>Get personalized advice, framework recommendations, and instant answers to your product questions. Trained on the latest PM best practices and industry insights.</p>
-                        <div class="ai-capabilities">
-                            <span class="capability">📊 Framework Selection</span>
-                            <span class="capability">🎯 Strategy Review</span>
-                            <span class="capability">💡 Problem Solving</span>
-                            <span class="capability">📈 Metrics Guidance</span>
+        <section id="social-proof" class="social-proof-section">
+            <div class="container">
+                <h2 class="section-title">Trusted by Product Teams</h2>
+                <p class="section-subtitle">See what product managers are saying about the playbook.</p>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"This playbook is a game-changer. It's become my go-to resource for everything from discovery to delivery. The interactive templates save me hours every week."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👩‍💻</div>
+                            <div class="author-info">
+                                <h4>Sarah L.</h4>
+                                <span>Senior Product Manager, TechCorp</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"As a new PM, this tool has been invaluable for getting up to speed. The frameworks are clearly explained and immediately applicable to my daily work."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👨‍🚀</div>
+                            <div class="author-info">
+                                <h4>Mike R.</h4>
+                                <span>Product Manager, Innovate Inc.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"I've rolled this out to my entire product team. It has standardized our processes and improved the quality of our product documentation immensely."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">🧑‍💼</div>
+                            <div class="author-info">
+                                <h4>Emily C.</h4>
+                                <span>Director of Product, Solutions Co.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="resources-section">
+            <div class="container">
+                <h2 class="section-title">PM Resource Library</h2>
+                <p class="section-subtitle">Curated resources, templates, and inspiration from the best in product management</p>
+                
+                <div class="resource-categories">
+                    <div class="resource-tab-nav">
+                        <button class="resource-tab active" data-category="templates">📋 Templates</button>
+                        <button class="resource-tab" data-category="books">📚 Essential Reading</button>
+                        <button class="resource-tab" data-category="tools">🛠️ Tools & Software</button>
+                        <button class="resource-tab" data-category="communities">👥 Communities</button>
+                    </div>
+                    
+                    <div class="resource-content">
+                        <div class="resource-category-content active" data-category="templates">
+                            <div class="resource-grid">
+                                <div class="resource-card downloadable">
+                                    <div class="resource-icon">📊</div>
+                                    <h4>Product Requirements Document (PRD)</h4>
+                                    <p>Comprehensive template for documenting product specifications and requirements</p>
+                                    <div class="resource-meta">
+                                        <span class="resource-type">Google Docs</span>
+                                        <span class="resource-downloads">2.3k downloads</span>
+                                    </div>
+                                    <button class="download-btn">Download Template</button>
+                                </div>
+                                <div class="resource-card downloadable">
+                                    <div class="resource-icon">🎯</div>
+                                    <h4>User Story Mapping Canvas</h4>
+                                    <p>Visual template for mapping user journeys and identifying key features</p>
+                                    <div class="resource-meta">
+                                        <span class="resource-type">Miro Board</span>
+                                        <span class="resource-downloads">1.8k downloads</span>
+                                    </div>
+                                    <button class="download-btn">Download Template</button>
+                                </div>
+                                <div class="resource-card downloadable">
+                                    <div class="resource-icon">📈</div>
+                                    <h4>Product Metrics Dashboard</h4>
+                                    <p>Ready-to-use analytics dashboard template with key product KPIs</p>
+                                    <div class="resource-meta">
+                                        <span class="resource-type">Google Sheets</span>
+                                        <span class="resource-downloads">3.1k downloads</span>
+                                    </div>
+                                    <button class="download-btn">Download Template</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-category-content" data-category="books">
+                            <div class="learning-path-header">
+                                <h3>12-Month PM Learning Journey</h3>
+                                <p>A progressive reading path designed to build your product management skills systematically</p>
+                                <button class="view-timeline-btn" onclick="showLearningTimeline()">View Full Timeline</button>
+                            </div>
+                            
+                            <div class="book-recommendations">
+                                <div class="book-card featured">
+                                    <div class="book-cover">📘</div>
+                                    <div class="book-info">
+                                        <div class="month-badge">Month 1</div>
+                                        <h4>Think Again by Adam Grant</h4>
+                                        <p class="book-description">Builds habit of questioning assumptions. Easier read to kick-off.</p>
+                                        <div class="book-rating">★★★★★ Essential Start</div>
+                                        <div class="book-tags">
+                                            <span class="tag">Mindset</span>
+                                            <span class="tag">Critical Thinking</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="book-card">
+                                    <div class="book-cover">📗</div>
+                                    <div class="book-info">
+                                        <div class="month-badge">Month 2</div>
+                                        <h4>Escaping the Build Trap by Melissa Perri</h4>
+                                        <p class="book-description">After mindset, need to shift from output to outcome.</p>
+                                        <div class="book-rating">★★★★★ Foundation</div>
+                                        <div class="book-tags">
+                                            <span class="tag">Outcomes</span>
+                                            <span class="tag">Product Culture</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="book-card">
+                                    <div class="book-cover">📙</div>
+                                    <div class="book-info">
+                                        <div class="month-badge">Month 3</div>
+                                        <h4>Inspired by Marty Cagan</h4>
+                                        <p class="book-description">Adds framework for what good product practice looks like.</p>
+                                        <div class="book-rating">★★★★★ Framework</div>
+                                        <div class="book-tags">
+                                            <span class="tag">Best Practices</span>
+                                            <span class="tag">Team Management</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="quick-preview">
+                                    <h4>Coming Next: Months 4-12</h4>
+                                    <ul>
+                                        <li><strong>Month 4:</strong> The Lean Product Playbook - Product-market fit process</li>
+                                        <li><strong>Month 5:</strong> Thinking in Systems - Strategic leverage</li>
+                                        <li><strong>Month 6:</strong> The Product Book - Broad survey integration</li>
+                                        <li>...and 6 more carefully sequenced books</li>
+                                    </ul>
+                                    <button class="see-all-btn" onclick="showLearningTimeline()">See Complete 12-Month Plan</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-category-content" data-category="tools">
+                            <div class="tools-grid">
+                                <div class="tool-recommendation">
+                                    <div class="tool-logo">🎨</div>
+                                    <h4>Figma</h4>
+                                    <p>Collaborative design and prototyping</p>
+                                    <div class="tool-pricing">Free - $45/month</div>
+                                    <div class="tool-rating">★★★★★</div>
+                                </div>
+                                <div class="tool-recommendation">
+                                    <div class="tool-logo">📊</div>
+                                    <h4>Amplitude</h4>
+                                    <p>Product analytics and user behavior tracking</p>
+                                    <div class="tool-pricing">Free - $995/month</div>
+                                    <div class="tool-rating">★★★★☆</div>
+                                </div>
+                                <div class="tool-recommendation">
+                                    <div class="tool-logo">🗂️</div>
+                                    <h4>Linear</h4>
+                                    <p>Issue tracking and project management</p>
+                                    <div class="tool-pricing">$8 - $16/month</div>
+                                    <div class="tool-rating">★★★★★</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-category-content" data-category="communities">
+                            <div class="communities-grid">
+                                <div class="community-card">
+                                    <div class="community-icon">💬</div>
+                                    <h4>Product Manager HQ</h4>
+                                    <p>45k+ product managers sharing insights and best practices</p>
+                                    <div class="community-stats">
+                                        <span>45,892 members</span>
+                                        <span>Very Active</span>
+                                    </div>
+                                    <button class="join-btn">Join Community</button>
+                                </div>
+                                <div class="community-card">
+                                    <div class="community-icon">🎯</div>
+                                    <h4>Mind the Product</h4>
+                                    <p>Global community with events, content, and career resources</p>
+                                    <div class="community-stats">
+                                        <span>200k+ members</span>
+                                        <span>Events & Content</span>
+                                    </div>
+                                    <button class="join-btn">Join Community</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ai-assistant" class="ai-assistant-section">
+            <div class="container">
+                <div class="ai-assistant-card">
+                    <div class="ai-content">
+                        <div class="ai-avatar">🤖</div>
+                        <div class="ai-text">
+                            <h3>Meet Your AI Product Assistant</h3>
+                            <p>Get personalized advice, framework recommendations, and instant answers to your product questions. Trained on the latest PM best practices and industry insights.</p>
+                            <div class="ai-capabilities">
+                                <span class="capability">📊 Framework Selection</span>
+                                <span class="capability">🎯 Strategy Review</span>
+                                <span class="capability">💡 Problem Solving</span>
+                                <span class="capability">📈 Metrics Guidance</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-chat-interface">
+                        <div class="chat-header">
+                            <h4>Ask Your PM Assistant</h4>
+                            <div class="status-indicator">🟢 Online</div>
+                        </div>
+                        
+                        <div class="chat-messages">
+                            <div class="ai-message">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    Hi! I'm here to help you with product management challenges. What would you like to work on today?
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-input-area">
+                            <input type="text" id="ai-input" placeholder="Ask about frameworks, metrics, strategy..." />
+                            <button class="send-btn" onclick="sendMessage()">Send</button>
+                        </div>
+                        
+                        <div class="quick-questions">
+                            <div class="question-category">
+                                <h6>Define Phase</h6>
+                                <button class="quick-q" onclick="askQuestion('What is a North Star Metric?')">What is a North Star Metric?</button>
+                                <button class="quick-q" onclick="askQuestion('Should I build a roadmap?')">Should I build a roadmap?</button>
+                            </div>
+                            <div class="question-category">
+                                <h6>Discover Phase</h6>
+                                <button class="quick-q" onclick="askQuestion('How do I use the Lean Product Canvas?')">How do I use the Lean Product Canvas?</button>
+                                <button class="quick-q" onclick="askQuestion('What makes a good hypothesis?')">What makes a good hypothesis?</button>
+                                <button class="quick-q" onclick="askQuestion('How to validate assumptions?')">How to validate assumptions?</button>
+                                <button class="quick-q" onclick="askQuestion('How do I know which assumption to test first?')">Which assumption to test first?</button>
+                            </div>
+                            <div class="question-category">
+                                <h6>Deliver Phase</h6>
+                                <button class="quick-q" onclick="askQuestion('How do I prioritize features?')">How do I prioritize features?</button>
+                                <button class="quick-q" onclick="askQuestion('What metrics should I track?')">What metrics should I track?</button>
+                            </div>
+                            <div class="question-category">
+                                <h6>Just for Fun</h6>
+                                <button class="quick-q joke-btn" onclick="askQuestion('Tell me a PM joke')">Tell me a PM joke</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer-section">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-main">
+                        <h3>Product Playbook by Pablo Munoz</h3>
+                        <p>Empowering product managers to build products that customers love and businesses thrive on.</p>
+                        <div class="footer-social">
+                            <a href="#" class="social-link">📧 Newsletter</a>
+                            <a href="#" class="social-link">🐦 Twitter</a>
+                            <a href="#" class="social-link">💼 LinkedIn</a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="link-group">
+                            <h4>Frameworks</h4>
+                            <a href="#frameworks">Vision Canvas</a>
+                            <a href="#frameworks">PR/FAQ</a>
+                            <a href="#frameworks">OKRs</a>
+                            <a href="#frameworks">Lean Canvas</a>
+                        </div>
+                        <div class="link-group">
+                            <h4>Resources</h4>
+                            <a href="#resources">Templates</a>
+                            <a href="#resources">Books</a>
+                            <a href="#resources">Tools</a>
+                            <a href="#resources">Communities</a>
+                        </div>
+                        <div class="link-group">
+                            <h4>Learn</h4>
+                            <a href="#phases">Product Journey</a>
+                            <a href="#risks">Four Big Risks</a>
+                            <a href="#frameworks">Interactive Frameworks</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="ai-chat-interface">
-                    <div class="chat-header">
-                        <h4>Ask Your PM Assistant</h4>
-                        <div class="status-indicator">🟢 Online</div>
-                    </div>
-                    
-                    <div class="chat-messages">
-                        <div class="ai-message">
-                            <div class="message-avatar">🤖</div>
-                            <div class="message-content">
-                                Hi! I'm here to help you with product management challenges. What would you like to work on today?
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="chat-input-area">
-                        <input type="text" id="ai-input" placeholder="Ask about frameworks, metrics, strategy..." />
-                        <button class="send-btn" onclick="sendMessage()">Send</button>
-                    </div>
-                    
-                    <div class="quick-questions">
-                        <div class="question-category">
-                            <h6>Define Phase</h6>
-                            <button class="quick-q" onclick="askQuestion('What is a North Star Metric?')">What is a North Star Metric?</button>
-                            <button class="quick-q" onclick="askQuestion('Should I build a roadmap?')">Should I build a roadmap?</button>
-                        </div>
-                        
-                        <div class="question-category">
-                            <h6>Discover Phase</h6>
-                            <button class="quick-q" onclick="askQuestion('How do I use the Lean Product Canvas?')">How do I use the Lean Product Canvas?</button>
-                            <button class="quick-q" onclick="askQuestion('What makes a good hypothesis?')">What makes a good hypothesis?</button>
-                            <button class="quick-q" onclick="askQuestion('How to validate assumptions?')">How to validate assumptions?</button>
-                            <button class="quick-q" onclick="askQuestion('How do I know which assumption to test first?')">Which assumption to test first?</button>
-                        </div>
-                        
-                        <div class="question-category">
-                            <h6>Deliver Phase</h6>
-                            <button class="quick-q" onclick="askQuestion('How do I prioritize features?')">How do I prioritize features?</button>
-                            <button class="quick-q" onclick="askQuestion('What metrics should I track?')">What metrics should I track?</button>
-                        </div>
-                        
-                        <div class="question-category">
-                            <h6>Just for Fun</h6>
-                            <button class="quick-q joke-btn" onclick="askQuestion('Tell me a PM joke')">Tell me a PM joke</button>
-                        </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Product Playbook by Pablo Munoz. Built with ❤️ for the PM community.</p>
+                    <div class="credits">
+                        <p><strong>Framework Credits:</strong> Four Big Risks by Marty Cagan (SVPG) • Lean Product Canvas by Jeff Gothelf • Prioritization Framework by Pablo Munoz</p>
+                        <p><strong>Inspired by:</strong> Melissa Perri, Jeff Gothelf, Marty Cagan, and the broader PM community</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <footer class="footer-section">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-main">
-                    <h3>Product Playbook by Pablo Munoz</h3>
-                    <p>Empowering product managers to build products that customers love and businesses thrive on.</p>
-                    <div class="footer-social">
-                        <a href="#" class="social-link">📧 Newsletter</a>
-                        <a href="#" class="social-link">🐦 Twitter</a>
-                        <a href="#" class="social-link">💼 LinkedIn</a>
-                    </div>
-                </div>
-                
-                <div class="footer-links">
-                    <div class="link-group">
-                        <h4>Frameworks</h4>
-                        <a href="#frameworks">Vision Canvas</a>
-                        <a href="#frameworks">PR/FAQ</a>
-                        <a href="#frameworks">OKRs</a>
-                        <a href="#frameworks">Lean Canvas</a>
-                    </div>
-                    
-                    <div class="link-group">
-                        <h4>Resources</h4>
-                        <a href="#frameworks">Templates</a>
-                        <a href="#frameworks">Books</a>
-                        <a href="#frameworks">Tools</a>
-                        <a href="#frameworks">Communities</a>
-                    </div>
-                    
-                    <div class="link-group">
-                        <h4>Learn</h4>
-                        <a href="#phases">Product Journey</a>
-                        <a href="#risks">Four Big Risks</a>
-                        <a href="#frameworks">Interactive Frameworks</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 Product Playbook by Pablo Munoz. Built with ❤️ for the PM community.</p>
-                <div class="credits">
-                    <p><strong>Framework Credits:</strong> Four Big Risks by Marty Cagan (SVPG) • Lean Product Canvas by Jeff Gothelf • Prioritization Framework by Pablo Munoz</p>
-                    <p><strong>Inspired by:</strong> Melissa Perri, Jeff Gothelf, Marty Cagan, and the broader PM community</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </main>
 
     <!-- Learning Timeline Overlay -->
     <div class="learning-timeline-overlay" id="timelineOverlay">
@@ -2069,7 +2322,6 @@
                         <div class="reasoning">Builds habit of questioning assumptions. Easier read to kick-off.</div>
                     </div>
                 </div>
-                
                 <div class="timeline-month">
                     <div class="month-number">2</div>
                     <div class="month-details">
@@ -2078,7 +2330,6 @@
                         <div class="reasoning">After mindset, need to shift from output to outcome.</div>
                     </div>
                 </div>
-                
                 <div class="timeline-month">
                     <div class="month-number">3</div>
                     <div class="month-details">
@@ -2087,7 +2338,6 @@
                         <div class="reasoning">Adds framework for what good product practice looks like.</div>
                     </div>
                 </div>
-                
                 <div class="timeline-month">
                     <div class="month-number">4</div>
                     <div class="month-details">
@@ -2096,7 +2346,6 @@
                         <div class="reasoning">Practical product-market fit process. Builds from lessons in #2-3.</div>
                     </div>
                 </div>
-                
                 <div class="timeline-month">
                     <div class="month-number">5</div>
                     <div class="month-details">
@@ -2105,7 +2354,6 @@
                         <div class="reasoning">Introduce systems thinking mid-journey for strategic leverage.</div>
                     </div>
                 </div>
-                
                 <div class="timeline-month">
                     <div class="month-number">6</div>
                     <div class="month-details">
@@ -2114,7 +2362,6 @@
                         <div class="reasoning">Broad survey of tools, role definitions; solid mid-level integration.</div>
                     </div>
                 </div>
-                
                 <div class="timeline-month">
                     <div class="month-number">7</div>
                     <div class="month-details">
@@ -2123,7 +2370,6 @@
                         <div class="reasoning">Now you have frameworks; shift to team structure & leadership.</div>
                     </div>
                 </div>
-                
                 <div class="timeline-month">
                     <div class="month-number">8</div>
                     <div class="month-details">
@@ -2132,7 +2378,6 @@
                         <div class="reasoning">Innovating, sparking new ideas; build on what you've learnt.</div>
                     </div>
                 </div>
-                
                 <div class="timeline-month">
                     <div class="month-number">9</div>
                     <div class="month-details">
@@ -2141,7 +2386,6 @@
                         <div class="reasoning">As products mature, scaling to mainstream matters.</div>
                     </div>
                 </div>
-                
                 <div class="timeline-month">
                     <div class="month-number">10</div>
                     <div class="month-details">
@@ -2150,7 +2394,6 @@
                         <div class="reasoning">Deep dive on customer interviews; sharpens discovery skills.</div>
                     </div>
                 </div>
-                
                 <div class="timeline-month">
                     <div class="month-number">11</div>
                     <div class="month-details">
@@ -2159,7 +2402,6 @@
                         <div class="reasoning">Leadership and influence matters more after earlier books.</div>
                     </div>
                 </div>
-                
                 <div class="timeline-month">
                     <div class="month-number">12</div>
                     <div class="month-details">
@@ -2172,6 +2414,7 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoVBL5gD5CMbaY9ojK0z75eDLRMA0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         // Smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2187,57 +2430,24 @@
             });
         });
         
-        // Floating navigation
-        const navDots = document.querySelectorAll('.nav-dot');
-        const sections = document.querySelectorAll('section');
-        
+        // Sidebar Navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('main > section');
+
         window.addEventListener('scroll', () => {
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
+                if (scrollY >= (sectionTop - 60)) {
                     current = section.getAttribute('id');
                 }
             });
-            
-            navDots.forEach(dot => {
-                dot.classList.remove('active');
-                if (dot.getAttribute('data-section') === current) {
-                    dot.classList.add('active');
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-section') === current) {
+                    link.classList.add('active');
                 }
-            });
-        });
-        
-        navDots.forEach(dot => {
-            dot.addEventListener('click', () => {
-                const section = document.getElementById(dot.getAttribute('data-section'));
-                if (section) {
-                    section.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        
-        // Framework interactions
-        function openFramework(type) {
-            // Add pulse animation
-            event.currentTarget.classList.add('pulse-animation');
-            setTimeout(() => {
-                event.currentTarget.classList.remove('pulse-animation');
-            }, 1000);
-        }
-        
-        // Add interactive elements
-        document.querySelectorAll('.framework-input').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentNode.style.background = 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)';
-            });
-            
-            input.addEventListener('blur', function() {
-                this.parentNode.style.background = 'white';
             });
         });
         
@@ -2248,11 +2458,7 @@
             if (message) {
                 addUserMessage(message);
                 input.value = '';
-                
-                // Simulate AI response
-                setTimeout(() => {
-                    generateAIResponse(message);
-                }, 1000);
+                setTimeout(() => { generateAIResponse(message); }, 1000);
             }
         }
         
@@ -2265,10 +2471,7 @@
             const messagesContainer = document.querySelector('.chat-messages');
             const userMessage = document.createElement('div');
             userMessage.className = 'user-message';
-            userMessage.innerHTML = `
-                <div class="message-content user-content">${message}</div>
-                <div class="message-avatar user-avatar">👤</div>
-            `;
+            userMessage.innerHTML = `<div class="message-content user-content">${message}</div><div class="message-avatar user-avatar">👤</div>`;
             messagesContainer.appendChild(userMessage);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
@@ -2276,29 +2479,18 @@
         function generateAIResponse(userMessage) {
             const responses = {
                 'How do I prioritize features?': "I recommend using Pablo's flexible prioritization framework built into this playbook! It uses weighted scoring across four dimensions: Opportunity Value (35%), Customer Value (20%), Feasibility (10%), and Strategic Value (35%). The key insight is using percentages - you can quickly pivot strategy by adjusting weights. If you need to shift from revenue focus to customer focus, just rebalance the weights across your entire backlog instantly.",
-                
                 'What metrics should I track?': "The key is to focus on metrics that drive your product strategy! Start with: 1) North Star Metric (your main success indicator), 2) AARRR metrics (Acquisition, Activation, Retention, Referral, Revenue), 3) Leading indicators that predict success. What's your product category? I can suggest more specific metrics.",
-                
                 'How to validate assumptions?': "Assumption validation is crucial! Here's my recommended approach: 1) Map out your riskiest assumptions, 2) Turn them into testable hypotheses, 3) Design quick experiments (surveys, interviews, MVPs), 4) Set success criteria before testing, 5) Learn and iterate. Want help designing a specific validation test?",
-
                 'What\'s the difference between an outcome and an output?': "An **output** is the thing we build, like a new button or feature. An **outcome** is the change in user behavior that happens because of what we built, like 'a 15% increase in users sharing recipes.' Great product teams focus on outcomes, not just shipping features. It's about the treasure, not just the map!",
-
                 'How do I run a good user interview?': "To get real treasure from user interviews, you need to be a good listener. 1) Have a clear goal for what you want to learn. 2) Ask open-ended questions about their past behavior, not what they *would* do. For example, 'Tell me about the last time you...' is better than 'Would you use...'. 3) Avoid leading questions. Let them do most of the talking.",
-
                 'What is a North Star Metric?': "The North Star Metric is the one measurement that best captures the core value your product delivers to its customers. For example, for a recipe app, it might be 'Number of recipes successfully cooked per week.' All your efforts should be aimed at moving that one metric. It's the star you steer the ship by!",
-
                 'Should I build a roadmap?': "Yes, but not the old kind with rigid dates and features! Modern roadmaps, as Melissa Perri advocates, are about communicating strategy. They should focus on business outcomes and the problems you're solving for customers each quarter. Think themes and problems to solve, not a list of features to build. It's a strategic communication tool, not a project plan.",
-                
                 'How do I use the Lean Product Canvas?': "Jeff Gothelf's Lean Product Canvas is perfect for systematic discovery! Start with Box 1 (Business Problem) - what's the most important challenge right now? Then identify your Users (Box 2) and their Jobs to be Done (Box 3). Map out potential Solutions (Box 4) and how you'll measure Business Outcomes (Box 5). Combine these into testable Hypotheses (Box 6), then focus on what you need to learn first (Box 7) and design quick experiments (Box 8).",
-                
                 'What makes a good hypothesis?': "A strong product hypothesis follows this format from Jeff Gothelf: 'We believe that [business outcome] will be achieved if [user] attains [benefit] with [feature].' Each hypothesis should focus on one feature only. The key is making your assumptions explicit so you can test them quickly and cheaply before building anything.",
-                
                 'How do I know which assumption to test first?': "Focus on your riskiest assumptions first! In early stages, prioritize risks to value over feasibility. Ask: 'What assumption, if wrong, would kill this idea?' Jeff Gothelf recommends using his Hypothesis Prioritization Canvas to systematically evaluate which assumptions have the highest risk and the biggest impact on your success.",
-                
                 'Which assumption to test first?': "Focus on your riskiest assumptions first! In early stages, prioritize risks to value over feasibility. Ask: 'What assumption, if wrong, would kill this idea?' Jeff Gothelf recommends using his Hypothesis Prioritization Canvas to systematically evaluate which assumptions have the highest risk and the biggest impact on your success."
             };
             
-            // Handle joke requests
             if (userMessage.toLowerCase().includes('joke') || userMessage.toLowerCase().includes('funny')) {
                 const jokes = [
                     "Why did the product manager cross the road? → To create a Jira ticket for engineering to figure out *why* the chicken crossed it.",
@@ -2306,36 +2498,22 @@
                     "How many product managers does it take to change a lightbulb? → None. They just write a user story: *'As a user, I want light.'*",
                     "What's the difference between a product manager and a project manager? → About three letters and 200 Jira tickets.",
                     "Why do PMs love Gantt charts? → Because nothing says 'control' like a pretty picture of something that will never happen.",
-                    "'Done' means: Developer → 'It compiles.' QA → 'All tests pass.' PM → 'We shipped it last quarter in the deck.'",
-                    "Why don't PMs ever play hide and seek? → Because good luck hiding when you've already put your location in the roadmap.",
-                    "A stakeholder says: 'Can we just add this small feature?' PM translation: 'Welcome to scope creep, please fasten your seatbelts.'",
-                    "What's a PM's favorite bedtime story? → *The Neverending Backlog.*",
-                    "Why did the sprint fail? → Because the user stories ran a marathon."
                 ];
-                
                 const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-                
                 const messagesContainer = document.querySelector('.chat-messages');
                 const aiMessage = document.createElement('div');
                 aiMessage.className = 'ai-message';
-                aiMessage.innerHTML = `
-                    <div class="message-avatar">😄</div>
-                    <div class="message-content">${randomJoke}</div>
-                `;
+                aiMessage.innerHTML = `<div class="message-avatar">😄</div><div class="message-content">${randomJoke}</div>`;
                 messagesContainer.appendChild(aiMessage);
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
                 return;
             }
             
-            const response = responses[userMessage] || "That's an interesting question! Product management involves balancing user needs, business goals, and technical constraints. Could you provide more context about your specific situation? I'd love to give you more targeted advice based on your product and challenges.";
-            
+            const response = responses[userMessage] || "That's an interesting question! Could you provide more context? I'd love to give you more targeted advice.";
             const messagesContainer = document.querySelector('.chat-messages');
             const aiMessage = document.createElement('div');
             aiMessage.className = 'ai-message';
-            aiMessage.innerHTML = `
-                <div class="message-avatar">🤖</div>
-                <div class="message-content">${response}</div>
-            `;
+            aiMessage.innerHTML = `<div class="message-avatar">🤖</div><div class="message-content">${response}</div>`;
             messagesContainer.appendChild(aiMessage);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
@@ -2343,34 +2521,20 @@
         // Resource tabs functionality
         document.querySelectorAll('.resource-tab').forEach(tab => {
             tab.addEventListener('click', function() {
-                // Remove active class from all tabs and content
                 document.querySelectorAll('.resource-tab').forEach(t => t.classList.remove('active'));
                 document.querySelectorAll('.resource-category-content').forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked tab
                 this.classList.add('active');
-                
-                // Show corresponding content
-                const category = this.dataset.category;
-                document.querySelector(`[data-category="${category}"].resource-category-content`).classList.add('active');
+                document.querySelector(`.resource-category-content[data-category="${this.dataset.category}"]`).classList.add('active');
             });
         });
         
         // Download functionality simulation
         document.querySelectorAll('.download-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                const resourceName = this.parentNode.querySelector('h4').textContent;
-                
-                // Simulate download
                 this.textContent = 'Downloading...';
-                this.style.background = '#10b981';
-                
                 setTimeout(() => {
                     this.textContent = '✓ Downloaded';
-                    setTimeout(() => {
-                        this.textContent = 'Download Template';
-                        this.style.background = 'linear-gradient(45deg, #001F3F, #1a3a5c)';
-                    }, 2000);
+                    setTimeout(() => { this.textContent = 'Download Template'; }, 2000);
                 }, 1500);
             });
         });
@@ -2391,27 +2555,21 @@
                 const key = `PMPlaybook.${input.dataset.key}`;
                 localStorage.setItem(key, input.value);
             });
-            
-            // Show success feedback
             const saveBtn = event.target;
-            const originalText = saveBtn.textContent;
             saveBtn.textContent = 'Saved!';
             saveBtn.style.background = '#10b981';
-            
             setTimeout(() => {
-                saveBtn.textContent = originalText;
+                saveBtn.textContent = 'Save';
                 saveBtn.style.background = '#001F3F';
             }, 2000);
         }
         
         function showResetConfirmation(templateId) {
-            const confirmation = document.getElementById(`reset-${templateId}`);
-            confirmation.style.display = 'block';
+            document.getElementById(`reset-${templateId}`).style.display = 'block';
         }
         
         function hideResetConfirmation(templateId) {
-            const confirmation = document.getElementById(`reset-${templateId}`);
-            confirmation.style.display = 'none';
+            document.getElementById(`reset-${templateId}`).style.display = 'none';
         }
         
         function resetTemplate(templateId) {
@@ -2421,37 +2579,64 @@
                 localStorage.removeItem(key);
                 input.value = '';
             });
-            
             hideResetConfirmation(templateId);
-            
-            // Show feedback
-            const resetBtn = document.querySelector(`[onclick="showResetConfirmation('${templateId}')"]`);
-            const originalText = resetBtn.textContent;
-            resetBtn.textContent = 'Reset!';
-            
-            setTimeout(() => {
-                resetBtn.textContent = originalText;
-            }, 2000);
+            const card = document.querySelector(`[data-framework-id="${templateId}"]`);
+            card.classList.remove('used');
+            localStorage.removeItem(`PMPlaybook.used.${templateId}`);
         }
         
-        function exportTemplate(templateId) {
-            // This would require html2canvas library for actual implementation
-            // For now, show placeholder functionality
+        function exportTemplate(event, templateId) {
             const exportBtn = event.target;
-            const originalText = exportBtn.textContent;
-            
+            const card = exportBtn.closest('.framework-card');
+            const title = card.querySelector('.framework-title').textContent.trim();
+            const elementToExport = card.querySelector('.editable-template') || card.querySelector('.lean-canvas-grid');
+
+            if (!elementToExport) return;
+
             exportBtn.textContent = 'Exporting...';
-            exportBtn.style.background = '#f59e0b';
-            
-            setTimeout(() => {
+            exportBtn.disabled = true;
+
+            html2canvas(elementToExport, {
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff'
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `${title.replace(/ /g, '-')}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
                 exportBtn.textContent = 'Exported!';
-                exportBtn.style.background = '#10b981';
-                
-                setTimeout(() => {
-                    exportBtn.textContent = originalText;
-                    exportBtn.style.background = '#10b981';
-                }, 2000);
-            }, 1500);
+                exportBtn.disabled = false;
+                setTimeout(() => { exportBtn.textContent = 'Export PNG'; }, 2000);
+            }).catch(err => {
+                console.error('Export failed:', err);
+                exportBtn.textContent = 'Error!';
+                setTimeout(() => { exportBtn.textContent = 'Export PNG'; }, 3000);
+            }).finally(() => {
+                exportBtn.disabled = false;
+            });
+        }
+
+        function calculatePriorityScore() {
+            const oppEl = document.querySelector('[data-key="prio-opp"]');
+            const custEl = document.querySelector('[data-key="prio-cust"]');
+            const feasEl = document.querySelector('[data-key="prio-feas"]');
+            const stratEl = document.querySelector('[data-key="prio-strat"]');
+
+            if(!oppEl) return; // Don't run if the element isn't on the page
+
+            const opp = parseFloat(oppEl.value) || 0;
+            const cust = parseFloat(custEl.value) || 0;
+            const feas = parseFloat(feasEl.value) || 0;
+            const strat = parseFloat(stratEl.value) || 0;
+
+            const score = (opp * 0.35) + (cust * 0.20) + (feas * 0.10) + (strat * 0.35);
+
+            const scoreElement = document.getElementById('total-score');
+            if (scoreElement) {
+                scoreElement.textContent = score.toFixed(2);
+            }
         }
         
         // Load saved data on page load
@@ -2465,6 +2650,19 @@
                 }
             });
         }
+
+        function checkUsedFrameworks() {
+            const frameworkCards = document.querySelectorAll('.framework-card');
+            frameworkCards.forEach(card => {
+                const frameworkId = card.dataset.frameworkId;
+                if (frameworkId) {
+                    const isUsed = localStorage.getItem(`PMPlaybook.used.${frameworkId}`);
+                    if (isUsed === 'true') {
+                        card.classList.add('used');
+                    }
+                }
+            });
+        }
         
         // Auto-save functionality
         function setupAutoSave() {
@@ -2473,6 +2671,15 @@
                 input.addEventListener('input', function() {
                     const key = `PMPlaybook.${this.dataset.key}`;
                     localStorage.setItem(key, this.value);
+                    
+                    const frameworkCard = this.closest('.framework-card');
+                    if (frameworkCard) {
+                        const frameworkId = frameworkCard.dataset.frameworkId;
+                        if(frameworkId) {
+                           localStorage.setItem(`PMPlaybook.used.${frameworkId}`, 'true');
+                           frameworkCard.classList.add('used');
+                        }
+                    }
                 });
             });
         }
@@ -2481,6 +2688,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadSavedData();
             setupAutoSave();
+            checkUsedFrameworks();
+            calculatePriorityScore();
+            document.querySelectorAll('.priority-score').forEach(select => {
+                select.addEventListener('change', calculatePriorityScore);
+            });
         });
         
         // Learning timeline overlay functions
@@ -2494,14 +2706,12 @@
             document.body.style.overflow = 'auto';
         }
         
-        // Close overlay when clicking outside content
         document.getElementById('timelineOverlay').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeLearningTimeline();
             }
         });
         
-        // Enter key support for AI chat
         document.getElementById('ai-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 sendMessage();
