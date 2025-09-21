@@ -1,9 +1,21 @@
 # Technical Specification – Product Manager's Playbook
 
 ## Architecture
-- **Single-file HTML** (main.html).
-- Vanilla JS for persistence, scoring, screenshot export, reset logic.
-- [html2canvas](https://html2canvas.hertzen.com/) for PNG export.
+The project uses a hybrid architecture: a static frontend for the user interface and a local Python backend to power the AI Assistant.
+
+### Frontend
+- **Single-file HTML** (main.html) for structure and content.
+- **Vanilla JS** for UI interactivity, template management (LocalStorage persistence, reset logic), and screenshot export.
+- **CSS** embedded within the HTML for styling.
+- **[html2canvas](https://html2canvas.hertzen.com/)** library for the PNG export functionality.
+
+### Backend (AI Assistant)
+- **Framework**: Python with Flask.
+- **Function**: Provides a local API endpoint (`/api/chat`) for the RAG system.
+- **Core Libraries**:
+  - `sentence-transformers`: For generating text embeddings.
+  - `faiss-cpu`: For creating and searching the vector index (knowledge base).
+- **Structure**: All backend code is contained within the `/backend` directory.
 
 ## Data Model
 - LocalStorage key format:
