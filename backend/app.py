@@ -1,12 +1,12 @@
 import os
 import faiss
 import numpy as np
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from sentence_transformers import SentenceTransformer
 
 # --- Initialization ---
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../', static_url_path='')
 # Enable CORS to allow requests from the local HTML file, which is essential for local development.
 CORS(app)
 
@@ -30,6 +30,11 @@ def load_knowledge_base():
         print("Please ensure you have run `create_knowledge_base.py` from within the `backend` directory.")
         print("---\n\n")
         MODEL, INDEX, CHUNKS = None, None, None
+
+# --- Frontend Route ---
+@app.route('/')
+def index():
+    return send_from_directory(app.static_folder, 'main.html')
 
 # --- RAG Core Function ---
 def search_knowledge_base(query, k=3):
