@@ -76,4 +76,4 @@ if __name__ == '__main__':
     # This allows the server to find the knowledge base files correctly.
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     load_knowledge_base()
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5001)
