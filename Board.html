@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wisdom Wall - Clementina Health</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%);
+        min-height: 100vh;
+        padding: 40px 20px;
+        overflow-x: hidden;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 60px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .header h1 {
+        font-size: 3rem;
+        color: #D4A574;
+        margin-bottom: 10px;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .header p {
+        font-size: 1.2rem;
+        color: #8B7355;
+        font-style: italic;
+    }
+
+    /* Milk drip animations */
+    .milk-drip {
+        position: absolute;
+        width: 20px;
+        height: 40px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%);
+        border-radius: 0 0 10px 10px;
+        opacity: 0.7;
+        animation: drip 3s ease-in infinite;
+    }
+
+    .milk-drip::before {
+        content: '';
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 30px;
+        background: rgba(255,255,255,0.8);
+        border-radius: 50%;
+    }
+
+    @keyframes drip {
+        0% {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        20% {
+            opacity: 0.7;
+        }
+        100% {
+            transform: translateY(100vh);
+            opacity: 0;
+        }
+    }
+
+    .milk-drip:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .milk-drip:nth-child(2) { left: 25%; animation-delay: 1.2s; }
+    .milk-drip:nth-child(3) { left: 45%; animation-delay: 2.5s; }
+    .milk-drip:nth-child(4) { left: 70%; animation-delay: 1.8s; }
+    .milk-drip:nth-child(5) { left: 85%; animation-delay: 0.7s; }
+
+    /* Wall container */
+    .wall-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        position: relative;
+        min-height: 800px;
+        margin-bottom: 80px;
+    }
+
+    /* Post-it notes */
+    .post-it {
+        position: absolute;
+        width: 220px;
+        min-height: 180px;
+        padding: 25px 20px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        transform-origin: center center;
+        animation: fadeInUp 0.6s ease-out;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px) rotate(0deg);
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .post-it:hover {
+        transform: scale(1.08) !important;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+        z-index: 100 !important;
+    }
+
+    .post-it::before {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 20px;
+        background: rgba(0,0,0,0.05);
+        border-radius: 2px;
+    }
+
+    /* Different post-it colors */
+    .post-it.yellow {
+        background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%);
+        border-left: 3px solid #FBC02D;
+    }
+
+    .post-it.pink {
+        background: linear-gradient(135deg, #FFE8E8 0%, #FFCDD2 100%);
+        border-left: 3px solid #E57373;
+    }
+
+    .post-it.blue {
+        background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+        border-left: 3px solid #64B5F6;
+    }
+
+    .post-it.green {
+        background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+        border-left: 3px solid #81C784;
+    }
+
+    .post-it.peach {
+        background: linear-gradient(135deg, #FFE8D6 0%, #FFD4B8 100%);
+        border-left: 3px solid #D4A574;
+    }
+
+    .post-it.lavender {
+        background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+        border-left: 3px solid #BA68C8;
+    }
+
+    /* Milk stain effects */
+    .milk-stain {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 70%, transparent 100%);
+        pointer-events: none;
+    }
+
+    .stain-1 { width: 40px; height: 45px; top: 15%; left: 8%; transform: rotate(23deg); }
+    .stain-2 { width: 55px; height: 50px; top: 60%; right: 12%; transform: rotate(-15deg); }
+    .stain-3 { width: 35px; height: 40px; bottom: 25%; left: 15%; transform: rotate(45deg); }
+
+    .post-it-text {
+        color: #333;
+        font-weight: 500;
+        position: relative;
+        z-index: 1;
+    }
+
+    .post-it-author {
+        margin-top: 12px;
+        font-size: 0.8rem;
+        color: #666;
+        font-style: italic;
+        text-align: right;
+    }
+
+    /* Form section */
+    .add-tip-section {
+        max-width: 600px;
+        margin: 80px auto 40px;
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(212, 165, 116, 0.2);
+        position: relative;
+        z-index: 10;
+    }
+
+    .add-tip-section h2 {
+        color: #D4A574;
+        font-size: 2rem;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .add-tip-section p {
+        color: #8B7355;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-group label {
+        display: block;
+        color: #8B7355;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+    }
+
+    .form-group textarea,
+    .form-group input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #FFE8D6;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-family: inherit;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #D4A574;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 18px;
+        background: linear-gradient(135deg, #D4A574 0%, #C49563 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(212, 165, 116, 0.3);
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(212, 165, 116, 0.4);
+    }
+
+    .submit-btn:active {
+        transform: translateY(0);
+    }
+
+    /* Success message */
+    .success-message {
+        background: #E8F5E9;
+        border: 2px solid #81C784;
+        color: #2E7D32;
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 20px;
+        display: none;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .success-message.show {
+        display: block;
+        animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .header h1 {
+            font-size: 2rem;
+        }
+
+        .header p {
+            font-size: 1rem;
+        }
+
+        .post-it {
+            width: 180px;
+            min-height: 150px;
+            padding: 20px 15px;
+            font-size: 0.85rem;
+        }
+
+        .add-tip-section {
+            padding: 30px 20px;
+        }
+
+        .add-tip-section h2 {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <!-- Milk drips -->
+    <div class="milk-drip"></div>
+    <div class="milk-drip"></div>
+    <div class="milk-drip"></div>
+    <div class="milk-drip"></div>
+    <div class="milk-drip"></div>
+
+```
+<div class="header">
+    <h1>The Wisdom Wall</h1>
+    <p>Real tips from real parents. Messy, honest, and full of love.</p>
+</div>
+
+<!-- Milk stains -->
+<div class="milk-stain stain-1"></div>
+<div class="milk-stain stain-2"></div>
+<div class="milk-stain stain-3"></div>
+
+<div class="wall-container" id="wallContainer">
+    <!-- Post-its will be generated here -->
+</div>
+
+<div class="add-tip-section">
+    <h2>Add Your Wisdom</h2>
+    <p>Share what you wish you'd known, what saved you, or what made you smile.</p>
+    
+    <form id="tipForm">
+        <div class="form-group">
+            <label for="tipText">Your Tip or Word of Encouragement</label>
+            <textarea 
+                id="tipText" 
+                name="tipText" 
+                placeholder="e.g., At 3am, remember: this phase doesn't last forever. You're doing better than you think."
+                required
+                maxlength="200"
+            ></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="authorName">Your First Name (optional)</label>
+            <input 
+                type="text" 
+                id="authorName" 
+                name="authorName" 
+                placeholder="e.g., Sarah"
+                maxlength="30"
+            >
+        </div>
+        
+        <button type="submit" class="submit-btn">Add to the Wall 💛</button>
+    </form>
+
+    <div class="success-message" id="successMessage">
+        ✨ Your wisdom has been added! Thank you for sharing. ✨
+    </div>
+</div>
+
+<script>
+    // Sample tips data
+    const tips = [
+        {
+            text: "At 3am when nothing works, remember: You are enough. Your baby chose you.",
+            author: "Maria, mom of twins",
+            color: "pink"
+        },
+        {
+            text: "Keep a basket of snacks by your nursing chair. One-handed eating is a survival skill.",
+            author: "Jessica",
+            color: "yellow"
+        },
+        {
+            text: "It's okay to cry while they cry. You're both learning together.",
+            author: "Anonymous",
+            color: "blue"
+        },
+        {
+            text: "Lower your standards. A fed baby, a rested parent - that's success.",
+            author: "David, dad of 3",
+            color: "green"
+        },
+        {
+            text: "Take photos of the hard moments too. One day, you'll miss even this.",
+            author: "Priya",
+            color: "peach"
+        },
+        {
+            text: "Your body did something incredible. Be gentle with it. Recovery isn't linear.",
+            author: "Sam",
+            color: "lavender"
+        },
+        {
+            text: "When someone offers help, say YES. Let them do your dishes, fold laundry, hold the baby while you shower.",
+            author: "Carmen",
+            color: "yellow"
+        },
+        {
+            text: "Cluster feeding is normal. You're not doing anything wrong. It's how they grow.",
+            author: "IBCLC Lisa",
+            color: "pink"
+        },
+        {
+            text: "Write down one win each day, no matter how small. 'We both survived' counts.",
+            author: "Anonymous",
+            color: "blue"
+        },
+        {
+            text: "If formula saves your sanity, it's saving your baby too. Fed is best.",
+            author: "Michelle",
+            color: "peach"
+        },
+        {
+            text: "Your partner doesn't have to do it YOUR way. Different works too.",
+            author: "Jake",
+            color: "green"
+        },
+        {
+            text: "Trust your gut. Mama intuition is real and powerful.",
+            author: "Destiny",
+            color: "lavender"
+        },
+        {
+            text: "Some days the greatest accomplishment is keeping everyone alive. That's enough.",
+            author: "Anonymous",
+            color: "yellow"
+        },
+        {
+            text: "Take the photo. You're beautiful, even with spit-up in your hair.",
+            author: "Rachel",
+            color: "pink"
+        },
+        {
+            text: "It gets easier. Then harder. Then easier again. All of it is temporary.",
+            author: "Mom of 4",
+            color: "blue"
+        },
+        {
+            text: "Those comparison posts online? They're showing the highlight reel. You're doing great.",
+            author: "Anonymous",
+            color: "peach"
+        },
+        {
+            text: "Buy the expensive nursing bra. Your boobs have been through enough.",
+            author: "Sophie",
+            color: "lavender"
+        },
+        {
+            text: "Postpartum rage is real. Talk to someone. You're not broken.",
+            author: "Anonymous",
+            color: "green"
+        }
+    ];
+
+    // Function to generate random position
+    function getRandomPosition(index, total) {
+        const containerWidth = document.getElementById('wallContainer').offsetWidth;
+        const cols = Math.floor(containerWidth / 250);
+        const rows = Math.ceil(total / cols);
+        
+        const col = index % cols;
+        const row = Math.floor(index / cols);
+        
+        const baseX = col * (containerWidth / cols);
+        const baseY = row * 220;
+        
+        // Add some randomness
+        const randomX = baseX + (Math.random() * 30 - 15);
+        const randomY = baseY + (Math.random() * 30 - 15);
+        
+        return { x: randomX, y: randomY };
+    }
+
+    // Function to create post-it
+    function createPostIt(tip, index, total) {
+        const postIt = document.createElement('div');
+        postIt.className = `post-it ${tip.color}`;
+        
+        const position = getRandomPosition(index, total);
+        const rotation = Math.random() * 10 - 5; // -5 to 5 degrees
+        
+        postIt.style.left = position.x + 'px';
+        postIt.style.top = position.y + 'px';
+        postIt.style.transform = `rotate(${rotation}deg)`;
+        postIt.style.animationDelay = `${index * 0.1}s`;
+        
+        postIt.innerHTML = `
+            <div class="post-it-text">${tip.text}</div>
+            <div class="post-it-author">— ${tip.author}</div>
+        `;
+        
+        return postIt;
+    }
+
+    // Initialize wall
+    function initWall() {
+        const container = document.getElementById('wallContainer');
+        tips.forEach((tip, index) => {
+            const postIt = createPostIt(tip, index, tips.length);
+            container.appendChild(postIt);
+        });
+        
+        // Set container height based on content
+        const maxY = Math.max(...Array.from(container.children).map(el => 
+            parseInt(el.style.top) + el.offsetHeight
+        ));
+        container.style.minHeight = (maxY + 50) + 'px';
+    }
+
+    // Handle form submission
+    document.getElementById('tipForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const tipText = document.getElementById('tipText').value;
+        const authorName = document.getElementById('authorName').value || 'Anonymous';
+        
+        // Create new tip
+        const newTip = {
+            text: tipText,
+            author: authorName,
+            color: ['yellow', 'pink', 'blue', 'green', 'peach', 'lavender'][Math.floor(Math.random() * 6)]
+        };
+        
+        // Add to array and create post-it
+        tips.push(newTip);
+        const container = document.getElementById('wallContainer');
+        const newPostIt = createPostIt(newTip, tips.length - 1, tips.length);
+        container.appendChild(newPostIt);
+        
+        // Update container height
+        const maxY = Math.max(...Array.from(container.children).map(el => 
+            parseInt(el.style.top) + el.offsetHeight
+        ));
+        container.style.minHeight = (maxY + 50) + 'px';
+        
+        // Show success message
+        const successMsg = document.getElementById('successMessage');
+        successMsg.classList.add('show');
+        
+        // Reset form
+        this.reset();
+        
+        // Scroll to new post-it
+        newPostIt.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Hide success message after 4 seconds
+        setTimeout(() => {
+            successMsg.classList.remove('show');
+        }, 4000);
+    });
+
+    // Handle window resize
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const container = document.getElementById('wallContainer');
+            container.innerHTML = '';
+            initWall();
+        }, 250);
+    });
+
+    // Initialize on load
+    initWall();
+</script>
+```
+
+</body>
+</html>
